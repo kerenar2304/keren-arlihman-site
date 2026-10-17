@@ -52,12 +52,12 @@
    header 84px · subtitle at 21% · words stacked (112px, wrappers 122px tall, 64px apart) around a 96x128 card at the centre ·
    paragraph at 73% (358px wide) · description row 32px from the bottom */
 @media (max-width:767px){
-  :root{--fs:112px;--card:96px}
+  :root{--fs:min(140px,18svh);--card:96px}
   .hc{height:100svh;min-height:640px}
   .hc-sub.top{top:19%;font-size:30px;line-height:1}
-  .hc-words{top:50%;transform:translateY(-50%);flex-direction:column-reverse;gap:64px}
-  .hc-w{width:100%;height:122px;padding:5px 16px;justify-content:center!important}
-  .hc-w span{line-height:112px}
+  .hc-words{top:50%;transform:translateY(-50%);flex-direction:column-reverse;gap:min(40px,5svh)}
+  .hc-w{width:100%;height:calc(var(--fs) + 10px);padding:5px 16px;justify-content:center!important}
+  .hc-w span{line-height:var(--fs)}
   .hc-stage{transform:translateY(-8px)}
   .hc-sub.bot{top:73.1%;bottom:auto;max-width:358px;padding:0;font-size:16px;line-height:1.35}
   .hc-foot{bottom:32px;flex-direction:row;font-size:14px;padding-inline:20px;width:100%}
@@ -138,12 +138,9 @@ html.menu-open .mmenu{opacity:1;visibility:visible;transition:opacity .4s var(--
   .pl-body{position:relative;grid-template-columns:1fr;padding:90px 22px 24px;display:none}
   .pl.is-on .pl-body{display:grid}.pl-img{grid-column:1;grid-row:auto;aspect-ratio:4/3}
 }
-/* phone: no box flip (the steps don't fit one face); sections in normal flow */
+/* phone: the same two cubes; stages use the small viewport so nothing hides under the browser bar */
 @media (max-width:760px){
-  .flip{height:auto}.flip-stage{position:static;height:auto;overflow:visible;perspective:none;background:none}
-  .box{position:static;transform:none!important}.box .seam,.flip-floor{display:none}
-  .face{position:relative;transform:none!important;border-radius:0!important}.face::after{display:none}
-  .f-front .hc{height:100svh}
+  .flip-stage,.flip2-stage{height:100svh}.f-front .hc{height:100svh}
   .pl-head{flex-direction:column;align-items:flex-start;gap:16px}
   .pl-head h2{white-space:normal;font-size:46px}
   .pl.is-on .pl-n{font-size:72px}
@@ -152,7 +149,6 @@ html.menu-open .mmenu{opacity:1;visibility:visible;transition:opacity .4s var(--
 }
 .pl-map{position:relative;background:#0D0C11}.pl-map svg{width:100%;height:100%;display:block}.pl-map figcaption{position:absolute;inset-inline-start:10px;bottom:8px;font-size:11px;color:rgba(244,243,241,.5)}
 .flip .face{pointer-events:none}.flip .face.live{pointer-events:auto}
-@media (max-width:760px){.flip .face{pointer-events:auto}}
 .box.done{transform:none!important}.box.done .f-bottom{transform:none!important}.box.done .f-bottom::after{opacity:0}.box.done .seam{display:none}
 .pl-body{grid-template-columns:1fr!important;grid-template-rows:1fr auto!important;padding:calc(36*var(--u)) calc(40*var(--u))!important}
 .pl-body h3{font-size:calc(64*var(--u))!important;line-height:.95!important;max-width:12ch}
@@ -221,7 +217,7 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 .info.swap>*{opacity:0;transform:translateY(10px)}
 .nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:calc(12*var(--u));position:relative;z-index:2}
 .stwrap{position:relative;display:grid}
-.side.nx{right:max(var(--gut),calc(50% - var(--R) - 80px))}.side.pr{left:max(var(--gut),calc(50% - var(--R) - 80px))}
+.side.nx{right:max(var(--gut),calc(50% - var(--R) - 90px))}.side.pr{left:max(var(--gut),calc(50% - var(--R) - 90px))}
 .side{position:absolute;top:45%;transform:translateY(-50%);z-index:3;width:58px;height:58px;font-size:22px!important;background:rgba(13,12,17,.6);backdrop-filter:blur(6px);border-radius:50%;border:1.5px solid rgba(244,243,241,.3);color:var(--paper);font-size:19px;line-height:1;transition:background .3s,border-color .3s}
 .side:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
 .nav .cnt{font-family:var(--display);font-size:15px;min-width:64px;text-align:center;opacity:.6}
@@ -258,14 +254,13 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 .f2-front .r .n{color:var(--lav)}
 .f2-side{color:var(--paper)}
 .f2-side .ring-sec{height:100vh;min-height:0;padding-top:calc(var(--hdr-h) + 16px)}
-@media (max-width:760px),(prefers-reduced-motion:reduce){
-  .stack{padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;opacity:1;pointer-events:auto;perspective:none}
+@media (prefers-reduced-motion:reduce){
+  .stack{margin-top:0;padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;opacity:1;pointer-events:auto;perspective:none}
   .box2{position:static}.f2-front{display:none}.f2-side{position:relative;pointer-events:auto}.f2-side .ring-sec{height:auto;min-height:100svh}
 }
-/* phone: no cube, so nothing overlaps; the hero shows first, then the title, then compact step cards */
+/* phone: compact step cards; the wheel arrows sit under the wheel */
 @media (max-width:760px){
-  .stack{margin-top:0;padding-bottom:12svh}
-  .f-bottom{min-height:0}.f-bottom .st-intro{height:auto;padding:14svh 0 8svh}
+  .nav .side{position:static;transform:none;width:48px;height:48px}
   .r{height:auto;min-height:0;grid-template-columns:1fr;gap:10px;padding:22px 22px 24px;margin-bottom:4svh;top:calc(var(--hdr-h) + 12px + var(--i)*12px)}
   .n{font-size:84px;line-height:.8}
   .r h3{font-size:30px}.r p{font-size:15px;padding-top:12px}
@@ -360,7 +355,8 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 
   /* targets copied 1:1 from the IX2 action lists: [x%, y%, z(vw), rotateY, rotateZ] */
   var DESK={f4:[80,-5,16,10,12],f3:[15,-15,10,25,-3],f2:[-50,-15,5,30,-12],f1:[-115,0,0,45,-18],word:125};
-  var MOB ={f4:[85,-10,16,10,14],f3:[25,-20,10,25,-1],f2:[-35,-15,5,30,-12],f1:[-85,-3,0,45,-18],word:200};
+  /* phone fan opened wider, like the reference video */
+  var MOB ={f4:[115,-10,16,10,14],f3:[34,-20,10,25,-1],f2:[-47,-15,5,30,-12],f1:[-115,-3,0,45,-18],word:200};
 
   /* one cycle = G0 hold 500ms + G1 5500ms + G2 3500ms = 9500ms, then loop */
   var T=9500;
@@ -418,7 +414,7 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 <script>
 (function(){
   var flip=document.getElementById('flip'), box=document.getElementById('box'), hdr=document.getElementById('hdr');
-  if(!flip||matchMedia('(prefers-reduced-motion: reduce)').matches||innerWidth<=760)return;
+  if(!flip||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
   var ticking=false;
   /* alternative transitions (?tr=1 expand card · 2 cover · 3 curtain · 4 none) */
@@ -525,13 +521,16 @@ function layout(){var mob=innerWidth<=760,w=mob?Math.round(innerWidth*.46):Math.
   /* the wheel spans ~70% of the screen width; card size follows the height so it never runs off the bottom */
   /* perspective grows with the wheel, so the side cards stay readable; the wheel spans ~72% of the width */
   R=Math.max(N*(w+gap)/(2*Math.PI),mob?0:innerWidth*.46);var P=mob?1100:Math.max(1700,R*1.4);stage.style.perspective=P+"px";
-  document.getElementById("stwrap").style.setProperty("--R",(R*P/(P+R))+"px");/* cards are built at the focused size and scaled down when not in front: shrinking stays sharp */var wB=Math.round(w*BIG),hB=Math.round(h*BIG),sw=wB/S,off=sw/R*180/Math.PI;
+  /* arrows sit clear of the outermost cards */document.getElementById("stwrap").style.setProperty("--R",(R*P/(P+R)+w*.55)+"px");/* cards are built at the focused size and scaled down when not in front: shrinking stays sharp */var wB=Math.round(w*BIG),hB=Math.round(h*BIG),sw=wB/S,off=sw/R*180/Math.PI;
   stage.style.height=Math.round(hB*1.6)+"px";ring.style.setProperty('--w',wB+'px');ring.style.setProperty('--h',hB+'px');last='';
   cards.forEach(function(el,i){[].forEach.call(el.children,function(s){var j=+s.dataset.j;
     s.style.width=(sw+.8)+'px';s.style.left=(-sw/2)+'px';
     s.style.transform='rotateY('+(i*STEP+(j-(S-1)/2)*off)+'deg) translateZ('+R+'px)';
     s.firstChild.firstChild.style.left=(-j*sw)+'px';s.lastChild.firstChild.style.left=(-(S-1-j)*sw)+'px'})})}
-layout();addEventListener('resize',layout);
+/* phone: the arrows move under the wheel, either side of the counter */
+function placeArrows(){var nav=document.querySelector('.ring-sec .nav'),sw=document.getElementById('stwrap'),nx=document.getElementById('next'),pr=document.getElementById('prev');
+  if(innerWidth<=760){if(nx.parentNode!==nav){nav.insertBefore(nx,nav.firstChild);nav.appendChild(pr)}}else if(nx.parentNode!==sw){sw.appendChild(nx);sw.appendChild(pr)}}
+layout();placeArrows();addEventListener('resize',function(){layout();placeArrows()});
 var rot=0,vel=0,target=null,dragging=false,lastX=0,moved=0,active=-1;
 var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* the cube flip calls this once, when the wheel comes into view */
@@ -581,7 +580,7 @@ var tilt=-9,last='';
 /* second cube: the last step card turns away to the right, the works wheel comes in on the left face */
 (function(){
   var f=document.getElementById('flip2'),box=document.getElementById('box2');
-  if(!f||matchMedia('(prefers-reduced-motion: reduce)').matches||innerWidth<=760)return;
+  if(!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var front=box.querySelector('.f2-front'),side=box.querySelector('.f2-side'),spun=false,tick=false,c3=document.querySelector('#stack .r:last-child');
   /* start the cube exactly when the last step card settles, so the still on the face lines up with it */
   function align(){f.style.marginTop='0px';var ps=c3.style.position;c3.style.position='static';var d3=c3.getBoundingClientRect().top+scrollY;c3.style.position=ps;
