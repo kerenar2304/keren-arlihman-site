@@ -602,5 +602,30 @@ var tilt=-9,last='';
   addEventListener('resize',function(){align();u()});align();u();
 })();
 </script>
+<script>
+/* a cube never rests half-turned: when the scroll stops mid-flip, finish the turn in the direction of travel */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var f1=document.getElementById('flip'),f2=document.getElementById('flip2');
+  var zones=[{el:f1,a:0,b:.85,tot:function(){return f1.offsetHeight-2*innerHeight}},
+             {el:f2,a:.08,b:.58,tot:function(){return f2.offsetHeight-innerHeight}}];
+  var timer=null,lastY=scrollY,dir=1,busy=false;
+  function settle(){
+    zones.forEach(function(z){
+      if(!z.el||busy)return;
+      var top=z.el.getBoundingClientRect().top+scrollY,tot=z.tot(),p=(scrollY-top)/tot;
+      if(p<=z.a+.005||p>=z.b-.005)return;
+      var to=top+(dir>0?z.b:z.a)*tot;
+      busy=true;scrollTo({top:to,behavior:'smooth'});
+      setTimeout(function(){busy=false;lastY=scrollY},900);
+    });
+  }
+  addEventListener('scroll',function(){
+    if(busy)return;
+    var y=scrollY;if(y!==lastY)dir=y>lastY?1:-1;lastY=y;
+    clearTimeout(timer);timer=setTimeout(settle,180);
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
