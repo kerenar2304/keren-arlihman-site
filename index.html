@@ -192,13 +192,15 @@ html[data-tr] .face::after,html[data-tr] .seam,html[data-tr] .flip-floor{display
 html[data-tr] .f-front{z-index:1}html[data-tr] .f-bottom{z-index:2}
 html[data-tr="5"] .flip-stage,html[data-tr="7"] .flip-stage{perspective:1800px}
 html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
-.ring-sec{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding-block:calc(50*var(--u)) calc(30*var(--u));overflow:hidden}
-.ttl{font-family:var(--display);font-weight:600;font-size:calc(64*var(--u));line-height:1;text-align:center;position:relative;z-index:2}
+/* title, wheel and caption sit together, centred, with a fixed margin above the bottom edge */
+.ring-sec{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:calc(50*var(--u)) max(56px,8vh);overflow:hidden}
+.ring-sec .ttl{margin-bottom:1vh}
+.ttl{font-family:var(--display);font-weight:600;font-size:min(calc(64*var(--u)),8.5vh);line-height:1;text-align:center;position:relative;z-index:2}
 .ttl em{color:var(--lav)}
 /* the wheel: every card is cut into thin strips that sit on the cylinder, so the cards truly curve */
-.stage{position:relative;perspective:1700px;perspective-origin:50% 30%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;min-height:min(47vh,500px)}
+.stage{position:relative;perspective:1700px;perspective-origin:50% 64%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .stage.drag{cursor:grabbing}
-.ring{position:absolute;left:50%;top:45%;width:0;height:0;transform-style:preserve-3d}
+.ring{position:absolute;left:50%;top:64%;width:0;height:0;transform-style:preserve-3d}
 .card{position:absolute;left:0;top:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
 .sl{position:absolute;top:calc(var(--h)/-2);height:var(--h);transform-style:preserve-3d}
 .fc,.bk{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#000}
@@ -211,7 +213,7 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 /* floor glow under the wheel */
 .stage::after{content:"";position:absolute;left:50%;bottom:2%;width:70%;height:90px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(192,168,251,.16),transparent);pointer-events:none}
 /* focused project info */
-.info{display:grid;justify-items:center;text-align:center;gap:calc(12*var(--u));min-height:96px;padding-top:calc(52*var(--u));position:relative;z-index:2}
+.info{display:grid;justify-items:center;text-align:center;gap:min(calc(12*var(--u)),1.4vh);min-height:0;padding-top:min(calc(52*var(--u)),5vh);position:relative;z-index:2}
 .info .k{display:flex;align-items:center;gap:14px;font:400 15px/1 var(--body);color:var(--lav);letter-spacing:.06em}.info .k::before,.info .k::after{content:"";width:28px;height:1px;background:currentColor;opacity:.6}.info p{display:none}
 .info h3{font-family:var(--display);font-weight:600;font-size:calc(46*var(--u));line-height:1.1;letter-spacing:.01em;margin:2px 0 0}
 .info p{font-weight:300;opacity:.75;max-width:46ch}
@@ -219,7 +221,7 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 .info.swap>*{opacity:0;transform:translateY(10px)}
 .nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:calc(12*var(--u));position:relative;z-index:2}
 .stwrap{position:relative;display:grid}
-.side.nx{right:max(var(--gut),calc(50% - var(--R)*.84 - 70px))}.side.pr{left:max(var(--gut),calc(50% - var(--R)*.84 - 70px))}
+.side.nx{right:max(var(--gut),calc(50% - var(--R) - 80px))}.side.pr{left:max(var(--gut),calc(50% - var(--R) - 80px))}
 .side{position:absolute;top:45%;transform:translateY(-50%);z-index:3;width:58px;height:58px;font-size:22px!important;background:rgba(13,12,17,.6);backdrop-filter:blur(6px);border-radius:50%;border:1.5px solid rgba(244,243,241,.3);color:var(--paper);font-size:19px;line-height:1;transition:background .3s,border-color .3s}
 .side:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
 .nav .cnt{font-family:var(--display);font-size:15px;min-width:64px;text-align:center;opacity:.6}
@@ -259,6 +261,14 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 @media (max-width:760px),(prefers-reduced-motion:reduce){
   .stack{padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;opacity:1;pointer-events:auto;perspective:none}
   .box2{position:static}.f2-front{display:none}.f2-side{position:relative;pointer-events:auto}.f2-side .ring-sec{height:auto;min-height:100svh}
+}
+/* phone: no cube, so nothing overlaps; the hero shows first, then the title, then compact step cards */
+@media (max-width:760px){
+  .stack{margin-top:0;padding-bottom:12svh}
+  .f-bottom{min-height:0}.f-bottom .st-intro{height:auto;padding:14svh 0 8svh}
+  .r{height:auto;min-height:0;grid-template-columns:1fr;gap:10px;padding:22px 22px 24px;margin-bottom:4svh;top:calc(var(--hdr-h) + 12px + var(--i)*12px)}
+  .n{font-size:84px;line-height:.8}
+  .r h3{font-size:30px}.r p{font-size:15px;padding-top:12px}
 }
 </style>
 </head>
@@ -511,9 +521,12 @@ var cards=C.map(function(c,i){var el=document.createElement('div');el.className=
   el.addEventListener('click',function(){if(moved>=6)return;if(i===nearest()&&target===null)openPV(i);else goTo(i)});ring.appendChild(el);return el});
 var R=0;
 var BIG=1.3;
-function layout(){var mob=innerWidth<=760,w=mob?Math.round(innerWidth*.46):Math.round(Math.min(380,innerWidth*.22)),h=Math.round(w/1.45),gap=w*(mob?.12:.42);
-  R=N*(w+gap)/(2*Math.PI);document.getElementById("stwrap").style.setProperty("--R",R+"px");/* cards are built at the focused size and scaled down when not in front: shrinking stays sharp */var wB=Math.round(w*BIG),hB=Math.round(h*BIG),sw=wB/S,off=sw/R*180/Math.PI;
-  ring.style.setProperty('--w',wB+'px');ring.style.setProperty('--h',hB+'px');last='';
+function layout(){var mob=innerWidth<=760,w=mob?Math.round(innerWidth*.46):Math.round(Math.min(innerWidth*.2,innerHeight*.3)),h=Math.round(w/1.45),gap=w*(mob?.12:.42);
+  /* the wheel spans ~70% of the screen width; card size follows the height so it never runs off the bottom */
+  /* perspective grows with the wheel, so the side cards stay readable; the wheel spans ~72% of the width */
+  R=Math.max(N*(w+gap)/(2*Math.PI),mob?0:innerWidth*.46);var P=mob?1100:Math.max(1700,R*1.4);stage.style.perspective=P+"px";
+  document.getElementById("stwrap").style.setProperty("--R",(R*P/(P+R))+"px");/* cards are built at the focused size and scaled down when not in front: shrinking stays sharp */var wB=Math.round(w*BIG),hB=Math.round(h*BIG),sw=wB/S,off=sw/R*180/Math.PI;
+  stage.style.height=Math.round(hB*1.6)+"px";ring.style.setProperty('--w',wB+'px');ring.style.setProperty('--h',hB+'px');last='';
   cards.forEach(function(el,i){[].forEach.call(el.children,function(s){var j=+s.dataset.j;
     s.style.width=(sw+.8)+'px';s.style.left=(-sw/2)+'px';
     s.style.transform='rotateY('+(i*STEP+(j-(S-1)/2)*off)+'deg) translateZ('+R+'px)';
@@ -554,7 +567,8 @@ var tilt=-9,last='';
   var want=-9-Math.min(7,Math.abs(sp)*1.1);tilt+=(want-tilt)*.08;
   /* write to the DOM only when something changed, so the browser can re-draw the images sharp at rest */
   var key=rot.toFixed(3)+'|'+tilt.toFixed(2)+'|'+dragging;if(key===last){requestAnimationFrame(f);return}last=key;
-  ring.style.transform='translateZ('+(-R)+'px) rotateX('+tilt.toFixed(2)+'deg) rotateY('+rot+'deg)';
+  /* lift by the tilt so the front card stays centred however big the wheel is */
+  ring.style.transform='translateY('+(R*Math.sin(tilt*Math.PI/180)).toFixed(1)+'px) translateZ('+(-R)+'px) rotateX('+tilt.toFixed(2)+'deg) rotateY('+rot+'deg)';
   var n=nearest();
   cards.forEach(function(el,i){var a=(i*STEP+rot)*Math.PI/180,c=Math.cos(a);
     el.style.setProperty('--dim',(i===n?0:Math.min(.75,(1-c)*.42+.12)).toFixed(3));
