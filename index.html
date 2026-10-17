@@ -246,8 +246,8 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 /* ---- works: the wheel arrives on the cube's side face ---- */
 .stack{padding-bottom:0}.stack .r:last-child{margin-bottom:0}
 .flip2{position:relative;z-index:20;height:320vh;margin-top:calc(-100svh + 32px)}
-.flip2-stage{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1800px;background:var(--ink);visibility:hidden}
-.flip2.on .flip2-stage{visibility:visible}
+.flip2-stage{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1800px;background:var(--ink);opacity:0;pointer-events:none}
+.flip2.on .flip2-stage{opacity:1;pointer-events:auto}
 .box2{position:absolute;inset:0;transform-style:preserve-3d}
 .f2{position:absolute;inset:0;background:var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
 .f2.live{pointer-events:auto}
@@ -257,7 +257,7 @@ html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
 .f2-side{color:var(--paper)}
 .f2-side .ring-sec{height:100vh;min-height:0;padding-top:calc(var(--hdr-h) + 16px)}
 @media (max-width:760px),(prefers-reduced-motion:reduce){
-  .stack{padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;visibility:visible;perspective:none}
+  .stack{padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;opacity:1;pointer-events:auto;perspective:none}
   .box2{position:static}.f2-front{display:none}.f2-side{position:relative;pointer-events:auto}.f2-side .ring-sec{height:auto;min-height:100svh}
 }
 </style>
