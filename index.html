@@ -203,10 +203,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
 
 /* ---------- tablet & phone ---------- */
 @media (max-width:900px){
-  /* the phone's header: the logo, and a menu of two thin lines; the call button waits inside the menu */
+  /* the phone's header: the logo, a compact call button, and a menu of two thin lines; when the menu opens the button
+     goes down to the bottom of the screen, full width */
   .v-nav{display:none}
-  .v-hdr .bar{grid-template-columns:1fr auto;gap:10px;height:72px}.v-hdr .v-wrap{padding-inline:var(--v-pad)}
-  .v-hdr .bar>.v-cta{display:none}
+  .v-hdr .bar{grid-template-columns:1fr auto auto;gap:6px;height:72px}.v-hdr .v-wrap{padding-inline:var(--v-pad)}
+  .v-hdr .bar>.v-cta{height:38px;padding:0 15px;gap:8px;font-size:14px;border-width:1px}.v-hdr .bar>.v-cta::before{inset:-40% -20%;opacity:.6}
   .v-menu{display:block;position:relative;width:44px;height:44px;margin-inline-end:-10px;background:none;border-radius:0;cursor:pointer}
   .v-menu span{position:absolute;right:10px;height:1.5px;border-radius:2px;background:currentColor;transition:transform .5s cubic-bezier(.7,0,.2,1),width .5s cubic-bezier(.7,0,.2,1),top .5s cubic-bezier(.7,0,.2,1)}
   .v-menu span:first-child{top:17px;width:24px}.v-menu span:last-child{top:25px;width:15px}
@@ -220,7 +221,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
   .v-hdr.open .v-nav a{display:inline-block;font:600 clamp(30px,9vw,40px)/1.15 var(--display);color:var(--paper);opacity:0;translate:0 18px;animation:v-mnav .6s cubic-bezier(.22,.61,.36,1) forwards}
   .v-hdr.open .v-nav li:nth-child(2) a{animation-delay:.06s}.v-hdr.open .v-nav li:nth-child(3) a{animation-delay:.12s}
   .v-hdr.open .v-nav li:nth-child(4) a{animation-delay:.18s}.v-hdr.open .v-nav li:nth-child(5) a{animation-delay:.24s}
-  .v-hdr.open .bar>.v-cta{display:flex;justify-content:center;position:fixed;justify-self:stretch;width:auto;left:var(--v-pad);right:var(--v-pad);bottom:max(30px,env(safe-area-inset-bottom));height:54px;
+  .v-hdr.open .bar>.v-cta{display:flex;justify-content:center;position:fixed;justify-self:stretch;width:auto;left:var(--v-pad);right:var(--v-pad);bottom:max(30px,env(safe-area-inset-bottom));height:54px;padding:0 24px;border-width:1.5px;
     font-size:17px;opacity:0;animation:v-mnav .6s cubic-bezier(.22,.61,.36,1) .3s forwards}
   .v-hdr.open.lite .v-logo,.v-hdr.open.lite .v-menu,.v-hdr.open.lite .v-cta{color:var(--paper)}.v-hdr.open.lite .v-cta{border-color:rgba(244,243,241,.55)}
 }
