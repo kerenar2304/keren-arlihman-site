@@ -2,629 +2,1302 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>document.documentElement.classList.add('js');var _t=new URLSearchParams(location.search).get('tr');if(_t!=='5')_t='7';if(_t)document.documentElement.dataset.tr=_t;var _n={"5":"קרן ארליכמן | מיתוג ואתרי תדמית","7":"קרן ארליכמן | מיתוג ואתרי תדמית"};if(_n[_t])addEventListener("DOMContentLoaded",function(){document.title=_n[_t]});if(new URLSearchParams(location.search).has('static'))document.documentElement.classList.add('static')</script>
-<title>הירו C | קרן ארליכמן</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>קרן ארליכמן | מיתוג ואתרי תדמית</title>
+<meta name="description" content="מיתוג ואתרי תדמית לעסקים שעברו דרך. כי שנים בונים שם, שניות בונות רושם.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap">
 <style>
-/* =====================================================================
-   HERO C: an exact port of brandolk.webflow.io's header animation
-   (Webflow IX2 "Header Animation - Desktop" a-22 / "- Mobile" a-23):
-   two giant words split by one card, the words slide inward into their
-   masks, four cards fan out in 3D while the block spins 360deg, then it
-   all folds back (720deg) and loops every 9.5s. Easing: inOutExpo.
-   ===================================================================== */
-.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.hc{position:relative;height:100svh;min-height:600px;background:var(--ink);color:var(--paper);overflow:hidden}
-.hc-sub{position:absolute;inset-inline:0;text-align:center;font:400 var(--t2)/1 var(--display);z-index:3}
-.hc-sub.top{top:calc(var(--hdr-h) + 3svh)}
-.hc-sub.bot{top:auto;bottom:calc(46px + 1svh);max-width:none;margin-inline:auto;padding-inline:var(--gut);font:300 var(--t4)/1.55 var(--body)}
+/* ---------- version 2 · from the Figma "אתר שלי" frame 279:751 ---------- */
+:root{--v-paper:#F3F2F0;--v-line:rgba(244,243,241,.09);--v-max:1325px;--v-pad:max(20px,5.7vw)}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);margin:0}
+.v-wrap{width:min(100%,var(--v-max));margin-inline:auto;padding-inline:var(--v-pad);box-sizing:border-box}
+.v-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* the words row (laid out left-to-right like the original; each word reads RTL) */
-.hc-words{position:absolute;inset-inline:0;top:50%;transform:translateY(calc(-55% - .26 * var(--fs) + 9svh));direction:ltr;display:flex;justify-content:center;align-items:center;gap:calc(var(--card) + 2.2vw);z-index:1}
-.hc-w{width:31vw;height:var(--fs);overflow:hidden;display:flex;align-items:center}
-.hc-w.is-left{justify-content:flex-end}
-.hc-w.is-right{justify-content:flex-start}
-.hc-w span{display:block;direction:rtl;font-family:var(--display);font-weight:600;font-size:var(--fs);line-height:1;white-space:nowrap;will-change:transform}
-.hc-w em{color:var(--lav)}
+/* header */
+.v-hdr{position:fixed;inset-inline:0;top:0;z-index:50;transition:background .35s,box-shadow .35s}
+.v-hdr.solid{background:rgba(13,12,17,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--v-line)}
+.v-hdr .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:96px}
+.v-logo{justify-self:start;color:var(--paper);display:inline-flex}
+.v-logo svg{height:52px;width:auto}
+.v-nav ul{display:flex;gap:clamp(24px,3vw,48px);list-style:none;margin:0;padding:0}
+.v-nav a{color:var(--paper);text-decoration:none;font:400 21px/1 var(--body)}
+.v-nav a:hover{color:var(--lav)}
+/* the header button matches the page's other buttons ("לכל הפרויקטים"): a thin outlined pill with an arrow */
+.v-cta{justify-self:end;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;border:1.5px solid rgba(244,243,241,.55);border-radius:999px;
+  color:var(--paper);text-decoration:none;font:400 16px/1 var(--body);transition:background .3s,color .3s,border-color .3s}
+.v-cta:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
+/* a small lavender light around the button, like the glow under the hands, the cube and the photo */
+.v-cta{position:relative;isolation:isolate}
+.v-cta::before{content:"";position:absolute;inset:-70% -35%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(192,168,251,.42),rgba(192,168,251,.14) 55%,transparent);filter:blur(7px);opacity:.85;transition:opacity .35s,transform .35s}
+.v-cta:hover::before{opacity:1;transform:scale(1.15)}
+.v-menu{display:none;width:48px;height:48px;border-radius:8px;background:rgba(244,243,241,.08);color:var(--paper);border:0;font-size:22px}
+/* v3: while the works play on the white, the header turns light too */
+.v-hdr.lite.solid{background:rgba(247,245,242,.9);box-shadow:0 1px 0 rgba(23,20,31,.08)}
+.v-hdr .v-logo,.v-hdr .v-nav a,.v-hdr .v-cta,.v-hdr .v-menu{transition:color .35s,background .35s,border-color .35s}
+.v-hdr.lite .v-logo,.v-hdr.lite .v-nav a,.v-hdr.lite .v-cta,.v-hdr.lite .v-menu{color:#17141f}
+.v-hdr.lite .v-nav a:hover{color:#7a5ae6}
+.v-hdr.lite .v-cta{border-color:rgba(23,20,31,.5)}.v-hdr.lite .v-cta:hover{color:#17141f}
+.v-hdr.lite .v-menu{background:rgba(23,20,31,.06)}
 
-/* the card stack */
-.hc-stage{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transform:translateY(4%);pointer-events:none;z-index:2}
-.hc-block{position:relative;width:var(--card);height:calc(var(--card) * 4 / 3);perspective:1000px}
-.hc-img{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
-.hc-f{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
-.hc-f img{width:100%;height:100%;object-fit:cover;display:block}
-.hc-f{overflow:hidden}
-/* the mockups under the portrait are a hair smaller, so no edge of them shows around it when the fan is closed */
-#f1,#f2,#f3{inset:2px}
-.ov{position:absolute;top:0;bottom:0;width:50.5%;background:var(--lav);transform:translateX(var(--o,0));pointer-events:none}
-.ov.l{left:0;--o:-110%}.ov.r{right:0;--o:110%}
+/* hero: one design frame (desktop 1325x846 from the Figma, phone 367x460 from the phone sketch).
+   Everything in it, text and hands, is placed in frame units and scaled by --sc, so the composition
+   keeps its proportions on every screen. Values are set per layout by the script below. */
+.v-hero{position:relative;height:max(100svh,600px);overflow:hidden;background:var(--ink);isolation:isolate}
+.v-hero::after{content:"";position:absolute;inset-inline:0;bottom:0;height:62%;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 70% at 50% 78%,rgba(192,168,251,.4),rgba(192,168,251,.1) 55%,transparent 80%);
+  /* the glow fades out before the hero ends, so the next section follows without a seam */
+  -webkit-mask:linear-gradient(#000 55%,transparent 100%);mask:linear-gradient(#000 55%,transparent 100%)}
+/* the vertical grid spans the whole screen and spreads with it */
+.v-cols{position:absolute;inset:0 3.8%;z-index:-1;pointer-events:none;display:flex;justify-content:space-between}
+.v-cols i{width:1px;background:var(--v-line)}
+.v-frame{position:absolute;left:0;right:0;bottom:0;height:calc(var(--fh) * var(--sc) * 1px);pointer-events:none}
+.v-hw{position:absolute;top:0;bottom:0;width:calc(var(--fw) * var(--sc) * .5px);
+  -webkit-mask:linear-gradient(#000 62%,transparent 100%);mask:linear-gradient(#000 62%,transparent 100%)}
+/* leaving the hero the hands slide out of the frame, each to its own side; then the cube is tossed in */
+.v-hw.l{left:calc(var(--hx) * 1px);transform:translateX(calc(var(--o,0) * -1%));opacity:var(--ho,1)}
+.v-hw.r{right:calc(var(--hx) * 1px);transform:translateX(calc(var(--o,0) * 1%)) scaleX(-1);opacity:var(--ho,1)}
+/* the hand drawing: thumb tip of the source image (403,146) lands on (--ax,--ay), scaled by --hs, turned 19.8deg as in the Figma */
+.v-hw img{position:absolute;max-width:none;height:auto;opacity:.55;width:calc(1254 * var(--hs) * var(--sc) * 1px);
+  left:calc((var(--ax) - 403 * var(--hs)) * var(--sc) * 1px);top:calc((var(--ay) - 146 * var(--hs)) * var(--sc) * 1px);
+  transform-origin:calc(403 * var(--hs) * var(--sc) * 1px) calc(146 * var(--hs) * var(--sc) * 1px);transform:rotate(19.8deg);
+  animation:v-breathe 7.4s ease-in-out infinite}
+/* the hands are alive: a slow, uneven float and a slight turn, the two hands out of step like real ones */
+.v-hw.r img{animation-duration:8.6s;animation-delay:-3.1s}
+@keyframes v-breathe{
+  0%,100%{translate:0 0;rotate:0deg}
+  30%{translate:calc(var(--sc) * 2px) calc(var(--sc) * -7px);rotate:-.7deg}
+  55%{translate:calc(var(--sc) * 1px) calc(var(--sc) * -10px);rotate:-.4deg}
+  80%{translate:calc(var(--sc) * -1px) calc(var(--sc) * -3px);rotate:.35deg}}
+@media (prefers-reduced-motion:reduce){.v-hw img{animation:none}}
+/* the opening: the hands appear together in the middle, open out to their places, and then the words come in */
+.v-hero.intro .v-hw.l{animation:v-open-l 2.6s cubic-bezier(.6,0,.2,1) backwards}
+.v-hero.intro .v-hw.r{animation:v-open-r 2.6s cubic-bezier(.6,0,.2,1) backwards}
+/* closed: the fingertips touching in the middle and the hands turned in, cupped together;
+   then they part and turn out, palms open, like hands presenting what is between them */
+@keyframes v-open-l{0%{translate:var(--inx,0) 0;rotate:7deg;opacity:0}20%{translate:var(--inx,0) 0;rotate:7deg;opacity:1}100%{translate:0 0;rotate:0deg;opacity:1}}
+@keyframes v-open-r{0%{translate:calc(var(--inx,0) * -1) 0;rotate:-7deg;opacity:0}20%{translate:calc(var(--inx,0) * -1) 0;rotate:-7deg;opacity:1}100%{translate:0 0;rotate:0deg;opacity:1}}
+.v-hero.pre .v-hw,.v-hero.pre .v-copy>*{opacity:0}
+.v-hero.intro .v-copy>*{animation:v-words 1s cubic-bezier(.22,.61,.36,1) backwards}
+.v-hero.intro .v-copy h1{animation-delay:1.25s}
+.v-hero.intro .v-copy .lead{animation-delay:1.7s}
+.v-hero.intro .v-copy .close{animation-delay:1.95s}
+@keyframes v-words{0%{opacity:0;translate:0 18px;filter:blur(6px)}100%{opacity:1;translate:0 0;filter:blur(0)}}
+.v-copy{position:absolute;inset:0;text-align:center;transform:translateY(calc(var(--h,0) * -80px));opacity:calc(1 - var(--h,0) * 1.6)}
+.v-copy>*{position:absolute;left:50%;transform:translateX(-50%);margin:0}
+.v-hero h1{top:calc(var(--ttop) * var(--sc) * 1px);width:100%;font:600 calc(var(--tfs) * var(--sc) * 1px)/.93 var(--display)}
+/* "אתר אחר" in the lavender, with a soft glow of its own color */
+.v-hero h1 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.38),0 0 .5em rgba(192,168,251,.16)}
+.v-hero .lead{top:calc(var(--ptop) * var(--sc) * 1px);width:calc(var(--pw) * var(--sc) * 1px);font:300 calc(var(--pfs) * var(--sc) * 1px)/1.6 var(--body)}
+.v-hero .close{top:calc(var(--ctop) * var(--sc) * 1px);width:100%;font:600 calc(var(--cfs) * var(--sc) * 1px)/1.2 var(--display);color:var(--lav)}
+@media (min-width:761px){.v-hero .lead span{display:block}}
+/* v3: the hero stays pinned for a while above the scene, which starts under it at the top of the page */
+.v3-top{position:relative;z-index:4}
+.v3-top .v-hero{position:sticky;top:0;min-height:100vh;min-height:100svh}
+.v-hw.l{translate:calc(var(--c,0) * var(--inx,0px)) 0;rotate:calc(var(--c,0) * 7deg)}
+.v-hw.r{translate:calc(var(--c,0) * var(--inx,0px) * -1) 0;rotate:calc(var(--c,0) * -7deg)}
+/* the light that forms between the hands, and the logo it draws */
+.v3-light{position:absolute;left:50%;top:var(--ly,62%);width:min(52vw,720px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;z-index:2;
+  background:radial-gradient(closest-side,rgba(214,198,255,.75),rgba(192,168,251,.28) 40%,rgba(192,168,251,.08) 65%,transparent);filter:blur(4px);
+  opacity:var(--k2,0);scale:calc((.3 + var(--k2,0) * .7) * (1 + var(--kg,0) * 5))}
+/* the light grows until it fills the screen with white; the works play on that white, which keeps the vertical grid
+   and a few soft lavender patches that drift slowly with the scroll. At the end it draws back, softly edged, into
+   the cube of the next section (--mx, --my, --mr) */
+.v3-white{position:absolute;inset:0;z-index:3;pointer-events:none;background:#f7f5f2;opacity:var(--kw,0);overflow:hidden;
+  -webkit-mask:radial-gradient(circle at var(--mx,50%) var(--my,50%),#000 var(--mr,200vmax),transparent calc(var(--mr,200vmax) + 22vmax));
+  mask:radial-gradient(circle at var(--mx,50%) var(--my,50%),#000 var(--mr,200vmax),transparent calc(var(--mr,200vmax) + 22vmax))}
+.v3-white .v-cols{z-index:0}.v3-white .v-cols i{background:rgba(23,20,31,.08)}
+.v3-white span{position:absolute;border-radius:50%;filter:blur(30px);background:radial-gradient(closest-side,rgba(192,168,251,.5),rgba(192,168,251,.16) 55%,transparent)}
+.v3-white .b1{width:46vw;aspect-ratio:1;left:-10vw;top:-16vh;translate:calc(var(--wv,0) * 14vw) calc(var(--wv,0) * 10vh)}
+.v3-white .b2{width:38vw;aspect-ratio:1;right:-8vw;bottom:-18vh;translate:calc(var(--wv,0) * -12vw) calc(var(--wv,0) * -8vh)}
+.v3-white .b3{width:26vw;aspect-ratio:1;right:22vw;top:8vh;opacity:.7;translate:calc(var(--wv,0) * -8vw) calc(var(--wv,0) * 14vh)}
+/* the works, as cards in depth: the one in front sits in the middle, the next ones wait at the left edge turned away,
+   one behind the other; going on, the front card leaves to the right growing and turning, and the next comes forward */
+.v3-mk{position:absolute;left:var(--cx,50%);top:var(--cy,53%);width:var(--cw);height:auto;translate:-50% -50%;z-index:3;pointer-events:none;opacity:0;border-radius:6px;
+  transform-origin:50% 50%;will-change:transform,opacity;box-shadow:0 40px 90px -40px rgba(0,0,0,.35),0 0 0 1px rgba(23,20,31,.06)}
+.v-hero{--cw:min(52vw,900px,calc((100svh - 270px) * 1.6));--cy:47%;--cx:50%}
+/* under the card in front, along its width: the project's name at its right, the way to all the projects at its left */
+/* the back of the last project's card: the night of the page, which fills the screen as the card turns over */
+.v3-back{position:absolute;left:var(--cx,50%);top:var(--cy,53%);width:var(--cw);aspect-ratio:1.6;translate:-50% -50%;z-index:11;pointer-events:none;opacity:0;
+  background:radial-gradient(70% 75% at 50% 55%,rgba(192,168,251,.3),rgba(192,168,251,.09) 55%,transparent 82%),#1a1722;border-radius:6px;transform-origin:50% 50%;will-change:transform;
+  box-shadow:inset 0 0 0 1px rgba(236,230,252,.22),inset 0 0 60px rgba(192,168,251,.12),0 40px 90px -40px rgba(0,0,0,.35)}
+/* as it fills the screen it deepens into the page's own night, so the hand-over is seamless */
+.v3-back::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--ink);opacity:var(--bdk,0)}
+/* the hero's own light under the hands goes as the works leave, the cube's light travelling with it instead */
+.v3-top .v-hero::after{opacity:var(--hg,1)}
+.v3-info{position:absolute;z-index:12;left:calc(var(--cx) - var(--cw) / 2);width:var(--cw);top:calc(var(--cy) + var(--cw) * .3125 + 22px);
+  opacity:0;visibility:hidden;color:#17141f;pointer-events:none}
+.v3-foot{display:flex;align-items:center;justify-content:space-between;gap:24px}
+/* the name of the section, written large across the white behind the cards, faint, drifting slowly with the scroll */
+.v3-white .v3-big{position:absolute;left:50%;top:var(--cy);translate:calc(-50% + var(--wv,0) * -10vw) -50%;white-space:nowrap;font:700 13vw/1 var(--display);color:rgba(23,20,31,.045);letter-spacing:-.01em}
+.v3-cap{margin:0}
+.v3-cap b{display:block;font:600 clamp(24px,2.3vw,38px)/1.1 var(--display)}
+.v3-cap span{display:block;margin-top:8px;font:300 15px/1 var(--body);opacity:.6}
+.v3-all{flex:none;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;border:1.5px solid rgba(23,20,31,.5);border-radius:999px;
+  color:#17141f;text-decoration:none;font:500 16px/1 var(--body);pointer-events:auto;transition:background .3s,border-color .3s,color .3s}
+.v3-all:hover{background:var(--lav);border-color:var(--lav)}
+@media (max-width:760px){.v-hero{--cw:86vw;--cx:50%;--cy:44%}
+  .v3-white .v3-big{font-size:17vw}
+  .v3-foot{flex-direction:column;align-items:flex-start;gap:16px}.v3-all{height:42px;font-size:15px;padding:0 18px}}
+/* a glimpse of the work in the hero: the hands hold four of the projects fanned out like a hand of cards. In the opening,
+   once the hands have opened, the fan spreads from a single stack; hovering a card lifts and straightens it and shows its
+   name, and the fan fades as the hero leaves */
+.hvf{position:absolute;left:50%;bottom:clamp(60px,10.5vh,104px);width:0;height:0;z-index:1;opacity:calc(1 - var(--h,0) * 1.8);--cw:clamp(150px,12vw,224px)}
+.hvf .fan{position:absolute;left:0;bottom:0;animation:hvf-sway 9s ease-in-out infinite}
+@keyframes hvf-sway{0%,100%{rotate:-1deg}50%{rotate:1deg}}
+.hvf a{position:absolute;left:calc(var(--cw) / -2);bottom:0;width:var(--cw);aspect-ratio:16/10;border-radius:7px;overflow:visible;transform-origin:50% 420%;
+  transform:rotate(var(--a)) translateY(0);transition:transform .7s cubic-bezier(.34,1.4,.64,1),filter .5s;
+  animation:hvf-open 1.4s calc(2.3s + var(--i) * .07s) cubic-bezier(.22,.9,.3,1) backwards}
+@keyframes hvf-open{from{transform:rotate(0deg) translateY(30px);opacity:0}}
+.hvf a i{position:absolute;inset:0;border-radius:inherit;overflow:hidden;box-shadow:0 0 0 1px rgba(244,243,241,.24),0 16px 40px -14px rgba(0,0,0,.7),0 0 46px -16px rgba(192,168,251,.55)}
+.hvf img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.hvf b{position:absolute;bottom:calc(100% + 10px);left:50%;translate:-50% 6px;white-space:nowrap;font:500 12.5px/1 var(--body);letter-spacing:.04em;color:var(--paper);
+  padding:7px 12px;border-radius:999px;background:rgba(13,12,17,.75);border:1px solid rgba(192,168,251,.45);opacity:0;transition:opacity .35s,translate .45s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.hvf .fan:hover a{filter:brightness(.6)}
+.hvf .fan a:hover,.hvf .fan a:focus-visible{filter:none;z-index:9;transform:rotate(calc(var(--a) * .35)) translateY(-26px) scale(1.12)}
+.hvf a:hover b,.hvf a:focus-visible b{opacity:1;translate:-50% 0}
+.hvf a:focus-visible{outline:none}.hvf a:focus-visible i{box-shadow:0 0 0 2px var(--lav)}
+@media (max-width:760px){.hvf{--cw:104px;bottom:14px}.hvf b{display:none}}
+@media (prefers-reduced-motion:reduce){.hvf .fan,.hvf a{animation:none}}
+/* another take on the glimpse, to choose from (?hf=flow; the fan without the parameter) */
+.hfx{position:absolute;left:50%;bottom:clamp(60px,10.5vh,104px);width:0;height:0;z-index:1;opacity:calc(1 - var(--h,0) * 1.8);--cw:clamp(150px,11.5vw,210px);
+  animation:hv-in2 1.3s 2.3s cubic-bezier(.22,.61,.36,1) backwards}
+@keyframes hv-in2{from{opacity:0;translate:0 30px;filter:blur(8px)}}
+.hfx .c{position:absolute;left:calc(var(--cw) / -2);bottom:0;width:var(--cw);aspect-ratio:16/10;border-radius:7px;overflow:hidden;display:block;
+  box-shadow:0 0 0 1px rgba(244,243,241,.24),0 14px 36px -12px rgba(0,0,0,.7),0 0 40px -16px rgba(192,168,251,.55)}
+.hfx .c img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.hfx .nm{position:absolute;left:50%;bottom:calc(var(--cw) * .625 + 14px);translate:-50% 0;white-space:nowrap;font:500 12.5px/1 var(--body);letter-spacing:.04em;
+  padding:7px 12px;border-radius:999px;background:rgba(13,12,17,.75);border:1px solid rgba(192,168,251,.45);color:var(--paper);transition:opacity .4s}
+/* cover flow: one in the middle facing you, its neighbours turned in on each side; it moves on by itself */
+.hfx.flow{perspective:900px}
+.hfx.flow .c{cursor:pointer;transition:transform 1s cubic-bezier(.65,0,.25,1),opacity .8s,filter .8s}
+@media (max-width:760px){.hfx{--cw:110px;bottom:16px}.hfx .nm{display:none}}
+/* the work, muted into the page's two colours (ink and lavender): a duotone made of a greyscale picture screened onto
+   deep violet and multiplied by the lavender; under the cursor (or the passing light) it comes back to full colour */
+.duo{position:relative;overflow:hidden;background:#151026}
+.duo img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.08);mix-blend-mode:screen;opacity:.6;transition:filter .8s,opacity .8s,mix-blend-mode 0s .8s}
+.duo::after{content:"";position:absolute;inset:0;background:var(--lav);mix-blend-mode:multiply;opacity:.92;transition:opacity .8s;pointer-events:none}
+.duo.lit img,.duo:hover img{filter:none;opacity:1;mix-blend-mode:normal;transition:filter .8s,opacity .8s}
+.duo.lit::after,.duo:hover::after{opacity:0}
+/* inside the grid: the bottom row of the background grid, between the hands, holds the four works in its cells */
+.hfg{position:absolute;left:3.8%;right:3.8%;bottom:clamp(36px,6vh,70px);height:calc(92.4vw / 6 * .62);z-index:0;opacity:calc(1 - var(--h,0) * 1.8);
+  -webkit-mask:linear-gradient(transparent,#000 30%);mask:linear-gradient(transparent,#000 30%);animation:hv-in2 1.4s 2.3s cubic-bezier(.22,.61,.36,1) backwards}
+.hfg a{position:absolute;top:0;bottom:0;width:calc(100% / 6);display:block}
+.hfg a:nth-child(1){left:calc(100% / 6)}.hfg a:nth-child(2){left:calc(100% / 6 * 2)}.hfg a:nth-child(3){left:calc(100% / 6 * 3)}.hfg a:nth-child(4){left:calc(100% / 6 * 4)}
+.hfg .duo{position:absolute;inset:0 1px}
+.hfg b{position:absolute;right:12px;bottom:10px;z-index:2;font:500 12px/1 var(--body);letter-spacing:.04em;color:var(--paper);opacity:0;transition:opacity .6s;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.hfg a:hover b,.hfg .duo.lit+b{opacity:1}
+@media (max-width:760px){.hfg{height:22vw;bottom:14px}.hfg b{display:none}}
 
-.hc-foot{position:absolute;inset-inline:0;bottom:calc(26*var(--u));display:flex;justify-content:space-between;font-size:var(--t5);z-index:3}
-.hc-sub.bot .l{display:block;text-wrap:balance}
-.hc-sub.bot .close{display:block;margin-top:.35em;color:var(--lav);font-weight:400}
-
-:root{--fs:min(16vw,23svh);--card:min(16vw,23svh)}
-@media (max-width:991px){:root{--fs:17vw;--card:22vw}.hc-w{width:30vw}}
-/* ---- mobile: measured 1:1 from brandolk at 390x844 ----
-   header 84px · subtitle at 21% · words stacked (112px, wrappers 122px tall, 64px apart) around a 96x128 card at the centre ·
-   paragraph at 73% (358px wide) · description row 32px from the bottom */
-@media (max-width:767px){
-  :root{--fs:min(140px,18svh);--card:96px}
-  .hc{height:100svh;min-height:640px}
-  .hc-sub.top{top:19%;font-size:30px;line-height:1}
-  .hc-words{top:50%;transform:translateY(-50%);flex-direction:column-reverse;gap:min(40px,5svh)}
-  .hc-w{width:100%;height:calc(var(--fs) + 10px);padding:5px 16px;justify-content:center!important}
-  .hc-w span{line-height:var(--fs)}
-  .hc-stage{transform:translateY(-8px)}
-  .hc-sub.bot{top:73.1%;bottom:auto;max-width:358px;padding:0;font-size:16px;line-height:1.35}
-  .hc-foot{bottom:32px;flex-direction:row;font-size:14px;padding-inline:20px;width:100%}
-  .hc-foot p{max-width:48%}
-  /* header like the reference: 84px, logo + a 52px menu square */
-  .hdr .bar{height:84px;padding-block:16px}
-  .hdr .logo img{height:34px}
-  .hdr .mbtn{display:grid}
+/* ---------- tablet & phone ---------- */
+@media (max-width:900px){
+  .v-nav{display:none}
+  .v-hdr .bar{grid-template-columns:1fr auto auto;gap:10px;height:76px}
+  .v-menu{display:grid;place-items:center}
+  .v-hdr.open .v-nav{display:block;position:fixed;inset:76px 0 auto;background:var(--ink);padding:24px var(--v-pad) 34px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+  .v-hdr.open .v-nav ul{flex-direction:column;gap:22px}
+  .v-hdr.open .v-nav a{font-size:26px}
 }
-@media (max-width:479px){.hc-foot{font-size:13px}}
-/* menu square (mobile only) + full-screen menu */
-.mbtn{display:none;place-items:center;width:52px;height:52px;background:rgba(255,255,255,.05);color:var(--paper);border:0;cursor:pointer;position:relative;z-index:2}
-.mbtn i{display:flex;gap:4px}.mbtn i b{width:5px;height:5px;background:currentColor;display:block}
-.mmenu{position:fixed;inset:0;z-index:55;background:var(--ink);display:grid;align-content:center;justify-items:center;gap:18px;
-  opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility 0s .4s}
-.mmenu a{font-family:var(--display);font-weight:600;font-size:44px;line-height:1;color:var(--paper)}
-.mmenu a.cta{margin-top:20px;font:600 16px/1 var(--body);background:var(--lav);color:var(--ink);padding:16px 26px;border-radius:var(--r)}
-html.menu-open .mmenu{opacity:1;visibility:visible;transition:opacity .4s var(--ease)}
-
-.hdr{color:var(--paper)}
-.hdr .l-dark{display:none}.hdr .l-light{display:block}
-.hdr .btn.solid{background:var(--lav);color:var(--ink)}
-/* ===== scroll transition: the hero is one face of a box that tips backward ===== */
-.flip{position:relative;height:330vh}
-.flip-stage{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1500px;perspective-origin:50% 50%;background:#0D0C11}
-.box{position:absolute;inset:0;transform-style:preserve-3d;transform:scale(var(--s,1)) translateY(var(--ty,0)) rotateY(var(--ry,0deg)) translateZ(-50vh) rotateX(var(--a,0deg));will-change:transform}
-.face{border-radius:var(--rad,0px)}
-.flip-floor{position:absolute;left:50%;bottom:6vh;width:70vw;height:10vh;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(192,168,251,.28),transparent);filter:blur(18px);opacity:var(--fo,0);pointer-events:none}
-.box .seam{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--lav);transform:translateZ(50vh);transform-origin:bottom;opacity:var(--so,0);box-shadow:0 0 24px 4px rgba(192,168,251,.6)}
-.face{position:absolute;inset:0;overflow:hidden;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.f-front{transform:translateZ(50vh)}
-.f-bottom{transform:rotateX(-90deg) translateZ(50vh);background:var(--ink);color:var(--paper);display:grid;align-content:center}
-.f-front .hc{height:100vh;max-height:none;min-height:0}
-/* a soft shade on the face that turns away, so the box reads as solid */
-.face::after{content:"";position:absolute;inset:0;background:#0D0C11;opacity:var(--shade,0);pointer-events:none}
-.f-bottom::after{opacity:var(--shade2,.6)}
-.f-bottom .points{padding-block:0}
-.hdr{transition:color .35s}
-.hdr.on-light{color:var(--ink)}
-.hdr.on-light .btn.solid{background:var(--ink);color:var(--paper)}
-@media (prefers-reduced-motion:reduce){
-  .flip{height:auto}.flip-stage{position:static;height:auto;perspective:none}
-  .box{position:static;transform:none}.face{position:relative;transform:none!important}
-  .f-front .hc{height:100svh}.f-bottom{min-height:100svh}.face::after{display:none}
+@media (max-width:600px){
+  .v-cta{height:42px;font-size:15px;padding:0 16px;gap:9px}
+  .v-logo svg{height:42px}
 }
-/* ---- STEPS: three tall panels on ink; the open one shows real material ---- */
-.pillars{height:100%;display:flex;align-items:center;padding-top:calc(var(--hdr-h) + 10px);padding-bottom:20px}
-.pl-wrap{display:grid;grid-template-columns:1fr;gap:calc(34*var(--u));width:min(100% - 2*var(--gut),calc(1240*var(--u)))}
-.pl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
-.pl-head h2{font-family:var(--display);font-weight:600;font-size:calc(84*var(--u));line-height:.95;color:var(--paper);white-space:nowrap}
-.pl-head h2 em{color:var(--lav);background:none;padding:0}
-.pl-head p{font-weight:300;font-size:var(--t4);line-height:1.6;max-width:26ch;opacity:.7;border-inline-start:1px solid rgba(244,243,241,.25);padding-inline-start:calc(22*var(--u))}
-.pl-row{list-style:none;margin:0;padding:0;display:flex;gap:10px;height:min(56vh,calc(520*var(--u)))}
-.pl{position:relative;flex:1 1 0;min-width:0;border-radius:6px;overflow:hidden;cursor:pointer;outline-offset:3px;
-  background:#0D0C11;border:1px solid rgba(244,243,241,.1);transition:flex-grow .9s cubic-bezier(.76,0,.24,1),background .6s,border-color .6s}
-.pl.is-on{flex-grow:5.2;background:var(--lav);border-color:var(--lav);color:var(--ink);cursor:default}
-.pl-n{position:absolute;inset-inline-start:calc(22*var(--u));top:calc(14*var(--u));font-family:var(--display);font-weight:600;font-size:calc(66*var(--u));line-height:.85;
-  color:var(--lav);opacity:.9;transition:color .6s,opacity .6s,font-size .9s cubic-bezier(.76,0,.24,1)}
-.pl.is-on .pl-n{color:var(--ink);opacity:1;font-size:calc(150*var(--u))}
-.pl-tab{position:absolute;inset-inline-start:calc(26*var(--u));bottom:calc(26*var(--u));font-family:var(--display);font-weight:600;font-size:var(--t3);
-  writing-mode:vertical-rl;transform:rotate(180deg);opacity:.85;transition:opacity .4s}
-.pl.is-on .pl-tab{opacity:0}
-.pl-body{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.15fr;grid-template-rows:1fr auto;gap:calc(16*var(--u)) calc(34*var(--u));align-items:end;padding:calc(30*var(--u));
-  opacity:0;transform:translateY(16px);transition:opacity .35s,transform .5s;pointer-events:none}
-.pl.is-on .pl-body{opacity:1;transform:none;transition:opacity .6s .45s,transform .9s cubic-bezier(.22,.61,.36,1) .45s;pointer-events:auto}
-.pl-body h3{grid-column:1;grid-row:1;align-self:end;font-family:var(--display);font-weight:600;font-size:calc(40*var(--u));line-height:1}
-.pl-body p{grid-column:1;grid-row:2;font-weight:300;font-size:var(--t4);line-height:1.55;max-width:34ch}
-.pl-img{grid-column:2;grid-row:1/span 2;margin:0;align-self:stretch;border-radius:4px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(13,12,17,.6)}
-.pl-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
-.pl.is-on .pl-img img{transform:none}
-.pl:not(.is-on):hover{background:#0D0C11;border-color:rgba(192,168,251,.4)}
-@media (max-width:1024px){.pl-wrap{grid-template-columns:1fr}.pl-head h2{font-size:calc(64*var(--u))}}
+
+/* ---------- the three steps, then the works: one long pinned scene driven by the scroll ---------- */
+.v-steps{position:relative;height:410vh;background:var(--ink)}
+.v-steps .v-cols{z-index:0}
+.v-steps-in{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:center;gap:3.5vw;padding:96px 3.8% 40px 6vw;--gut:clamp(18px,1.6vw,26px);box-sizing:border-box;overflow:hidden}
+/* the text columns start on the first line of the background grid, set in by one gutter */
+.v-steps-txt{padding-right:var(--gut);position:relative;z-index:2;will-change:opacity,transform}
+/* the steps: a small label, a large outlined numeral (thin like the hand drawing) that rolls to the next number,
+   then the step's title wiping up into place and its text */
+.v-steps-txt h2{font:500 clamp(15px,1.1vw,18px)/1 var(--body);color:var(--lav);letter-spacing:.06em;margin:0;display:flex;align-items:center;gap:14px}
+.v-steps-txt h2::after{content:"";width:48px;height:1px;background:currentColor;opacity:.6}
+.v-snum{direction:ltr;text-align:right;font:600 clamp(120px,12.5vw,214px)/.86 var(--display);height:.86em;overflow:hidden;margin:clamp(16px,3vh,30px) 0 clamp(14px,2.4vh,24px)}
+.v-snum-in{transform:translateY(calc(var(--si,0) * -.86em));transition:transform .9s cubic-bezier(.7,0,.2,1)}
+.v-snum span{display:block;height:.86em;color:transparent;-webkit-text-stroke:1px rgba(244,243,241,.62)}
+.v-slist{position:relative;list-style:none;margin:0;padding:0;min-height:clamp(200px,27vh,270px)}
+.v-step{position:absolute;inset:0 0 auto;pointer-events:none}
+.v-step.on{pointer-events:auto}
+.v-step h3{overflow:hidden;font:600 clamp(42px,4.4vw,70px)/1.05 var(--display);margin:0;padding-bottom:.06em}
+.v-step h3 span{display:block;opacity:0;transform:translateY(140%);transition:transform .8s cubic-bezier(.7,0,.2,1),opacity .5s}
+.v-step.on h3 span{opacity:1;transform:none;transition-delay:.12s}
+/* the titles that left are pushed well clear of the line and faded, so no stroke of their letters shows at its edge */
+.v-step.past h3 span{transform:translateY(-140%)}
+.v-step p{font:300 clamp(16px,1.3vw,19px)/1.65 var(--body);margin:clamp(14px,2vh,20px) 0 0;max-width:38ch;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .6s cubic-bezier(.22,.61,.36,1)}
+.v-step.on p{opacity:.82;transform:none;transition-delay:.35s}
+.v-cube-slot{height:100%}
+/* the cube canvas covers the whole scene, so it can travel to the centre and grow */
+.v-3d{position:fixed;inset:0;z-index:1;pointer-events:none}
+.v-3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* the faded lavender oval under the cube, like the glow under the hands */
+.v-cglow{position:fixed;left:0;top:0;width:var(--gw,600px);height:calc(var(--gw,600px) * .55);z-index:0;pointer-events:none;
+  transform:translate(calc(var(--gx,0px) - 50%),calc(var(--gy,0px) - 50%));
+  background:radial-gradient(closest-side,rgba(192,168,251,.34),rgba(192,168,251,.1) 55%,transparent);filter:blur(10px);opacity:var(--go,1)}
+/* the works: the cube's face becomes a stack of project cards; the scroll flips each card down over its bottom edge
+   (like a flip calendar) and the next project is behind it */
+.v-steps-txt{grid-area:1/1}.v-cube-slot{grid-area:1/2}
+.v-boxwrap{position:absolute;inset:0;z-index:2;perspective:1700px;pointer-events:none;display:none}
+.v-boxwrap.on{display:block}
+.v-box{position:absolute;left:0;top:0;width:var(--CW,400px);height:var(--CH,250px);transform-style:preserve-3d}
+.v-fc{position:absolute;inset:0;transform-origin:50% 100%;transform-style:preserve-3d;visibility:hidden}
+.v-fb{position:absolute;inset:0;transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(244,243,241,.4);
+  background:linear-gradient(180deg,rgba(192,168,251,.22),rgba(192,168,251,.06)),#16151b}
+.v-bf{position:absolute;inset:0;overflow:hidden;background:rgba(20,19,25,var(--pi,1));border:1px solid rgba(244,243,241,.55);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+/* the project mockups: each scene is one real photograph (laptop and phone at the same place and size in all of them,
+   aligned by the laptop screen); the screens are cut out of it and the site runs underneath */
+.mk{position:absolute;inset:0;overflow:hidden;opacity:var(--pi,1);background:#000}
+.mk-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:2}
+.mk-s{position:absolute;overflow:hidden;container-type:inline-size;background:#000;direction:rtl}
+.mk-s>img:not(.lg),.mk-s>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.mk-s>.top{object-position:50% 0}
+/* Eitan: the hero rebuilt over the real lighthouse video (sizes in screen widths, from the site at 1546 / 390 px) */
+@font-face{font-family:"Talent FS";src:url(assets/mk/fonts/Talent_FS-Light.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Talent FS";src:url(assets/mk/fonts/Talent_FS-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Talent FS";src:url(assets/mk/fonts/Talent_FS-Black.woff2) format("woff2");font-weight:900;font-display:swap}
+.es{font-family:"Talent FS",system-ui,sans-serif;background:#020618}
+.es>video{inset:auto}
+.es i{position:absolute;font-style:normal;white-space:nowrap;line-height:1.0714}
+.es .h{font-weight:900;color:#b99e64}
+.es .p{font-weight:300;color:#f0fdff;line-height:1.5}
+.es .b{font-weight:400;color:#050e42;background:#b99e64;line-height:1}
+.es svg,.es .lg{position:absolute;display:block}
+/* ORO: the site's own copy layer over its frames, timed to the video (sizes from the site at 1546 / 390 px) */
+@font-face{font-family:"Sansation";src:url(assets/mk/fonts/Sansation-Light.ttf) format("truetype");font-weight:300;font-display:swap}
+@font-face{font-family:"Sansation";src:url(assets/mk/fonts/Sansation-Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+.oro{direction:ltr;text-align:left;font-family:"Sansation",system-ui,sans-serif;font-weight:300;color:#EFE3D4;background:#070503}
+.oro .hd{position:absolute;left:var(--px);right:var(--px);top:var(--py);display:flex;justify-content:space-between;align-items:center}
+.oro .lk b{display:block;font:400 var(--lo)/1 "Bruno Ace","Sansation",sans-serif;letter-spacing:.02em}
+.oro .lk s{display:block;text-decoration:none;font-size:var(--ls);letter-spacing:.12em;color:rgba(239,227,212,.62);margin-top:.42em;white-space:nowrap}
+.oro .bg{display:grid;gap:var(--bgap)}.oro .bg i{display:block;width:var(--bw);height:1px;background:#EFE3D4}
+.oro .wash{position:absolute;inset:0;opacity:0;transition:opacity .5s;background:linear-gradient(to right,rgba(7,5,3,.5),rgba(7,5,3,.26) 39%,rgba(7,5,3,0)),linear-gradient(to top,rgba(7,5,3,.8),rgba(7,5,3,.47) 32%,rgba(7,5,3,.16) 64%,rgba(7,5,3,0))}
+.oro .sl{position:absolute;left:var(--px);right:var(--px);bottom:var(--sb)}
+.oro .sl>*{opacity:0;transform:translateY(var(--rise));transition:opacity .85s ease,transform .95s cubic-bezier(.16,.84,.24,1)}
+.oro .sl .cap{transition-delay:.14s}.oro .sl .cta{transition-delay:.28s}
+.oro .sl.in>*{opacity:1;transform:none}
+.oro .ch{position:relative;font-size:var(--chs);letter-spacing:.4em;text-transform:uppercase;color:#E3B072;margin-bottom:1em;padding-left:var(--chp)}
+.oro .ch::before{content:"";position:absolute;left:0;top:50%;width:var(--chl);height:1px;background:#E3B072}
+.oro .cap{font:400 var(--cs)/1.4 "Bruno Ace","Sansation",sans-serif;letter-spacing:.01em;max-width:34ch}
+.oro .cap em{display:block;font-style:normal;color:rgba(239,227,212,.62);font-size:var(--cis);line-height:1.5;margin-top:.55em}
+.oro .sl.fin{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--fgap);bottom:var(--fb)}
+.oro .fin .ch{letter-spacing:.44em}
+.oro .fin .cap{font-size:var(--fs);line-height:1.08;letter-spacing:0;max-width:18ch}
+.oro .fin .cap em{font:300 var(--fis)/1.6 "Sansation",sans-serif;margin-top:1.15em;max-width:42ch;color:rgba(239,227,212,.78)}
+.oro .cta{flex:none;margin-bottom:.4em;white-space:nowrap;padding:var(--bp);border-radius:999px;font-size:var(--bs);font-weight:400;letter-spacing:.24em;text-transform:uppercase;
+  background:linear-gradient(180deg,rgba(150,72,42,.62),rgba(96,44,26,.5));border:1px solid rgba(227,176,114,.46);box-shadow:0 1cqw 3cqw rgba(7,5,3,.45)}
+.oro.ph .sl.fin{flex-direction:column;align-items:flex-start}
+.v-ptxt{grid-area:1/1;position:relative;z-index:2;opacity:0;pointer-events:none}
+/* v3: the works play in the hero, so the scene's own works index stays hidden */
+.v3-top ~ .v-steps .v-ptxt{display:none}
+.v-ptxt.on{pointer-events:auto}
+/* the works: a large heading over an index of the projects; the project on the card is the open row */
+.v-ptxt h2{padding-right:var(--gut);font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0 0 clamp(22px,4vh,40px)}
+.v-ptxt h2 em{font-style:normal;color:var(--lav)}
+/* the index ends on a line of the background grid (the third from the right) */
+.v-plist{list-style:none;margin:0;padding:0;max-width:28.6vw;border-top:1px solid rgba(244,243,241,.18)}
+.v-pj2{border-bottom:1px solid rgba(244,243,241,.18)}
+.v-pj2 .row{display:grid;grid-template-columns:clamp(38px,3vw,48px) 1fr auto;align-items:baseline;gap:12px;padding:clamp(13px,2.1vh,20px) var(--gut);color:var(--paper);text-decoration:none;opacity:.38;transition:opacity .4s}
+.v-pj2.on .row,.v-pj2 .row:hover{opacity:1}
+.v-pj2 .n{font:600 clamp(13px,.95vw,15px)/1 var(--display);letter-spacing:.06em;color:var(--lav)}
+.v-pj2 .t{font:600 clamp(20px,1.7vw,28px)/1.1 var(--display);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.v-pj2 .k{font:400 clamp(12px,.9vw,14px)/1 var(--body);opacity:.7}
+.v-pall{margin-right:var(--gut);display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;margin-top:clamp(20px,3.4vh,34px);border:1.5px solid rgba(244,243,241,.55);border-radius:999px;color:var(--paper);text-decoration:none;font:400 16px/1 var(--body);transition:background .3s,color .3s,border-color .3s}
+.v-pall:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
 @media (max-width:760px){
-  .pillars{height:auto;padding-block:90px 40px}
-  .pl-row{flex-direction:column;height:auto}
-  .pl{flex:none;min-height:110px}.pl.is-on{min-height:auto}
-  .pl-n{font-size:64px}.pl-tab{writing-mode:horizontal-tb;transform:none;inset-inline-start:auto;inset-inline-end:22px;bottom:auto;top:30px}
-  .pl-body{position:relative;grid-template-columns:1fr;padding:90px 22px 24px;display:none}
-  .pl.is-on .pl-body{display:grid}.pl-img{grid-column:1;grid-row:auto;aspect-ratio:4/3}
+  .v-steps-txt,.v-ptxt{grid-area:2/1}.v-cube-slot{grid-area:1/1}
+  .v-ptxt h2{font-size:30px;margin-bottom:14px}.v-pj2 .row{padding:10px 0}.v-pj2 .t{font-size:19px}.v-plist{max-width:none}
+  .v-pall{height:42px;padding:0 18px;margin-top:16px}
 }
-/* phone: the same two cubes; stages use the small viewport so nothing hides under the browser bar */
 @media (max-width:760px){
-  .flip-stage,.flip2-stage{height:100svh}.f-front .hc{height:100svh}
-  .pl-head{flex-direction:column;align-items:flex-start;gap:16px}
-  .pl-head h2{white-space:normal;font-size:46px}
-  .pl.is-on .pl-n{font-size:72px}
-  .pl-body{padding:104px 22px 24px}
-  .pl-body h3{font-size:28px}
+  .v-steps{height:410vh}
+  .v-steps-in{grid-template-columns:1fr;grid-template-rows:42% 1fr;padding:84px 22px 26px;gap:6px;--gut:0px}
+  .v-cube-slot{order:-1;grid-row:1}.v-steps-txt{grid-row:2}
+  .v-snum{font-size:76px;margin:10px 0 8px}.v-slist{min-height:170px}
+  .v-step h3{font-size:32px}.v-step p{font-size:14.5px;margin-top:10px}
 }
-.pl-map{position:relative;background:#0D0C11}.pl-map svg{width:100%;height:100%;display:block}.pl-map figcaption{position:absolute;inset-inline-start:10px;bottom:8px;font-size:11px;color:rgba(244,243,241,.5)}
-.flip .face{pointer-events:none}.flip .face.live{pointer-events:auto}
-.box.done{transform:none!important}.box.done .f-bottom{transform:none!important}.box.done .f-bottom::after{opacity:0}.box.done .seam{display:none}
-.pl-body{grid-template-columns:1fr!important;grid-template-rows:1fr auto!important;padding:calc(36*var(--u)) calc(40*var(--u))!important}
-.pl-body h3{font-size:calc(64*var(--u))!important;line-height:.95!important;max-width:12ch}
-.pl-body p{font-size:var(--t3)!important;line-height:1.5!important;max-width:38ch!important;border-top:1.5px solid rgba(13,12,17,.25);padding-top:calc(18*var(--u))}
-@media (max-width:760px){.pl-body h3{font-size:34px!important}.pl-body p{font-size:17px!important}}
-.pl.is-on .pl-n{inset-inline-start:auto!important;inset-inline-end:calc(34*var(--u));top:auto;bottom:calc(10*var(--u));font-size:calc(300*var(--u))!important;line-height:.8}
-.pl-body{justify-items:start}.pl-body h3,.pl-body p{max-width:min(56%,38ch)!important}
-.pl-body h3{align-self:end;padding-top:calc(20*var(--u))}
-@media (max-width:760px){.pl.is-on .pl-n{inset-inline-end:auto;inset-inline-start:22px!important;top:14px;bottom:auto;font-size:72px!important}.pl-body h3,.pl-body p{max-width:none!important}}
-/* ---- steps: option C (stacked cards) ---- */
-
-.st-intro{height:70svh;display:grid;place-items:center;text-align:center;color:var(--paper)}
-.st-intro h2{font-family:var(--display);font-weight:600;font-size:calc(110*var(--u));line-height:.92}
-.st-intro h2 em{color:var(--lav);background:none;padding:0}
-.st-intro p{margin-top:22px;font-weight:300;opacity:.7}
-.stack{list-style:none;margin:0;padding:0 0 30svh}
-.r{position:sticky;top:calc(var(--hdr-h) + 14px + var(--i)*22px);height:calc(100svh - var(--hdr-h) - 90px);margin:0 auto 6svh;width:min(92vw,calc(1180*var(--u)));border-radius:10px;overflow:hidden;
-  display:grid;grid-template-columns:1.1fr 1fr;align-items:end;gap:40px;padding:calc(48*var(--u)) calc(56*var(--u));box-shadow:0 -30px 60px -30px rgba(0,0,0,.6);
-  transform-origin:50% 0;transform:scale(var(--s,1))}
-.r:nth-child(1){--i:0;background:var(--paper);color:var(--ink)}
-.r:nth-child(2){--i:1;background:var(--lav);color:var(--ink)}
-.r:nth-child(3){--i:2;background:var(--paper);color:var(--ink)}
-.n{grid-column:2;grid-row:1/span 2;justify-self:end;align-self:stretch;display:flex;align-items:flex-end;font-family:var(--display);font-weight:600;font-size:calc(380*var(--u));line-height:.78}
-.r:nth-child(1) .n{color:var(--lav)}.r:nth-child(2) .n{color:var(--ink)}.r:nth-child(3) .n{color:var(--lav)}
-.r h3{grid-column:1;font-family:var(--display);font-weight:600;font-size:calc(80*var(--u));line-height:.95;align-self:end}
-.r p{grid-column:1;font-weight:300;font-size:var(--t3);line-height:1.5;max-width:34ch;border-top:1.5px solid currentColor;padding-top:18px;opacity:.85}
-@media (max-width:760px){.r{grid-template-columns:1fr;height:74svh;padding:28px 24px;align-content:end}.n{grid-column:1;grid-row:1;justify-self:start;font-size:140px}.r h3{font-size:40px}.r p{font-size:17px}.st-intro h2{font-size:52px}}
-
-.f-bottom .st-intro{height:100%}
-.stack{position:relative;z-index:10;margin-top:-100vh;background:transparent;padding-top:0}
-body{background:var(--ink)}
-.hdr.inked{background:var(--ink)}
-/* alternative transitions: flat faces, no cube */
-html[data-tr] .box{transform:none!important}
-html[data-tr] .face{transform:none!important;border-radius:0!important}
-html[data-tr] .face::after,html[data-tr] .seam,html[data-tr] .flip-floor{display:none}
-html[data-tr] .f-front{z-index:1}html[data-tr] .f-bottom{z-index:2}
-html[data-tr="5"] .flip-stage,html[data-tr="7"] .flip-stage{perspective:1800px}
-html[data-tr="5"] .box,html[data-tr="7"] .box{transform-style:preserve-3d}
-/* title, wheel and caption sit together, centred, with a fixed margin above the bottom edge */
-.ring-sec{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:calc(50*var(--u)) max(56px,8vh);overflow:hidden}
-.ring-sec .ttl{margin-bottom:1vh}
-.ttl{font-family:var(--display);font-weight:600;font-size:min(calc(64*var(--u)),8.5vh);line-height:1;text-align:center;position:relative;z-index:2}
-.ttl em{color:var(--lav)}
-/* the wheel: every card is cut into thin strips that sit on the cylinder, so the cards truly curve */
-.stage{position:relative;perspective:1700px;perspective-origin:50% 64%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.stage.drag{cursor:grabbing}
-.ring{position:absolute;left:50%;top:64%;width:0;height:0;transform-style:preserve-3d}
-.card{position:absolute;left:0;top:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
-.sl{position:absolute;top:calc(var(--h)/-2);height:var(--h);transform-style:preserve-3d}
-.fc,.bk{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#000}
-.bk{transform:rotateY(180deg)}
-.fc img,.bk img{position:absolute;top:0;width:var(--w);height:var(--h);max-width:none;object-fit:cover;pointer-events:none}
-.sl.s0 .fc,.sl.s0 .bk{border-radius:10px 0 0 10px}
-.sl.sE .fc,.sl.sE .bk{border-radius:0 10px 10px 0}
-.fc::after,.bk::after{content:"";position:absolute;inset:0;background:#0D0C11;opacity:var(--dim,0);pointer-events:none}
-.bk::after{opacity:var(--dimb,.6)}
-/* floor glow under the wheel */
-.stage::after{content:"";position:absolute;left:50%;bottom:2%;width:70%;height:90px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(192,168,251,.16),transparent);pointer-events:none}
-/* focused project info */
-.info{display:grid;justify-items:center;text-align:center;gap:min(calc(12*var(--u)),1.4vh);min-height:0;padding-top:min(calc(52*var(--u)),5vh);position:relative;z-index:2}
-.info .k{display:flex;align-items:center;gap:14px;font:400 15px/1 var(--body);color:var(--lav);letter-spacing:.06em}.info .k::before,.info .k::after{content:"";width:28px;height:1px;background:currentColor;opacity:.6}.info p{display:none}
-.info h3{font-family:var(--display);font-weight:600;font-size:calc(46*var(--u));line-height:1.1;letter-spacing:.01em;margin:2px 0 0}
-.info p{font-weight:300;opacity:.75;max-width:46ch}
-.info>*{transition:opacity .35s,transform .45s cubic-bezier(.22,.61,.36,1)}
-.info.swap>*{opacity:0;transform:translateY(10px)}
-.nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:calc(12*var(--u));position:relative;z-index:2}
-.stwrap{position:relative;display:grid}
-.side.nx{right:max(var(--gut),calc(50% - var(--R) - 90px))}.side.pr{left:max(var(--gut),calc(50% - var(--R) - 90px))}
-.side{position:absolute;top:45%;transform:translateY(-50%);z-index:3;width:58px;height:58px;font-size:22px!important;background:rgba(13,12,17,.6);backdrop-filter:blur(6px);border-radius:50%;border:1.5px solid rgba(244,243,241,.3);color:var(--paper);font-size:19px;line-height:1;transition:background .3s,border-color .3s}
-.side:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
-.nav .cnt{font-family:var(--display);font-size:15px;min-width:64px;text-align:center;opacity:.6}
-.nav .open{width:auto!important;border:0!important;height:44px;padding:0 22px;border-radius:999px;background:var(--lav);color:var(--ink);font:600 15px/1 var(--display);display:inline-flex;align-items:center;gap:10px;transition:background .3s,transform .3s}
-.nav .open:hover{background:var(--paper)!important;color:var(--ink)!important}
-.nav .open span{transition:transform .3s}.nav .open:hover span{transform:translateX(-4px)}
-.card.front{cursor:pointer}
-/* project view: opens over the wheel */
-.pv{position:fixed;inset:0;z-index:80;background:rgba(13,12,17,.94);backdrop-filter:blur(8px);display:grid;grid-template-rows:auto 1fr;gap:20px;padding:calc(40*var(--u)) var(--gut) calc(30*var(--u));
-  opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
-.pv.on{opacity:1;visibility:visible}
-.pv .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
-.pv .hd .k{display:inline-block;font-size:14px;color:var(--lav);border:1px solid rgba(192,168,251,.45);border-radius:999px;padding:7px 16px 8px}
-.pv .hd h3{font:600 calc(56*var(--u))/1.1 var(--display);margin-top:14px}
-.pv .hd p{font-weight:300;opacity:.75;margin-top:8px;max-width:50ch}
-.pv .x{width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(244,243,241,.3);color:var(--paper);font-size:22px;flex:none;transition:background .3s}
-.pv .x:hover{background:var(--lav);color:var(--ink);border-color:var(--lav)}
-.pv .gal{display:flex;gap:16px;min-height:0;justify-content:center}
-.pv .gal img{height:100%;max-height:calc(100svh - 260px);width:auto;max-width:100%;object-fit:contain;border-radius:8px;
-  opacity:0;transform:translateY(30px);transition:opacity .6s,transform .8s cubic-bezier(.22,1,.36,1)}
-.pv.on .gal img{opacity:1;transform:none}.pv.on .gal img+img{transition-delay:.12s}
-@media (max-width:760px){.pv .gal{flex-direction:column;overflow:auto}.pv .gal img{height:auto;max-height:none;width:100%}.pv .hd h3{font-size:30px}}
-@media (max-width:760px){.ttl{font-size:44px}.info h3{font-size:28px}.stage{min-height:46vh;perspective:1100px}}
-/* ---- works: the wheel arrives on the cube's side face ---- */
-.stack{padding-bottom:0}.stack .r:last-child{margin-bottom:0}
-.flip2{position:relative;z-index:20;height:320vh;margin-top:calc(-100svh + 32px)}
-.flip2-stage{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1800px;background:var(--ink);opacity:0;pointer-events:none}
-.flip2.on .flip2-stage{opacity:1;pointer-events:auto}
-.box2{position:absolute;inset:0;transform-style:preserve-3d}
-.f2{position:absolute;inset:0;background:var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
-.f2.live{pointer-events:auto}
-/* a still of the last step card, exactly where the sticky card stops */
-.f2-front .r{position:absolute;top:calc(var(--hdr-h) + 14px + 44px);left:50%;transform:translateX(-50%);margin:0;background:var(--paper);color:var(--ink)}
-.f2-front .r .n{color:var(--lav)}
-.f2-side{color:var(--paper)}
-.f2-side .ring-sec{height:100vh;min-height:0;padding-top:calc(var(--hdr-h) + 16px)}
-@media (prefers-reduced-motion:reduce){
-  .stack{margin-top:0;padding-bottom:30svh}.flip2{height:auto;margin-top:0}.flip2-stage{position:static;height:auto;opacity:1;pointer-events:auto;perspective:none}
-  .box2{position:static}.f2-front{display:none}.f2-side{position:relative;pointer-events:auto}.f2-side .ring-sec{height:auto;min-height:100svh}
-}
-/* phone: compact step cards; the wheel arrows sit under the wheel */
+/* about, the scene's last part: the last project card turns over and flies across to land as my photo (right),
+   the story comes in on the left */
+.v-aslot{grid-area:1/1;height:100%;pointer-events:none}
+.v-atxt{grid-area:1/2;position:relative;z-index:3;opacity:0;pointer-events:none;padding-left:var(--gut)}
+.v-atxt.on{pointer-events:auto}
+.v-atxt h2{font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0 0 clamp(22px,4vh,38px)}
+.v-atxt h2 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.v-atxt p{font:300 clamp(15px,1.12vw,17.5px)/1.7 var(--body);margin:0 0 .9em;max-width:62ch;opacity:.85}
+.v-atxt .sig{font:400 clamp(15px,1.1vw,17px)/1 var(--body);color:var(--lav);opacity:1;margin-top:clamp(18px,3vh,28px)}
+/* the layer that holds my photo in the about part */
+.v-tiles{position:absolute;inset:0;z-index:3;pointer-events:none;display:none}
+.v-tiles.on{display:block}
+.v-aph{position:absolute;left:0;top:0;display:block;object-fit:contain;pointer-events:none}
+/* the photo winks when you hover it: a second frame with one eye closed shows for a moment */
+.v-aph.live{pointer-events:auto}
+.v-aph.blk{opacity:0!important;pointer-events:none;transition:none}
+.v-aph.blk.on{opacity:1!important}
 @media (max-width:760px){
-  .nav .side{position:static;transform:none;width:48px;height:48px}
-  .r{height:auto;min-height:0;grid-template-columns:1fr;gap:10px;padding:22px 22px 24px;margin-bottom:4svh;top:calc(var(--hdr-h) + 12px + var(--i)*12px)}
-  .n{font-size:84px;line-height:.8}
-  .r h3{font-size:30px}.r p{font-size:15px;padding-top:12px}
+  .v-aslot{grid-area:auto;grid-row:1;grid-column:1}
+  .v-atxt{grid-area:auto;grid-row:2;grid-column:1;align-self:start;padding-left:0}
+  .v-atxt h2{font-size:30px;margin-bottom:12px}.v-atxt p{font-size:13.5px;line-height:1.55;margin-bottom:.6em}
 }
+@media (prefers-reduced-motion:reduce){.v-step *,.v-snum-in{transition:none}}
+/* reviews: a large heading and my Google rating, then the three reviews in one row; the row spans the background grid
+   from its first line to its last, so each review takes two of its columns and the lines between them sit on its lines */
+/* the top of the section is see-through, so the scene's lavender light above fades into it instead of stopping at a line */
+/* the reviews start rising over the end of the about (their top is a soft fade from transparent), so no empty scroll is left between them */
+.v-rev{position:relative;margin-top:-10vh;z-index:2;background:linear-gradient(180deg,rgba(13,12,17,0),var(--ink) 38vh);padding:clamp(90px,14vh,150px) 0 clamp(90px,13vh,150px);overflow:hidden}
+.v-rev::before{content:"";position:absolute;right:-10%;top:12%;width:70%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(192,168,251,.12),transparent);filter:blur(20px);
+  /* its lower part fades out well before the section ends, so the reviews flow into the questions without an edge */
+  -webkit-mask:linear-gradient(#000 35%,transparent 80%);mask:linear-gradient(#000 35%,transparent 80%)}
+/* the grid comes down into the reviews: its 1st, 3rd, 5th and 7th lines are drawn by the script as the frames of the
+   reviews (down to the bottom of the list); the lines between them step back behind the reviews */
+@media (min-width:761px){.v-rev .v-cols i:nth-child(odd){visibility:hidden}}
+.v-rev .v-cols{z-index:0}
+.v-rev .v-cols i{-webkit-mask-image:linear-gradient(180deg,#000,transparent 200px);mask-image:linear-gradient(180deg,#000,transparent 200px)}
+.v-rev-in{position:relative;z-index:1;padding:0 3.8%;--gut:clamp(18px,1.6vw,26px)}
+.v-rev-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 var(--gut);margin-bottom:clamp(40px,7vh,72px)}
+.v-rev-head h2{font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0;opacity:0;translate:0 26px;filter:blur(6px);transition:opacity 1s,translate 1.1s cubic-bezier(.22,.61,.36,1),filter 1s}
+.v-rev.in .v-rev-head h2{opacity:1;translate:0 0;filter:none}
+.v-rev-head h2 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.v-rev-list{position:relative;z-index:1;list-style:none;margin:0;padding:0;columns:3;column-gap:0}
+.v-q{position:relative;display:flex;flex-direction:column;gap:20px;padding:clamp(28px,4vh,44px) var(--gut);break-inside:avoid;
+  opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform 1s cubic-bezier(.22,.61,.36,1),background .5s}
+.v-q.on{opacity:1;transform:none}
+/* the frame lines are drawn by the script (so they can bend under the cursor); this canvas sits over the list */
+.v-lines{position:absolute;z-index:2;pointer-events:none;display:block}
+.v-q .qm{width:40px;height:30px;fill:none;stroke:var(--lav);stroke-width:1.2;stroke-linejoin:round}
+.v-q blockquote{margin:0;flex:1;font:300 clamp(16px,1.2vw,18.5px)/1.75 var(--body);opacity:.88}
+.v-q blockquote p{margin:0 0 .7em}.v-q blockquote p:last-child{margin:0}
+.v-q .who{margin:0}.v-q .who b{display:block;font:600 clamp(19px,1.5vw,23px)/1.1 var(--display)}
+.v-q .who span{display:block;margin-top:8px;font:400 13px/1 var(--body);color:var(--lav);letter-spacing:.06em}
+@media (max-width:760px){
+  .v-rev-in{padding:0 22px;--gut:0px}
+  .v-rev-head{flex-direction:column;align-items:flex-start}.v-rev-head h2{font-size:34px}
+  .v-rev-list{columns:1}.v-q{padding:26px 0}
+}
+@media (prefers-reduced-motion:reduce){.v-q{transition:none;opacity:1;transform:none}}
+/* ---------- questions: the doubts that are left before picking up the phone ----------
+   the heading sits on the right two columns of the grid, the questions on the four to its left; each question is a
+   line that draws itself in from the right, and a little lavender light runs along it under the cursor */
+.v-faq,.v-ft{isolation:isolate}
+.v-faq{position:relative;padding:clamp(70px,11vh,130px) 0 clamp(90px,14vh,160px);background:var(--ink)}
+/* no background grid behind the questions; it only comes back in at the bottom of the section, toward the contact */
+.v-faq .v-cols{z-index:-1;-webkit-mask-image:linear-gradient(180deg,transparent calc(100% - 160px),#000);mask-image:linear-gradient(180deg,transparent calc(100% - 160px),#000)}
+.v-faq-in{position:relative;padding:0 3.8%;--gut:clamp(18px,1.6vw,26px);display:grid;grid-template-columns:2fr 4fr;align-items:start}
+.v-faq-head{position:sticky;top:130px;padding:0 var(--gut)}
+.v-faq-head h2{font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0 0 22px}
+.v-faq-head h2 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.v-faq-head p{margin:0;max-width:24ch;font:300 clamp(15px,1.1vw,17px)/1.6 var(--body);opacity:.7}
+.v-faq-list{list-style:none;margin:0;padding:0;position:relative}
+.v-fq{position:relative;--mx:-400px}
+.v-fq::before,.v-faq-list::after{content:"";position:absolute;inset-inline:0;top:0;height:1px;pointer-events:none;transform-origin:right;
+  background:radial-gradient(150px 1px at var(--mx) 50%,var(--lav),transparent),rgba(244,243,241,.18);
+  transform:scaleX(0);transition:transform 1.3s cubic-bezier(.7,0,.2,1)}
+.v-faq-list::after{top:auto;bottom:0;--mx:-400px}
+.v-faq.in .v-fq::before,.v-faq.in .v-faq-list::after{transform:none}
+.v-faq.in .v-fq:nth-child(2)::before{transition-delay:.12s}.v-faq.in .v-fq:nth-child(3)::before{transition-delay:.24s}
+.v-faq.in .v-fq:nth-child(4)::before{transition-delay:.36s}.v-faq.in .v-fq:nth-child(5)::before{transition-delay:.48s}
+.v-faq.in .v-fq:nth-child(6)::before{transition-delay:.6s}.v-faq.in .v-fq:nth-child(7)::before{transition-delay:.72s}.v-faq.in .v-fq:nth-child(8)::before{transition-delay:.84s}.v-faq.in .v-faq-list::after{transition-delay:.96s}
+.v-fq button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:clamp(48px,4vw,64px) 1fr 28px;align-items:center;gap:14px;
+  padding:clamp(22px,3.4vh,34px) var(--gut);color:var(--paper)}
+.v-fq button:focus-visible{outline:1.5px solid var(--lav);outline-offset:-4px;border-radius:6px}
+.v-fq .n{font:600 clamp(22px,1.9vw,30px)/1 var(--display);color:transparent;-webkit-text-stroke:1px rgba(244,243,241,.5);transition:-webkit-text-stroke-color .4s}
+.v-fq .t{font:600 clamp(20px,1.75vw,29px)/1.2 var(--display);transition:color .4s,transform .6s cubic-bezier(.22,.61,.36,1)}
+.v-fq button:hover .t{transform:translateX(-8px)}
+.v-fq.open .n,.v-fq button:hover .n{-webkit-text-stroke-color:var(--lav)}
+.v-fq.open .t{color:var(--lav)}
+/* the plus is two thin lines; opening, the upright one lies down and it becomes a minus */
+.v-fq .pm{position:relative;width:22px;height:22px;justify-self:end}
+.v-fq .pm::before,.v-fq .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.v-fq .pm::after{transform:rotate(90deg)}
+.v-fq.open .pm::after{transform:rotate(0deg)}
+.v-fq .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.7,0,.2,1)}
+.v-fq.open .a{grid-template-rows:1fr}
+.v-fq .a>div{overflow:hidden}
+.v-fq .a p{margin:0;padding:0 calc(clamp(48px,4vw,64px) + 14px + var(--gut)) clamp(26px,4vh,38px);max-width:62ch;
+  font:300 clamp(16px,1.2vw,18.5px)/1.75 var(--body);opacity:0;filter:blur(5px);translate:0 10px;transition:opacity .5s,filter .5s,translate .6s}
+.v-fq.open .a p{opacity:.86;filter:none;translate:0 0;transition-delay:.15s}
+.v-faq .v-up{opacity:0;translate:0 22px;filter:blur(6px);transition:opacity 1s,translate 1s cubic-bezier(.22,.61,.36,1),filter 1s}
+.v-faq.in .v-up{opacity:1;translate:0 0;filter:none}.v-faq.in .v-up+.v-up{transition-delay:.15s}
+@media (max-width:760px){
+  .v-faq-in{grid-template-columns:1fr;padding:0 22px;--gut:0px}
+  .v-faq-head{position:static;margin-bottom:30px}.v-faq-head h2{font-size:34px}
+  .v-fq button{grid-template-columns:36px 1fr 22px;padding:20px 0}.v-fq .t{font-size:19px}
+  .v-fq .a p{padding:0 0 22px 0}
+}
+
+/* ---------- contact: the two hands of the drawing, turned on a gentle diagonal, point at the form between them.
+   The hands are one drawing (2688x1520) in two layers screened onto the dark; each layer is only moved and turned
+   as a whole round its own fingertip, so the drawing stays exact and the tip lands on the point it should ---------- */
+.v-ct{position:relative;overflow:hidden;isolation:isolate;background:var(--ink);color:var(--paper);--k:0}
+.v-ct .v-cols{z-index:-1}
+.v-ct .v-up{opacity:0;translate:0 22px;filter:blur(6px);transition:opacity 1s,translate 1s cubic-bezier(.22,.61,.36,1),filter 1s}
+.v-ct.in .v-up{opacity:1;translate:0 0;filter:none}
+.v-ct.in .v-up+.v-up{transition-delay:.15s}
+.ct-h{margin:0;font:600 clamp(46px,5.4vw,92px)/.96 var(--display)}
+.ct-h em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.38),0 0 .5em rgba(192,168,251,.16)}
+.ct-sub{margin:18px 0 0;max-width:36ch;font:300 clamp(16px,1.2vw,19px)/1.6 var(--body);opacity:.72}
+.ct-lbl{margin:0 0 18px;display:flex;align-items:center;gap:14px;font:500 clamp(14px,1vw,16px)/1 var(--body);color:var(--lav);letter-spacing:.06em}
+.ct-lbl::after{content:"";width:48px;height:1px;background:currentColor;opacity:.6}
+/* a hand layer: its fingertip (--tx --ty in the drawing) is set on the layer's left/top, then moved by --dx --dy and turned by --rot */
+.hl{position:absolute;left:var(--px,50%);top:var(--py,50%);width:var(--lw,100%);height:auto;max-width:none;mix-blend-mode:screen;pointer-events:none;
+  transform-origin:var(--tx) var(--ty);transform:translate(calc(var(--tx) * -1),calc(var(--ty) * -1)) translate(var(--dx,0px),var(--dy,0px)) rotate(var(--rot,0deg));
+  opacity:calc(.15 + var(--k) * .4)}
+.hl.t{--tx:52.6%;--ty:50.1%}.hl.b{--tx:51.5%;--ty:52.6%}
+/* the fields: large, on a single line; the label sits on the line and rises when you write; the line lights up lavender */
+.fl{position:relative;display:block;padding-top:22px}
+.fl input{all:unset;box-sizing:border-box;width:100%;padding:6px 0 12px;font:500 clamp(20px,1.6vw,26px)/1.3 var(--display);color:var(--paper);caret-color:var(--lav)}
+.fl>span{position:absolute;right:0;top:30px;font:300 clamp(17px,1.25vw,20px)/1.2 var(--body);opacity:.55;pointer-events:none;transform-origin:right top;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s,color .3s}
+.fl input:focus+span,.fl input:not(:placeholder-shown)+span{transform:translateY(-28px) scale(.72);opacity:.85;color:var(--lav)}
+.fl>i{position:absolute;inset-inline:0;bottom:0;height:1px;background:rgba(244,243,241,.3)}
+.fl>i::after{content:"";position:absolute;inset:0;background:var(--lav);box-shadow:0 0 12px rgba(192,168,251,.8);transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.7,0,.2,1)}
+.fl:focus-within>i::after{transform:none}
+.fl.bad>i{background:#ff9a9a}.fl.bad>span{color:#ffb0b0;opacity:1}
+.ct-form{display:grid;gap:clamp(14px,2.2vh,22px)}
+.ct-err{display:block;min-height:18px;font:400 13px/1.4 var(--body);color:#ffb0b0}
+.ct-send{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:58px;border:0;border-radius:999px;background:var(--lav);color:var(--ink);
+  font:500 17px/1 var(--body);box-shadow:0 0 34px rgba(192,168,251,.35);transition:background .3s,box-shadow .3s}
+.ct-send span{transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.ct-send:hover{background:#d3c1ff;box-shadow:0 0 50px rgba(192,168,251,.6)}.ct-send:hover span{transform:translateX(-6px)}
+.ct-send:focus-visible,.ct-orb:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+/* or directly: two clear buttons with their icons */
+.ct-direct{display:flex;gap:10px;flex-wrap:wrap}
+.ct-direct a{flex:1;min-width:130px;display:flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 20px;border:1.5px solid rgba(244,243,241,.5);border-radius:999px;
+  color:var(--paper);text-decoration:none;font:400 15px/1 var(--body);transition:background .3s,color .3s,border-color .3s}
+.ct-direct a svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ct-direct a:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.ct-direct a:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
+.ct-or{display:flex;align-items:center;gap:14px;margin:clamp(18px,3vh,24px) 0 12px;font:400 13px/1 var(--body);opacity:.55}
+.ct-or::before,.ct-or::after{content:"";flex:1;height:1px;background:currentColor;opacity:.5}
+.ct-done{display:none;margin:0;font:600 clamp(28px,2.6vw,42px)/1.2 var(--display)}
+.ct-done em{font-style:normal;color:var(--lav)}
+.ct-done span{display:block;margin-top:12px;font:300 clamp(15px,1.15vw,18px)/1.6 var(--body);opacity:.72}
+.sent .ct-form{display:none}.sent .ct-done{display:block;animation:v-words 1s cubic-bezier(.22,.61,.36,1) backwards}
+
+/* the hands come in from the upper left and the lower right, their tips at the two sides of the form */
+.c2{padding:clamp(90px,13vh,150px) 0 clamp(50px,8vh,90px)}
+.c2-top{text-align:center;padding:0 22px}.c2-top .ct-sub{margin-inline:auto}
+.c2-stage{position:relative;--fw:min(440px,calc(100vw - 44px));--gap:calc(var(--fw) / 2 + 28px);height:clamp(600px,78vh,800px);display:grid;place-items:center}
+.c2 .hl{--lw:min(128vw,2300px)}
+.c2 .hl.t{--rot:46deg}.c2 .hl.b{--rot:44deg}
+/* behind the heading and behind the form, the background grid fades away from their edges */
+.c2 .v-cols{--g1:radial-gradient(var(--mw,300px) var(--mh,300px) at var(--mx,50%) var(--my,50%),transparent 62%,#000 100%);
+  --g2:radial-gradient(var(--tw,300px) var(--th,200px) at var(--tx2,50%) var(--ty2,10%),transparent 58%,#000 100%);
+  -webkit-mask-image:var(--g1),var(--g2);-webkit-mask-composite:source-in;mask-image:var(--g1),var(--g2);mask-composite:intersect}
+.c2 .hl.t{--dx:calc(var(--gap) + (1 - var(--k)) * 30vw)}
+.c2 .hl.b{--dx:calc(var(--gap) * -1 - (1 - var(--k)) * 30vw)}
+.c2-form{position:relative;z-index:2;width:var(--fw)}
+.c2-form .ct-send{margin-top:8px}
+@media (max-width:760px){
+  .c2-stage{height:auto;padding:200px 0}.c2 .hl{--lw:200vw;--rot:-62deg;--dx:0px}
+  .c2 .hl.t{--py:0;--dy:calc(190px - (1 - var(--k)) * 30vh)}.c2 .hl.b{--py:100%;--dy:calc(-190px + (1 - var(--k)) * 30vh)}
+}
+
+@media (prefers-reduced-motion:reduce){.v-faq .v-up,.v-ct .v-up{transition:none}.v-ct{--k:1!important}}
+
+/* ---------- footer: the line the whole site says, once more, big; the second half fills with light as the page ends ---------- */
+.v-ft{position:relative;background:var(--ink);padding:clamp(70px,12vh,130px) 0 34px;overflow:hidden}
+.v-ft-in{padding:0 calc(3.8% + clamp(18px,1.6vw,26px))}
+.v-sign{margin:0 0 clamp(60px,10vh,110px);font:600 clamp(48px,8.4vw,150px)/.95 var(--display);text-align:center}
+.v-sign>span{display:block;margin-inline:auto}
+/* years and seconds: the first line comes in slowly, letter by letter; then the second arrives at once, in a flash of
+   light. Every letter is its own little box, so the two lines can sway together like a sheet of silk (the script) */
+.v-sign>span{width:max-content;max-width:100%;position:relative}
+.v-sign .ch{display:inline-block;position:relative;white-space:pre}
+/* the outlined line shows only the outer edge of each letter: a 2px stroke, its inner half covered by a fill in the
+   background colour, which also hides where the parts of a letter overlap inside it (as in the ש) */
+.v-sign .o .ch{color:transparent;-webkit-text-stroke:2px rgba(244,243,241,.5);opacity:0;filter:blur(8px);transition:opacity .9s ease,filter .9s ease}
+.v-sign .o .ch::before{content:attr(data-c);position:absolute;left:0;top:0;color:var(--ink);-webkit-text-stroke:0}
+.v-ft.in .v-sign .o .ch{opacity:1;filter:none}
+/* the filled line: lavender, with a soft lighter sheen that passes over it now and then (one gradient laid across the
+   whole line, each letter showing its own part of it) */
+.v-sign .f{filter:drop-shadow(0 0 .09em rgba(192,168,251,.32))}
+.v-sign .f .ch{color:transparent;opacity:0;background:linear-gradient(100deg,#a98ef4 0%,var(--lav) 30%,#ebe3ff 46%,var(--lav) 62%,#a98ef4 100%) 0 0/var(--lw,1000px) 100% no-repeat;
+  background-position:calc(var(--sh,0px) - var(--lx,0px)) 0;-webkit-background-clip:text;background-clip:text}
+.v-ft.go .v-sign .f .ch{opacity:1}
+.v-ft.go .v-sign .f{animation:v-flash 1.2s ease-out}
+@keyframes v-flash{0%{filter:brightness(2.2) blur(2px) drop-shadow(0 0 .09em rgba(192,168,251,.32))}35%{filter:brightness(1.5) drop-shadow(0 0 .09em rgba(192,168,251,.32))}100%{filter:drop-shadow(0 0 .09em rgba(192,168,251,.32))}}
+.v-ft-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding-top:28px;border-top:1px solid rgba(244,243,241,.14)}
+.v-ft-me{display:flex;align-items:center;gap:14px;color:var(--paper);text-decoration:none;font:400 15px/1.3 var(--body)}
+.v-ft-me svg{height:38px;width:auto}
+.v-ft-me small{display:block;opacity:.6;font-size:13px}
+.v-soc{display:flex;gap:10px;list-style:none;margin:0;padding:0}
+.v-soc a{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid rgba(244,243,241,.3);border-radius:50%;color:var(--paper);transition:background .3s,color .3s,border-color .3s}
+.v-soc a:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
+.v-soc svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.v-legal{justify-self:end;display:flex;flex-wrap:wrap;gap:6px 18px;font:400 13px/1.4 var(--body)}
+.v-legal a{color:var(--paper);opacity:.6;text-decoration:none}.v-legal a:hover{opacity:1;color:var(--lav)}
+.v-legal span{opacity:.45}
+@media (max-width:760px){
+  .v-ft-in{padding:0 22px}.v-sign{font-size:13vw}
+  .v-ft-row{grid-template-columns:1fr;justify-items:start}.v-legal{justify-self:start}
+}
+/* on hover, a soft lavender light follows the cursor over the closing line: each line has a lit copy laid over it,
+   shown only in a circle around the cursor (--mx, --my, set per line); the outlined line's contour turns lavender
+   there, as if the light drew it, and the filled line brightens. The glow is on the letters themselves, no box */
+.v-sign .lit{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;
+  -webkit-mask:radial-gradient(circle min(18vw,230px) at var(--mx,-999px) var(--my,-999px),#000 15%,transparent 72%);
+  mask:radial-gradient(circle min(18vw,230px) at var(--mx,-999px) var(--my,-999px),#000 15%,transparent 72%)}
+.v-sign.hov .lit{opacity:1}
+.v-sign .o.lit .ch{-webkit-text-stroke-color:#cbb6ff}
+.v-sign .o.lit .ch{text-shadow:0 0 .07em rgba(192,168,251,.9),0 0 .22em rgba(192,168,251,.4)}
+.v-sign .f.lit .ch{background:#f6f2ff;-webkit-background-clip:text;background-clip:text}
+.v-sign .f.lit{filter:none}
+.v-ft.go .v-sign .f.lit{animation:none}
+@media (prefers-reduced-motion:reduce){.v-sign .o .ch{opacity:1;filter:none;transition:none}.v-sign .f .ch{opacity:1;animation:none}}
 </style>
 </head>
-<body>
-<header class="hdr" id="hdr">
-  <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="קרן ארליכמן, לראש העמוד"><svg class="mark" viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a>
-    <nav aria-label="ראשי"><ul><li><a href="./#why">למה זה עובד</a></li><li><a href="./#work">עבודות</a></li><li><a href="./#about">עליי</a></li><li><a href="./#process">תהליך</a></li><li><a href="./#contact">צרו קשר</a></li></ul></nav>
-    <a class="btn solid" href="./#contact"><span class="roll"><span>לשיחת היכרות</span><span aria-hidden="true">לשיחת היכרות</span></span><span class="ar" aria-hidden="true">←</span></a>
-    <button class="mbtn" id="mbtn" type="button" aria-label="פתיחת התפריט" aria-expanded="false" aria-controls="mmenu"><i><b></b><b></b><b></b></i></button>
+<body id="top">
+<header class="v-hdr" id="hdr">
+  <div class="v-wrap bar">
+    <a class="v-logo" href="#hero" aria-label="קרן ארליכמן, לראש העמוד"><svg viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a>
+    <nav class="v-nav" aria-label="ראשי"><ul><li><a href="#work">פרויקטים</a></li><li><a href="#process">איך זה עובד</a></li><li><a href="#about">אודות</a></li><li><a href="#process">תהליך</a></li><li><a href="#contact">צרו קשר</a></li></ul></nav>
+    <a class="v-cta" href="#contact">לשיחת היכרות <span aria-hidden="true">←</span></a>
+    <button class="v-menu" id="menu" type="button" aria-label="פתיחת התפריט" aria-expanded="false">☰</button>
   </div>
 </header>
-<nav class="mmenu" id="mmenu" aria-label="תפריט"><a href="./#why">למה זה עובד</a><a href="./#work">עבודות</a><a href="./#about">עליי</a><a href="./#process">תהליך</a><a href="./#contact">צרו קשר</a><a class="cta" href="./#contact">לשיחת היכרות ←</a></nav>
 
-<main id="main">
-<div class="flip" id="flip"><div class="flip-stage"><div class="flip-floor" id="floor"></div><div class="box" id="box"><i class="seam"></i>
-<div class="face f-front">
-<section class="hc" aria-labelledby="h1">
-  <h1 id="h1" class="sr">היום אתם שווים אתר אחר</h1>
-  <p class="hc-sub top" aria-hidden="true">היום אתם שווים</p>
-
-  <div class="hc-words" aria-hidden="true">
-    <div class="hc-w is-left"><span id="wL"><em>אחר</em></span></div>
-    <div class="hc-w is-right"><span id="wR">אתר</span></div>
-  </div>
-
-  <div class="hc-stage">
-    <div class="hc-block">
-      <div class="hc-img" id="hImg">
-        <div class="hc-f" id="f1"><img src="assets/img/w-julis-mockup.webp" alt="אתר Juli's חנות פרחים על מחשב נייד וטלפון, בין פרחים לבנים ואקליפטוס" width="1200" height="1789" style="object-position:42% 64%"></div>
-        <div class="hc-f" id="f2"><img src="assets/img/w-eitan-mockup.webp" alt="אתר איתן שפיר ושות' רואי חשבון על מחשב נייד וטלפון, על שולחן עץ מול קיר כחול" width="848" height="1264" style="object-position:40% 62%"></div>
-        <div class="hc-f" id="f3"><img src="assets/img/w-ravid-1.webp" alt="אתר רביד נחום אדריכלים, עמוד הצוות" width="1024" height="1536" style="object-position:50% 56%"></div>
-        <div class="hc-f" id="f4"><img id="f4img" src="assets/img/keren-portrait.webp" alt="קרן ארליכמן" width="900" height="1195" fetchpriority="high"></div>
-      </div>
+<main>
+<div class="v3-top" id="v3top"><section class="v-hero" id="hero" aria-labelledby="h1">
+  <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <span class="v3-light" aria-hidden="true"></span>
+  <div class="v3-white" aria-hidden="true"><div class="v-cols"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="b1"></span><span class="b2"></span><span class="b3"></span><b class="v3-big">עבודות נבחרות</b></div>
+  <img class="v3-mk" data-i="0" src="assets/img/v3-mock-ravid.webp" alt="רביד נחום אדריכלים, האתר במחשב ובטלפון">
+  <img class="v3-mk" data-i="1" src="assets/img/v3-mock-julis.webp" alt="Juli's, האתר במחשב ובטלפון">
+  <img class="v3-mk" data-i="2" src="assets/img/v3-mock-eitan.webp" alt="איתן שפיר ושות', האתר במחשב ובטלפון">
+  <img class="v3-mk" data-i="3" src="assets/img/v3-mock-oro.webp" alt="ORO, האתר במחשב ובטלפון">
+  <div class="v3-back" aria-hidden="true"></div>
+  <div class="v3-info">
+    <div class="v3-foot">
+      <p class="v3-cap" aria-live="polite"><b></b><span></span></p>
+      <a class="v3-all" href="projects.html">לכל הפרויקטים <span aria-hidden="true">←</span></a>
     </div>
   </div>
-
-  <p class="hc-sub bot"><span class="l">העסק שלכם עבר דרך, האתר נשאר מאחור.</span><span class="l">אני יוצרת לכם אתר תדמית שמרגיש ונראה כמו העסק שאתם היום.</span><span class="l close">כי שנים בונים שם אבל שניות בונות רושם.</span></p>
-
-  <div class="hc-foot wrap">
-    <p>קרן ארליכמן · מיתוג ואתרי תדמית</p>
+  <div class="v-frame">
+    <div class="v-hw l" aria-hidden="true"><img src="assets/img/v2-hand.png" alt=""></div>
+    <div class="v-hw r" aria-hidden="true"><img src="assets/img/v2-hand.png" alt=""></div>
+    <div class="v-copy">
+      <h1 id="h1">היום אתם שווים<br><em>אתר אחר</em></h1>
+      <p class="lead"><span>העסק שלכם עבר דרך אבל האתר נשאר מאחור.</span> <span>אני יוצרת לכם אתר תדמית שמרגיש ונראה כמו העסק שאתם היום.</span></p>
+      <p class="close">שנים בונים שם שניות בונות רושם</p>
+    </div>
   </div>
 </section>
+
 </div>
-<div class="face f-bottom">
-<section class="st-intro" id="why" aria-labelledby="w-h"><div><h2 id="w-h">שלושה שלבים<br><em>בלי ניחושים</em></h2></div></section>
-</div>
-</div></div></div>
-<ol class="stack" id="stack">
-      <li class="r"><span class="n">01</span><h3>אפיון העסק והשוק</h3><p>לפני כל קו, אני לומדת את העסק שלכם, את הקהל ואת המתחרים. מה כולם אומרים, איך כולם נראים, ואיפה המקום שעוד פנוי.</p></li>
-      <li class="r"><span class="n">02</span><h3>מיתוג מדויק</h3><p>לוגו, צבעים, טיפוגרפיה ומסרים שנולדים מהאפיון. שפה אחת שמבדלת אתכם ומדברת אל הלקוחות שאתם רוצים.</p></li>
-      <li class="r"><span class="n">03</span><h3>אתר תדמית ברמה שלכם</h3><p>אתר שמרגיש ונראה כמו העסק שאתם היום. מי שנכנס מבין תוך שניות עם מי הוא מדבר.</p></li>
-</ol>
-<div class="flip2" id="flip2"><div class="flip2-stage"><div class="box2" id="box2">
-<div class="f2 f2-front" aria-hidden="true"><div class="r"><span class="n">03</span><h3>אתר תדמית ברמה שלכם</h3><p>אתר שמרגיש ונראה כמו העסק שאתם היום. מי שנכנס מבין תוך שניות עם מי הוא מדבר.</p></div></div>
-<div class="f2 f2-side">
-<section class="ring-sec" id="work" aria-labelledby="work-h">
-  <h2 class="ttl" id="work-h">עבודות <em>שגאים לשלוח</em></h2>
-  <div class="stwrap" id="stwrap"><div class="stage" id="stage" aria-roledescription="carousel" aria-label="גלגל עבודות"><div class="ring" id="ring"></div></div><button type="button" class="side nx" id="next" aria-label="לעבודה הבאה">→</button><button type="button" class="side pr" id="prev" aria-label="לעבודה הקודמת">←</button></div>
-  <div>
-    <div class="info" id="info" aria-live="polite"><h3></h3><span class="k"></span><p></p></div>
-    <div class="nav"><span class="cnt" id="cnt"></span></div>
+<section class="v-steps" id="process" aria-labelledby="steps-h">
+  <div class="v-steps-in" id="stepsIn">
+    <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="v-cglow" id="cglow" aria-hidden="true"></div>
+    <div class="v-3d" id="cube" aria-hidden="true"></div>
+    <div class="v-steps-txt" id="stepsTxt">
+      <h2 id="steps-h">הדרך לאתר אחר</h2>
+      <div class="v-snum" aria-hidden="true"><div class="v-snum-in" id="snum"><span>01</span><span>02</span><span>03</span></div></div>
+      <ol class="v-slist">
+        <li class="v-step on"><h3><span>מכירים את העסק</span></h3><p>לפני שמתחילים לעצב, מגלים יחד מה גורם ללקוחות לבחור דווקא בכם, גם אם הם לא יודעים להסביר למה. את כל זה מזקקים למשפט אחד שממנו הכול מתחיל.</p></li>
+        <li class="v-step"><h3><span>יוצרים את השפה העיצובית</span></h3><p>הופכים את מה שמייחד אתכם לשפה של לוגו, צבעים, אותיות ומילים. כזו שגם בלי לראות את השם, יודעים שזה אתם.</p></li>
+        <li class="v-step"><h3><span>בונים את האתר</span></h3><p>בונים אתר שכבר בשניות הראשונות מבהיר מי אתם, משדר את הרמה שלכם ומוביל את הגולש בדיוק לצעד הבא.</p></li>
+      </ol>
+    </div>
+    <div class="v-cube-slot" aria-hidden="true"></div>
+    <!-- the works: the cube's middle square opens into a stack of project cards -->
+    <div class="v-boxwrap" id="boxwrap" aria-hidden="true"><div class="v-box" id="box"></div></div>
+    <div class="v-ptxt" id="work" aria-label="עבודות">
+      <h2>עבודות<br><em>שגאים לשלוח</em></h2>
+      <ol class="v-plist" id="plist"></ol>
+      <a class="v-pall" href="#work">לכל הפרויקטים <span aria-hidden="true">←</span></a>
+    </div>
+    <!-- about: the last project evaporates into particles that settle into my photo; the story comes in beside it -->
+    <div class="v-aslot" aria-hidden="true"></div>
+    <div class="v-tiles" id="tiles" aria-hidden="true"></div>
+    <div class="v-atxt" id="about" aria-labelledby="about-h">
+      <h2 id="about-h">מיתוג טוב<br><em>לא מתחיל בניחוש</em></h2>
+      <p>העסק התפתח, צבר ניסיון והתקדם. אבל המיתוג? הוא קצת נשאר מאחור. הלוגו נראה אחרת בכל מקום, ואת הלינק לאתר כבר מביך לשלוח.</p>
+      <p>אני קרן ארליכמן, מעצבת מותגים ואתרים, עם ניסיון של יותר מעשור בעולם האנליזה. ואני מכירה את המקום הזה מבפנים: כשבניתי את העסק שלי, הלוגו עבר כמה סבבים עד שהתחברתי אליו, ואת הלינק לאתר הישן העדפתי לא לשלוח. משם הבנתי מה צריך לקרות כדי שהנראות תתאים למי שעומד מאחוריה.</p>
+      <p>היום, לפני שאני מציירת את הקו הראשון, אני לומדת את העסק שלכם, את השוק, את המתחרים ואת מה שמייחד אתכם. משם אני מתחילה לצייר את הלוגו עם דף ועיפרון, ובונה ממנו שפה עיצובית אחת, ברורה ואחידה, שמלווה את העסק בכל מקום, מכרטיס הביקור ועד לאתר.</p>
+      <p>כי הנראות של העסק צריכה לשקף את המקום שאליו הגעתם. ובפעם הבאה שיבקשו מכם לינק לאתר, תשלחו אותו בגאווה.</p>
+    </div>
   </div>
 </section>
-</div>
-</div></div></div>
+
+<!-- reviews: what clients said (from my current site), with my Google rating -->
+<section class="v-rev" id="reviews" aria-labelledby="rev-h">
+  <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="v-rev-in">
+    <div class="v-rev-head">
+      <h2 id="rev-h">קולות<br><em>מהדרך המשותפת</em></h2>
+    </div>
+    <ul class="v-rev-list">
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote>היה לי העונג לעבוד עם קרן, גם ברמה המקצועית וגם האישית. היא הקשיבה לכל צורך ובקשה, פעלה במהירות ועם ירידה לפרטים, ותמיד ליוותה את התהליך בגישה חיובית וחיוך. התוצאה עלתה על הציפיות, ואני ממליץ עליה בחום רב.</blockquote>
+        <p class="who"><b>דניאל שלמה</b><span>POCKTICK</span></p></li>
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote>קרן זו ה-מעצבת שכל עצמאי או בעל עסק רוצה לצידו!! חוץ מהעובדה שהיא מבינה ויודעת מה היא עושה ברמה הגבוהה ביותר, היא גם בן אדם נעים, מסודר ומתוקתק שעושה שקט ונחת בכל התעסקות, בכל פרויקט מהקטן עד הגדול!! מומלץ מאוד, אין עליך קרן</blockquote>
+        <p class="who"><b>אייל ברגרזון</b><span>GETCOMFY</span></p></li>
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote>ממליץ בחום! מקצועית, יצירתית ומדויקת. הייתה קשובה לאורך כל התהליך, הבינה בדיוק את הצרכים של העסק והפכה אותם למיתוג יפה, נקי ומרשים. שירות מעולה ותוצאה מעל הציפיות.</blockquote>
+        <p class="who"><b>ירון בר חריר</b><span>YNALIZE</span></p></li>
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote>כחלק מתהליך המיתוג מחדש של "קיפוד", קרן הצליחה להפיח חיים חדשים בזהות הוויזואלית של העסק. היא שילבה יצירתיות עם דיוק, והביאה אותם לרמה הבאה בעיצוב מוקפד ומודרני. העבודה איתה הייתה מקצועית, נעימה וזורמת, והתוצאה מדברת בעד עצמה. ממליץ בחום!</blockquote>
+        <p class="who"><b>ויק יבלונסקי</b><span>KIPOD</span></p></li>
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote>קרן, מאוד מעריך את מקצועיותך ולא פחות את הסבלנות, האדיבות והנועם לעבוד מולך. אני מאוד אוהב את העבודה שעשית עבורי, וכל מי שמקבל ממני מסמכים מציין את המיוחדות.</blockquote>
+        <p class="who"><b>משה אבות שחף</b><span>משרד עורכי דין</span></p></li>
+      <li class="v-q"><svg class="qm" viewBox="0 0 48 36" aria-hidden="true"><use href="#qm"/></svg>
+        <blockquote><p>קרן אהובה,</p><p>את יודעת לגעת, לחבר ולתרגם את מי שנמצא מולך. זו אמנות ייחודית, שניחנים בה מתי מעט. ההליכה המשותפת איתך, ללא הכרות מוקדמת, היתה עבורי טבעית והאינסטינקט שלי הוכיח לי, שאיתך אני רוצה לצעוד יחד.</p><p>תחילתה של דרך עצמאית, לרוב מלווה במקטעים של אתגר וקושי, חששות מפני הלא נודע ובעיקר ציפייה להגשים חלום. בדרך הזו, בה בחרתי להיות עצמאית, זכיתי לפגוש אותך.</p><p>הקשבת לי, רצית לשמוע כמה שיותר, ובמיצג שהכנת עבורי, הפכת את התיאורטי לפרקטי ואת חלומי לבר הגשמה. יצרת עבורי לוגו, שמדבר בשם עצמו, כזה שמכיל את כל ערכיי.</p></blockquote>
+        <p class="who"><b>עו"ד סיגל מיטלמן</b><span>משרד עורכי דין</span></p></li>
+    </ul>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><path id="qm" pathLength="1" d="M20 2C9 6 2 14 2 24c0 6 4 10 9 10s9-4 9-9-4-8-8-8c-1 0-2 0-3 1 1-6 6-11 13-14M46 2C35 6 28 14 28 24c0 6 4 10 9 10s9-4 9-9-4-8-8-8c-1 0-2 0-3 1 1-6 6-11 13-14"/></svg>
+  </div>
+</section>
+
+<!-- questions: the doubts left before picking up the phone -->
+<section class="v-faq" id="faq" aria-labelledby="faq-h">
+  <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="v-faq-in">
+    <div class="v-faq-head">
+      <h2 id="faq-h" class="v-up">לפני<br><em>שמרימים טלפון</em></h2>
+      <p class="v-up">כמה שאלות שעולות כמעט בכל שיחה ראשונה. ואם נשארה עוד אחת, בשיחה עונים עליה.</p>
+    </div>
+    <ul class="v-faq-list">
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa1"><span class="n" aria-hidden="true">01</span><span class="t">מה בעצם את עושה</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa1" role="region"><div><p>מיתוג ואתרי תדמית לעסקים. מחקר שוק ומתחרים, שפה עיצובית מלאה (לוגו, צבעים וטיפוגרפיה), עיצוב מוצרי הדפוס כחלק מהמיתוג, ועיצוב ובנייה של אתר התדמית. אפשר את הכל יחד, ואפשר גם רק מיתוג או רק אתר, לפי מה שהעסק צריך עכשיו.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa2"><span class="n" aria-hidden="true">02</span><span class="t">את עובדת לבד</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa2" role="region"><div><p>כן. את המחקר, העיצוב והבנייה אני עושה בעצמי, כך שמי שמדבר איתכם בשיחה הראשונה הוא גם מי שמלווה אתכם עד המסירה. בלי מתווכים ובלי טלפון שבור.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa3"><span class="n" aria-hidden="true">03</span><span class="t">כמה זה עולה</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa3" role="region"><div><p>כל עסק נמצא בנקודה אחרת, ולכן המחיר נקבע אחרי שיחת ההיכרות. תקבלו הצעה מסודרת שמפרטת בדיוק מה כלול בה, בלי תוספות בהמשך.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa4"><span class="n" aria-hidden="true">04</span><span class="t">כמה זמן זה לוקח</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa4" role="region"><div><p>זה תלוי בהיקף, ולוח הזמנים המדויק מופיע בהצעת המחיר. מצדכם זה דורש מעט זמן, ובמקומות הנכונים: פגישת היכרות אחת, ושיחה קצרה בסוף כל שלב כדי לאשר אותו. את השאר אני לוקחת עליי, כדי שאתם תמשיכו לעבוד.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa5"><span class="n" aria-hidden="true">05</span><span class="t">ומה אם לא נתחבר לכיוון</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa5" role="region"><div><p>לא מתחילים לעצב לפני שמסכימים על הכיוון. המחקר מגיע קודם, השפה העיצובית נבנית ממנו, ורק כשהיא מרגישה לכם נכונה היא הופכת לאתר. כך אין הפתעות בסוף הדרך.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa6"><span class="n" aria-hidden="true">06</span><span class="t">יש לנו כבר זהות, נאבד אותה</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa6" role="region"><div><p>לא. קודם מבינים מה כבר עובד אצלכם ומה הלקוחות מזהים איתכם. לפעמים נכון לבנות מחדש, ולפעמים מספיק לדייק את מה שקיים, כדי שייראה ברמה שהגעתם אליה.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa7"><span class="n" aria-hidden="true">07</span><span class="t">למי שייכים הקבצים והאתר</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa7" role="region"><div><p>לכם. בסוף התהליך תקבלו את כל קבצי המיתוג בפורמטים שצריך, לדפוס ולדיגיטל, והאתר והתכנים שבו שייכים לעסק שלכם.</p></div></div></li>
+      <li class="v-fq"><button type="button" aria-expanded="false" aria-controls="fa8"><span class="n" aria-hidden="true">08</span><span class="t">ומה קורה אחרי שהאתר עולה</span><span class="pm" aria-hidden="true"></span></button>
+        <div class="a" id="fa8" role="region"><div><p>אני לא נעלמת. אם צריך עדכון, תיקון או עמוד חדש, אפשר לחזור אליי, ואפשר גם לסכם מראש ליווי מסודר.</p></div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- contact: the two hands point at the form between them -->
+<section class="v-ct c2" id="contact" aria-labelledby="c2-h">
+  <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="c2-top"><h2 class="ct-h v-up" id="c2-h">הצעד הראשון<br><em>מתחיל בשיחה</em></h2><p class="ct-sub v-up">שיחה קצרה, בלי התחייבות. נבדוק יחד איפה אתם היום, ואיפה אתם צריכים להיות.</p></div>
+  <div class="c2-stage" data-stage>
+    <img class="hl t" src="assets/img/v2-touch-top.webp?v=6" alt="" aria-hidden="true">
+    <img class="hl b" src="assets/img/v2-touch-bot.webp?v=6" alt="" aria-hidden="true">
+    <div class="c2-form v-up">
+      <form class="ct-form" novalidate data-form>
+        <label class="fl"><input name="name" autocomplete="name" placeholder=" " required><span>שם</span><i></i></label>
+        <label class="fl"><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " style="text-align:right" required><span>טלפון</span><i></i></label>
+        <small class="ct-err" aria-live="polite"></small>
+        <button class="ct-send" type="submit">לשליחת הפרטים <span aria-hidden="true">←</span></button>
+        <p class="ct-or">או ישירות</p><div class="ct-direct" data-direct></div>
+      </form>
+      <p class="ct-done" role="status" tabindex="-1" style="text-align:center">הפרטים <em>אצלי</em><span>אחזור אליכם באופן אישי בהקדם, לתיאום שיחת ההיכרות.</span></p>
+    </div>
+  </div>
+</section>
+
+<template id="ctDirect"><a href="https://wa.me/972547419393?text=%D7%94%D7%99%D7%99%20%D7%A7%D7%A8%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%A2%D7%9C%20%D7%9E%D7%99%D7%AA%D7%95%D7%92%20%D7%95%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z"/><path d="M9.2 8.6c.2 2.7 2.4 5 5.2 5.4l1-1.2-1.6-.9-.8.6a4 4 0 0 1-2.1-2.1l.6-.8-.9-1.6z"/></svg>וואטסאפ</a><a href="mailto:ksuwa22@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>מייל</a></template>
+<script>
+/* the WhatsApp and email buttons come from one template */
+(function(){  var t=document.getElementById('ctDirect');[].forEach.call(document.querySelectorAll('[data-direct]'),function(d){d.appendChild(t.content.cloneNode(true))})})();
+</script>
+
 </main>
-<div class="pv" id="pv" role="dialog" aria-modal="true" aria-labelledby="pvt" hidden>
-  <div class="hd"><div><span class="k" id="pvk"></span><h3 id="pvt"></h3><p id="pvp"></p></div><button type="button" class="x" id="pvx" aria-label="סגירה">✕</button></div>
-  <div class="gal" id="pvg"></div>
-</div>
+
+<footer class="v-ft" id="footer">
+  <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="v-ft-in">
+    <p class="v-sign" aria-label="שנים בונים שם, שניות בונות רושם"><span class="o" data-t="שנים בונים שם" aria-hidden="true">שנים בונים שם</span><span class="f" data-t="שניות בונות רושם" aria-hidden="true">שניות בונות רושם</span></p>
+    <div class="v-ft-row">
+      <a class="v-ft-me" href="#hero" aria-label="קרן ארליכמן, לראש העמוד"><svg viewBox="560 240 880 1230" aria-hidden="true"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg><span>קרן ארליכמן<small>מיתוג ואתרי תדמית</small></span></a>
+      <ul class="v-soc">
+        <li><a href="https://wa.me/972547419393?text=%D7%94%D7%99%D7%99%20%D7%A7%D7%A8%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%A2%D7%9C%20%D7%9E%D7%99%D7%AA%D7%95%D7%92%20%D7%95%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99." target="_blank" rel="noopener" aria-label="וואטסאפ"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z"/><path d="M9.2 8.6c.2 2.7 2.4 5 5.2 5.4l1-1.2-1.6-.9-.8.6a4 4 0 0 1-2.1-2.1l.6-.8-.9-1.6z"/></svg></a></li>
+        <li><a href="mailto:ksuwa22@gmail.com" aria-label="מייל"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a></li>
+        <li><a href="https://www.instagram.com/keren.arlihman/" target="_blank" rel="noopener" aria-label="אינסטגרם"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a></li>
+        <li><a href="https://www.facebook.com/keren.Arlihman" target="_blank" rel="noopener" aria-label="פייסבוק"><svg viewBox="0 0 24 24"><path d="M14.5 21v-7.5h2.6l.4-3h-3v-2c0-.9.3-1.5 1.6-1.5h1.5V4.3a19 19 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.4H9v3h2.5V21"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/keren-arlihman-ab812496/" target="_blank" rel="noopener" aria-label="לינקדאין"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 10.5V16M8 7.6v.1M11.5 16v-3.2c0-1.5 1-2.3 2.1-2.3s2 .8 2 2.3V16M11.5 10.5V16"/></svg></a></li>
+      </ul>
+      <div class="v-legal"><a href="privacy.html">מדיניות פרטיות</a><a href="accessibility.html">הצהרת נגישות</a><a href="terms.html">תנאי שימוש</a><span>© 2026 קרן ארליכמן</span></div>
+    </div>
+  </div>
+</footer>
+
 
 <script>
+/* header: solid after the hero, phone menu */
 (function(){
-  var b=document.getElementById('mbtn'), r=document.documentElement;
-  b.addEventListener('click',function(){var o=r.classList.toggle('menu-open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'סגירת התפריט':'פתיחת התפריט')});
-  document.querySelectorAll('.mmenu a').forEach(function(a){a.addEventListener('click',function(){r.classList.remove('menu-open')})});
-  addEventListener('keydown',function(e){if(e.key==='Escape')r.classList.remove('menu-open')});
-})();
-(function(){
-  var d=document.documentElement;
-  if(d.classList.contains('static')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-
-  /* Webflow's inOutExpo */
-  function ease(t){return t<=0?0:t>=1?1:t<.5?Math.pow(2,20*t-10)/2:(2-Math.pow(2,-20*t+10))/2}
-
-  var el={L:document.getElementById('wL'),R:document.getElementById('wR'),img:document.getElementById('hImg'),
-          f1:document.getElementById('f1'),f2:document.getElementById('f2'),f3:document.getElementById('f3'),f4:document.getElementById('f4')};
-
-  /* targets copied 1:1 from the IX2 action lists: [x%, y%, z(vw), rotateY, rotateZ] */
-  var DESK={f4:[80,-5,16,10,12],f3:[15,-15,10,25,-3],f2:[-50,-15,5,30,-12],f1:[-115,0,0,45,-18],word:125};
-  /* phone fan opened wider, like the reference video */
-  var MOB ={f4:[115,-10,16,10,14],f3:[34,-20,10,25,-1],f2:[-47,-15,5,30,-12],f1:[-115,-3,0,45,-18],word:200};
-
-  /* one cycle = G0 hold 500ms + G1 5500ms + G2 3500ms = 9500ms, then loop */
-  var T=9500;
-
-  /* a channel is a list of segments [start, duration, toValue]; value is held between segments */
-  function val(segs,t){var v=0;for(var i=0;i<segs.length;i++){var s=segs[i];if(t<s[0])break;
-      if(s[1]===0||t>=s[0]+s[1]){v=s[2];}else{v=v+(s[2]-v)*ease((t-s[0])/s[1]);break;}}return v}
-
-  var CH;
-  function build(){
-    var mob=innerWidth<=991, P=mob?MOB:DESK, ch={};
-    /* words: slide inward at 500+2450 for 2500ms */
-    if(!mob){
-      ch.L=[[2950,2500,P.word],[7000,2500,0]];          /* G2: back the way they came, +1000ms */
-      ch.R=[[2950,2500,-P.word],[7000,2500,0]];
-    }else{
-      ch.L=[[2950,2500,P.word],[6000,0,-P.word],[7000,2500,0]];   /* mobile G2 jumps them to the far side, G3 brings them in */
-      ch.R=[[2950,2500,-P.word],[6000,0,P.word],[7000,2500,0]];
-      var sw=ch.L; ch.L=ch.R; ch.R=sw;   /* stacked on mobile: the top word leaves to the right, like the reference */
-    }
-    /* cards fan out at 500+2500 for 3000ms, fold back at 6000 for 3000ms */
-    ['f1','f2','f3','f4'].forEach(function(k){
-      ch[k]=P[k].map(function(target){return [[3000,3000,target],[6000,3000,0]]});
-    });
-    /* the whole stack spins 0 -> 360 -> 720 (= 0) */
-    ch.img=[[3000,3000,360],[6000,3000,720]];
-    CH=ch;
-  }
-  build(); addEventListener('resize',build);
-
-  /* entrance, in Brandolk's own vocabulary:
-     words = "Title Animation" a-31 (from -/+200%, outQuint 2400ms, delay 250);
-     card  = "Reveal Project Image" a-38 (curtains close 1500ms inOutQuint, image on, curtains open 1500ms) */
-  function outQuint(t){t=Math.min(1,Math.max(0,t));return 1-Math.pow(1-t,5)}
-  function inOutQuint(t){t=Math.min(1,Math.max(0,t));return t<.5?16*t*t*t*t*t:1-Math.pow(-2*t+2,5)/2}
-  var LOOP_AT=650;   /* the loop clock starts here so the fan opens right after the entrance */
-  var q=new URLSearchParams(location.search), FREEZE=q.has('t')?+q.get('t'):null;  /* ?t=4500 freezes one moment (for screenshots) */
-  var t0=performance.now();
-  (function frame(now){
-    var e=FREEZE!=null?FREEZE:(now-t0);          /* elapsed since load */
-    var t=e<LOOP_AT?0:(e-LOOP_AT)%T;              /* position in the loop */
-    var wl=val(CH.L,t), wr=val(CH.R,t);
-    if(e<2650){var k=outQuint((e-250)/2400); wl=-200*(1-k); wr=200*(1-k);}
-    el.L.style.transform='translate3d('+wl.toFixed(3)+'%,0,0)';
-    el.R.style.transform='translate3d('+wr.toFixed(3)+'%,0,0)';
-    el.img.style.transform='rotateY('+(val(CH.img,t)%720).toFixed(3)+'deg)';
-    ['f1','f2','f3','f4'].forEach(function(k){
-      var c=CH[k], x=val(c[0],t), y=val(c[1],t), z=val(c[2],t), ry=val(c[3],t), rz=val(c[4],t);
-      el[k].style.transform='translate3d('+x.toFixed(3)+'%,'+y.toFixed(3)+'%,'+z.toFixed(3)+'vw) rotateY('+ry.toFixed(3)+'deg) rotateZ('+rz.toFixed(3)+'deg)';
-    });
-    if(FREEZE==null)requestAnimationFrame(frame);
-  })(t0);
+  var h=document.getElementById('hdr'),m=document.getElementById('menu');
+  function s(){h.classList.toggle('solid',scrollY>40)}addEventListener('scroll',s,{passive:true});s();
+  m.addEventListener('click',function(){var o=h.classList.toggle('open');m.setAttribute('aria-expanded',o);m.setAttribute('aria-label',o?'סגירת התפריט':'פתיחת התפריט')});
+  h.querySelectorAll('.v-nav a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open');m.setAttribute('aria-expanded','false')})});
+  /* the hero frame: positions are in design units of the active frame */
+  var hero=document.getElementById('hero');
+  var DESK={fw:1325,fh:846,ttop:168,tfs:112,ptop:466,pfs:22,pw:720,ctop:548,cfs:31,ax:187,ay:212,hs:.653},
+      MOB ={fw:367,fh:540,ttop:52,tfs:46,ptop:172,pfs:12.5,pw:222,ctop:244,cfs:16.5,ax:66,ay:292,hs:.228};
+  function fit(){
+    var w=hero.clientWidth,mob=w<=760,F=mob?MOB:DESK,sc,hh,hx;
+    if(mob){sc=w/F.fw;hh=F.fh*sc+76;hero.style.height=hh+'px';hx=0}
+    else{hero.style.height='';hh=hero.clientHeight;sc=Math.min(w/F.fw,(hh-20)/F.fh);
+      /* on a wide screen the frame is narrower than the screen: the hands move out into part of the spare room */
+      hx=Math.max(0,(w-F.fw*sc)/2)*.45}
+    for(var k in F)hero.style.setProperty('--'+k,F[k]);
+    hero.style.setProperty('--sc',sc);hero.style.setProperty('--hx',hx);
+    reach()}
+  /* the opening starts with the fingertips touching in the middle: find the hand's innermost drawn point once it is
+     turned in 7deg (from the drawing itself), and move it to the centre */
+  var DOTS=null;
+  function reach(){var w=hero.clientWidth,mob=w<=760,hw=hero.querySelector('.v-hw.l'),im=hw.querySelector('img');if(!DOTS||!im.offsetWidth)return;
+    var cs=getComputedStyle(im),m=new DOMMatrix(cs.transform),o=cs.transformOrigin.split(' ').map(parseFloat),iw=im.offsetWidth,ih=im.offsetHeight,
+        ox=hw.offsetWidth/2,oy=hw.offsetHeight/2,r=7*Math.PI/180,co=Math.cos(r),si=Math.sin(r),best=-1e9;
+    DOTS.forEach(function(p){var x=p[0]*iw-o[0],y=p[1]*ih-o[1],X=im.offsetLeft+o[0]+m.a*x+m.c*y,Y=im.offsetTop+o[1]+m.b*x+m.d*y;
+      if(Y>hw.offsetHeight*(mob?.8:.92)||Y<0)return;   /* the frame's fade hides the bottom */
+      var Xr=ox+(X-ox)*co-(Y-oy)*si;if(Xr>best)best=Xr});
+    hero.style.setProperty('--inx',Math.max(0,w/2-(hw.offsetLeft+best)+(mob?3:6))+'px')}
+  (function(){var im=new Image();im.onload=function(){var c=document.createElement('canvas'),n=160;c.width=c.height=n;var x=c.getContext('2d');x.drawImage(im,0,0,n,n);
+    var d=x.getImageData(0,0,n,n).data;DOTS=[];for(var j=0;j<n;j++)for(var i=0;i<n;i++)if(d[(j*n+i)*4+3]>90)DOTS.push([(i+.5)/n,(j+.5)/n]);reach();open()};
+    im.src=hero.querySelector('.v-hw.l img').src})();
+  addEventListener('resize',fit);fit();
+  /* the opening plays once the hands' reach is known (the hands and words wait hidden until then) */
+  var OPEN=!matchMedia('(prefers-reduced-motion: reduce)').matches&&scrollY<40;if(OPEN)hero.classList.add('pre');
+  function open(){if(!OPEN)return;OPEN=false;hero.classList.remove('pre');hero.classList.add('intro');setTimeout(function(){hero.classList.remove('intro')},3400)}
+  setTimeout(open,1500);
+  /* leaving the hero: --h runs 0 to 1; the hands slide out to the sides (--o, % of a hand's width) */
+  /* v3, leaving the hero (it stays pinned while the works play): the words go, the hands come together and turn in, a
+     light forms between them and grows until the screen is white, the hands fading in it; out of the white the first
+     project's website opens as the front card of the works, the other projects coming
+     in beside it, turned away at the left edge. Then the scroll moves the cards along (after her reference): the front
+     card leaves to the right growing and turning, the next comes forward,.
+     At the end the cards and the light fade and the hero gives way to the steps, right under it */
+  var top3=document.getElementById('v3top'),proc=document.getElementById('process');
+  var MK=[].slice.call(hero.querySelectorAll('.v3-mk')),cap=hero.querySelector('.v3-cap'),info=hero.querySelector('.v3-info'),wh=hero.querySelector('.v3-white'),cslot=document.querySelector('.v-cube-slot');
+  var CAP=[['רביד נחום אדריכלים','מיתוג · אתר תדמית'],["Juli's",'מיתוג · אתר חנות'],["איתן שפיר ושות'",'מיתוג · אתר תדמית'],['ORO מגורים על מאדים','מיתוג · אתר תדמית']],capI=-1,N=MK.length;
+  /* scroll lengths (vh): the hands meeting 55, the light turning white and the first project coming out of it 75, each project its own stop of 40, the way out 50 (its first tenth starts the card turning over and the cube's toss, which then play on their own) */
+  var INTRO=55,P0=75,PER=40,OUT=50,WK=P0+(N-1)*PER,TOT=INTRO+WK+OUT;
+  /* the scroll itself: RI for the opening (which then plays on its own), then the projects' stops and the way out */
+  var RI=30,TOTR=RI+WK-P0+OUT;
+  function cl3(x){return Math.min(1,Math.max(0,x))}function sm3(x){x=cl3(x);return x*x*(3-2*x)}function io3(x){x=cl3(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
+  function size3(){var H3=innerHeight*TOTR/100;top3.style.height=(hero.offsetHeight+H3)+'px';proc.style.marginTop=(-(hero.offsetHeight+H3))+'px'}
+  addEventListener('resize',size3);size3();
+  /* where a card stands by its distance from the front (d: 0 in front, 1, 2 waiting at the left, -1 gone to the right):
+     x (vw, + to the right), scale, turn about its upright axis (deg), tilt (deg), opacity */
+  var KF=[[-1,96,1.18,-30,3,1],[0,0,1,0,0,1],[1,-45,.5,32,0,1],[2,-55,.4,36,0,.85],[3,-63,.32,38,0,0]];
+  function at(d){d=Math.max(-1,Math.min(3,d));for(var k=0;k<KF.length-2;k++)if(d<=KF[k+1][0])break;var a=KF[k],b=KF[k+1],t=(d-a[0])/(b[0]-a[0]),o=[];for(var j=1;j<6;j++)o.push(a[j]+(b[j]-a[j])*t);return o}
+  function leave(){var sv=visSv(scrollY/Math.max(1,innerHeight)*100),ci=cl3(sv/INTRO),u0=(sv-INTRO)/P0,so=outA(cl3((sv-INTRO-WK)/OUT)),mob=innerWidth<761;
+    hero.style.setProperty('--h',Math.min(1,ci/.3).toFixed(4));hero.style.setProperty('--o','0');
+    hero.style.setProperty('--c',sm3((ci-.04)/.5).toFixed(4));
+    /* the light grows until the screen is white, the hands fading in it */
+    hero.style.setProperty('--kg',io3(u0/.24).toFixed(4));
+    hero.style.setProperty('--ho',(1-sm3((u0-.02)/.18)).toFixed(3));
+    /* m: the first project opening straight out of the white; e: it settling as the front card while the others come in;
+       q: which card is in front (0 to N-1), each move eased, with a pause on every card */
+    var m=sm3((u0-.24)/.26),e=io3((u0-.46)/.42),w=(sv-INTRO-P0)/PER,q=stepQ(w<0?0:Math.min(N-1,Math.round(w)));
+    var gone=sm3(so/.25);
+    MK.forEach(function(mk,i){var d=i-q,k=at(d),x=k[0],sc=k[1],ry=k[2],rz=k[3],op=k[4],y=0;
+      if(i===0){sc*=e+(1-e)*(.62+.38*io3(m));op*=m}
+      else{x=x*e-90*(1-e);op*=e}
+      if(mob)x+=d>0?-8*Math.min(1,d):-30*Math.max(-1,d);
+      if(i===N-1&&so>0)return;
+      mk.style.opacity=(op*(1-gone)).toFixed(3);mk.style.zIndex=String(10-Math.round(Math.abs(d)*2));
+      mk.style.transform='translate('+x.toFixed(2)+'vw,'+(y-gone*6).toFixed(2)+'vh) perspective(1600px) rotateY('+ry.toFixed(2)+'deg) rotateZ('+rz.toFixed(2)+'deg) scale('+sc.toFixed(4)+')';
+      mk.style.filter=i===0&&m<.999?'blur('+((1-m)*10).toFixed(1)+'px)':'none'});
+    /* the name of the card in front: it fades while the cards move and comes back with the new name */
+    var on=Math.round(q),near=1-cl3(Math.abs(q-on)/.18),show=e*near*(1-gone);
+    cap.style.opacity=show.toFixed(3);cap.style.transform='translateY('+((1-near)*10).toFixed(1)+'px)';
+    if(on!==capI&&CAP[on]){capI=on;cap.querySelector('b').textContent=CAP[on][0];cap.querySelector('span').textContent=CAP[on][1]}
+    var io=e*(1-gone);info.style.opacity=io.toFixed(3);info.style.visibility=io>.02?'visible':'hidden';
+    /* the light: full as the hands meet, then gone under the white */
+    hero.style.setProperty('--k2',(sm3((ci-.3)/.35)*(1-sm3((u0-.3)/.2))).toFixed(3));
+    /* the lavender patches drift with the works */
+    hero.style.setProperty('--wv',cl3((sv-INTRO-P0*.2)/(WK+OUT)).toFixed(4));
+    /* the way out: the other cards and the name go, and the last project turns over and grows at once; its back is the
+       night of the page, which fills the screen, and we are back on dark. Then the hero gives way, and the cube of the
+       steps is tossed in from the side as it was when the steps came right after the hero (window.__toss, 0 to 1) */
+    var last=MK[N-1],bk=hero.querySelector('.v3-back'),fl=io3(cl3(so/.42)),ang=180*fl;
+    if(so>0){var cw0=last.offsetWidth||1,ch0=last.offsetHeight||1,cover=Math.max(innerWidth/cw0,innerHeight/ch0)*1.5,sc=1+(cover-1)*Math.pow(fl,1.6);
+      last.style.zIndex='10';last.style.filter='none';
+      last.style.opacity=ang<90?'1':'0';last.style.transform='perspective(1600px) rotateY('+ang.toFixed(2)+'deg) scale('+sc.toFixed(4)+')';
+      bk.style.opacity=ang>=90?'1':'0';bk.style.setProperty('--bdk',sm3((fl-.62)/.38).toFixed(3));bk.style.transform='perspective(1600px) rotateY('+(ang-180).toFixed(2)+'deg) scale('+sc.toFixed(4)+')'}
+    else bk.style.opacity='0';
+    hero.style.setProperty('--kw',sm3((u0-.06)/.18).toFixed(4));
+    hero.style.setProperty('--hg',(1-sm3(so/.3)).toFixed(3));
+    document.getElementById('hdr').classList.toggle('lite',sm3((u0-.06)/.18)>.5&&so<.24&&scrollY<innerHeight*TOTR/100);
+    window.__toss=cl3((so-.5)/.5);
+    hero.style.opacity=(1-sm3((so-.44)/.06)).toFixed(3);hero.style.visibility=so>=.5?'hidden':''}
+  /* the opening plays on its own: past a small scroll the page is at the first project and the opening runs to its end
+     at an even pace (about 2.2 seconds), or back to the hero when scrolling up; the rest follows the scroll */
+  var HI=0,HT=0,hRun=false,hLast=0,hInit=false;
+  function visSv(s){var t=s>3?1:0;
+    /* landing on the page further down (a reload, a link): the opening is simply done */
+    if(!hInit){hInit=true;HI=t;HT=t}
+    if(t!==HT){HT=t;if(RM3())HI=t;else if(!hRun){hRun=true;hLast=performance.now();requestAnimationFrame(htick)}}
+    return HI<1?HI*(INTRO+P0):INTRO+P0+Math.max(0,s-RI)}
+  function htick(now){var dt=Math.max(0,Math.min(.05,(now-hLast)/1000));hLast=now;HI+=Math.sign(HT-HI)*Math.min(Math.abs(HT-HI),dt/2.2);leave();
+    if(HI!==HT)requestAnimationFrame(htick);else hRun=false}
+  /* the works, one project per scroll: the scroll only says which project is in front, and the cards travel there on
+     their own (about seven tenths of a second), so a project never stops halfway. A wheel or trackpad gesture inside
+     the works moves exactly one project; before the first and after the last the page scrolls on as usual */
+  var QA=0,QT=0,qRun=false,qLast=0,lockW=0;
+  function stepQ(t){if(t!==QT){QT=t;if(RM3()){QA=t}else if(!qRun){qRun=true;qLast=performance.now();requestAnimationFrame(qtick)}}return QA}
+  function qtick(now){var dt=Math.min(.05,(now-qLast)/1000);qLast=now;QA+=(QT-QA)*(1-Math.exp(-dt*7));if(Math.abs(QT-QA)<.002)QA=QT;leave();
+    if(QA!==QT)requestAnimationFrame(qtick);else qRun=false}
+  function stopAt(i){return (RI+i*PER)/100*innerHeight}
+  addEventListener('wheel',function(ev){if(Math.abs(ev.deltaY)<2)return;var sv=scrollY/Math.max(1,innerHeight)*100,a=0,b=RI+(N-1)*PER+PER*.5;
+    if(sv<a||sv>b)return;var now=performance.now();
+    /* a gesture already moved a project: its tail (a trackpad's glide) is held back until it ends */
+    if(now<lockW){ev.preventDefault();lockW=Math.max(lockW,now+160);return}
+    var rp=(sv-RI)/PER,nx=ev.deltaY>0?Math.floor(rp+.02)+1:Math.ceil(rp-.02)-1;
+    /* from the hero down: to the first project (the opening plays); from the first project up: back to the hero */
+    if(sv<RI-1&&ev.deltaY<0)return;
+    if(nx<0){ev.preventDefault();lockW=now+1400;scrollTo({top:0,behavior:'auto'});return}
+    if(nx>N-1)return;
+    ev.preventDefault();lockW=now+(sv<RI-1?1400:650);scrollTo({top:stopAt(nx),behavior:'auto'})},{passive:false});
+  /* the way out is not scrubbed by the scroll: a short scroll past the last project starts it and it plays through on
+     its own (the card turning over, then the cube tossed in), about two seconds; scrolling back up plays it backwards */
+  var A=0,AT=0,aRun=false,aLast=0,ADUR=RM3()?.01:1.9;
+  function RM3(){return matchMedia('(prefers-reduced-motion: reduce)').matches}
+  function outA(s){var t=s>.1?1:0;if(t!==AT){AT=t;if(!aRun){aRun=true;aLast=performance.now();requestAnimationFrame(atick)}}return A}
+  function atick(now){var dt=Math.min(.05,(now-aLast)/1000);aLast=now;A+=Math.sign(AT-A)*Math.min(Math.abs(AT-A),dt/ADUR);leave();
+    if(A!==AT)requestAnimationFrame(atick);else aRun=false}
+  addEventListener('scroll',leave,{passive:true});leave();
 })();
 </script>
 <script>
+/* the steps and the works, one pinned scene driven by the scroll (smoothed):
+   0.00-0.21  the three steps: each layer makes a quarter turn on its own axis (y, x, z)
+   0.20-0.30  the step text leaves; the cube turns its face to you, grows a little, and the first project
+              fades in across its nine squares
+   0.30-1.00  the cube's face is a stack of project cards: the scroll flips each card down over its bottom edge
+              to show the next one, and the project's details sit beside it, where the steps were */
 (function(){
-  var flip=document.getElementById('flip'), box=document.getElementById('box'), hdr=document.getElementById('hdr');
-  if(!flip||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-  var ticking=false;
-  /* alternative transitions (?tr=1 expand card · 2 cover · 3 curtain · 4 none) */
-  var front=box.querySelector('.f-front'), back=box.querySelector('.f-bottom'), clone=null;
-  function alt(TR,p){
-    var k=ease(Math.min(1,p/.85));
-    front.classList.toggle('live',k<.5); back.classList.toggle('live',k>=.5);
-    if(TR==='5'){
-      /* sideways cube: the hero turns away to the right, the next screen comes in on the left face */
-      var w=box.clientWidth, m=Math.sin(Math.PI*k);
-      box.style.setProperty('transform','scale('+(1-.18*m)+') translateZ('+(-w/2)+'px) rotateY('+(90*k)+'deg)','important');
-      front.style.setProperty('transform','translateZ('+(w/2)+'px)','important');
-      back.style.setProperty('transform','rotateY(-90deg) translateZ('+(w/2)+'px)','important');
-      front.style.filter='brightness('+(1-.6*k)+')'; back.style.filter='brightness('+(.4+.6*k)+')';
-      front.style.visibility=k>=.999?'hidden':'visible'; back.style.visibility=k<=.001?'hidden':'visible';
-      if(k>=.999){box.style.setProperty('transform','none','important');back.style.setProperty('transform','none','important');}
-    } else if(TR==='7'){
-      /* backward roll: the hero tips away from you, the next screen rises from below */
-      var h=box.clientHeight, m=Math.sin(Math.PI*k);
-      box.style.setProperty('transform','scale('+(1-.18*m)+') translateZ('+(-h/2)+'px) rotateX('+(90*k)+'deg)','important');
-      front.style.setProperty('transform','translateZ('+(h/2)+'px)','important');
-      back.style.setProperty('transform','rotateX(-90deg) translateZ('+(h/2)+'px)','important');
-      front.style.filter='brightness('+(1-.6*k)+')'; back.style.filter='brightness('+(.4+.6*k)+')';
-      front.style.visibility=k>=.999?'hidden':'visible'; back.style.visibility=k<=.001?'hidden':'visible';
-      if(k>=.999){box.style.setProperty('transform','none','important');back.style.setProperty('transform','none','important');}
+  var PROJ=[
+    {src:'w-ravid-1',px:.5,py:.56,t:'רביד נחום אדריכלים',k:'מיתוג · אתר תדמית',p:'קו אחד שעובר מהלוגו ועד האתר, כמו בתוכנית של בית.'},
+    {src:'w-julis-mockup',px:.5,py:.64,t:"Juli's",k:'מיתוג · אתר חנות',p:'עלי כותרת שהפכו לסמל, ואתר חנות שבו הזר הוא הגיבור.'},
+    {src:'w-eitan-mockup',px:.5,py:.66,t:"איתן שפיר ושות'",k:'מיתוג · אתר תדמית',p:'משרד רואי חשבון עם ארבעים שנות ניסיון קיבל שפה אחת, מהמונוגרמה ועד האתר.'},
+    {src:'w-oro-mockup',px:.5,py:.6,t:'ORO מגורים על מאדים',k:'מיתוג · אתר תדמית',p:'מתחם מגורים על כוכב אחר, ואתר שנגלל כמו סרט.'}];
+  var N=PROJ.length;
+  var sec=document.getElementById('process'),scene=document.getElementById('stepsIn'),host=document.getElementById('cube'),slot=sec.querySelector('.v-cube-slot');
+  var snum=document.getElementById('snum'),txt=document.getElementById('stepsTxt'),steps=[].slice.call(sec.querySelectorAll('.v-step'));
+  var aslot=sec.querySelector('.v-aslot'),atxt=document.getElementById('about'),heroEl=document.getElementById('hero'),wrap=document.getElementById('boxwrap'),box=document.getElementById('box'),ptxt=document.getElementById('work'),plist=document.getElementById('plist'),glow=document.getElementById('cglow');
+  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* the card stack: a card per project, its front is the project, its back a plain lavender-tinted panel */
+  /* what each project's screens show. On the laptop Eitan's hero is rebuilt in place, at the site's own sizes, over its
+     lighthouse video; the phones show the live sites as captured on a real phone */
+  function ux(b){return function(px){return (px/b*100).toFixed(3)+'cqw'}}
+  function eitan(){var u=ux(1546),v='<video data-src="assets/mk/eitan-hero.mp4" muted loop playsinline preload="none" style="',s;
+    s=v+'left:-3.36%;top:-3.02%;width:118.3%;height:107.2%"></video>'+
+      '<svg viewBox="0 0 1546 960" preserveAspectRatio="none" style="inset:0;width:100%;height:100%"><path d="M54 962Q773 828 1492 962Z" fill="#fff"/><path d="M258 962Q773 897 1288 962" fill="none" stroke="#b99e64" stroke-width="3"/></svg>'+
+      '<img class="lg" src="assets/mk/es-mark.svg" alt="" style="right:'+u(39)+';top:'+u(28)+';height:'+u(41)+'">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="#b99e64" stroke-width="1.7" stroke-linecap="round" style="right:'+u(113)+';top:'+u(33)+';width:'+u(32)+'"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'+
+      '<i class="h" style="right:'+u(178)+';top:'+u(334)+';font-size:'+u(60)+'">מעטפת מקצועית אחת<br>לעסקים וארגונים</i>'+
+      '<i class="p" style="right:'+u(178)+';top:'+u(491)+';font-size:'+u(26)+'">ראיית חשבון, מיסוי, ליווי עסקי ובקרות שכר<br>תחת קורת גג אחת.</i>'+
+      '<i class="b" style="right:'+u(178)+';top:'+u(601)+';font-size:'+u(20)+';padding:'+u(10.5)+' '+u(10)+';border-radius:'+u(5)+'">לתחומי התמחות ←</i>';
+    return s}
+  /* ORO's chapters in the laptop video (seconds at 24 fps: each sequence is 97 frames, the residence 65, the valley 105) */
+  var OROCH=[[0,4.04,'01 · The Arrival','Morning looks different here<em>And this is only the view</em>'],
+    [4.04,8.08,'02 · The Threshold','The view comes standard<em>Floor to horizon windows.<br>Mars, uninterrupted.</em>'],
+    [8.08,12.13,'03 · The Great Room','Built for another planet,<br>Designed to feel like home.'],
+    [12.13,16.17,'04 · The Promenade','A residential landscape,<br>designed for life on Mars.'],
+    [16.17,20.21,'05 · The Systems','The best technology is invisible<em>Until you want to see it.</em>'],
+    [22.92,26.96,'06 · The Community','A village under a foreign sun.'],
+    [26.96,31.33,'07 · The Valley','Yours to the horizon.']];
+  var OROFIN='<p class="ch">08 · The Reserve</p><p class="cap">Your next address is<br>already on the map<em>ORO Mars Residences,<br>Now all that’s missing is you.</em></p>';
+  function oro(mob){var u=ux(mob?390:1546),D=mob?{px:20,py:18,lo:24,ls:8,bgap:7,bw:26,sb:86,rise:16,chs:9,chp:34,chl:24,cs:16,cis:12.5,fgap:22,fb:98,fs:26,fis:15,bp:'17 34',bs:11}
+      :{px:48,py:34,lo:38,ls:11,bgap:7,bw:26,sb:101,rise:16,chs:9,chp:34,chl:24,cs:20.9,cis:15.8,fgap:77,fb:115,fs:52,fis:17.8,bp:'17 34',bs:11},st='';
+    for(var k in D)st+='--'+k+':'+String(D[k]).split(' ').map(function(n){return u(+n)}).join(' ')+';';
+    var s='<video data-src="assets/mk/oro-'+(mob?'ph':'lap')+'.mp4" muted loop playsinline preload="none"></video><div class="wash"'+(mob?' style="opacity:1"':'')+'></div>'+
+      '<div class="hd"><span class="lk"><b>ORO</b><s>MARS RESIDENCES</s></span><span class="bg"><i></i><i></i><i></i></span></div>';
+    if(!mob)OROCH.forEach(function(c){s+='<div class="sl"><p class="ch">'+c[2]+'</p><p class="cap">'+c[3]+'</p></div>'});
+    s+='<div class="sl fin'+(mob?' in':'')+'"><div>'+OROFIN+'</div><span class="cta">Find Your Residence</span></div>';
+    return [s,st]}
+  /* the screen holes of each scene, in % of the card (left, top, width, height); the laptop is the same in all four */
+  var MK=[{bg:'ravid',lap:'<img class="top" src="assets/mk/ravid-lap.webp" alt="">',ph:'<img class="top" src="assets/mk/ravid-ph.webp" alt="">',L:[23.06,23.1,43.25,43.2],P:[72.94,40.5,10.31,34]},
+          {bg:'julis',lap:'<img class="top" src="assets/mk/julis-lap.webp" alt="">',ph:'<img class="top" src="assets/mk/julis-ph.webp" alt="">',L:[22.94,24.9,43.38,41.4],P:[72.06,42.1,10.5,32.2]},
+          {bg:'eitan',lap:eitan(),ph:'<img class="top" src="assets/mk/eitan-ph.webp" alt="">',cls:'es',L:[22.94,25,43.38,41.3],P:[72.44,46.3,11.5,33.8]},
+          {bg:'oro',lap:oro(0),ph:oro(1),cls:'oro',L:[23.13,21.2,43.44,44.8],P:[72.38,39.5,10.44,35.1]}];
+  function scr(h){return typeof h==='string'?[h,'']:h}
+  function at(r){return 'left:'+r[0]+'%;top:'+r[1]+'%;width:'+r[2]+'%;height:'+r[3]+'%;'}
+  var cards=PROJ.map(function(pr,i){var c=document.createElement('div'),m=MK[i],L=scr(m.lap),P=scr(m.ph);c.className='v-fc';
+    c.innerHTML='<div class="v-bf" role="img" aria-label="'+pr.t+'"><div class="mk">'+
+      '<div class="mk-s '+(m.cls||'')+'" style="'+at(m.L)+L[1]+'">'+L[0]+'</div><div class="mk-s ph '+(m.cls||'')+'" style="'+at(m.P)+P[1]+'">'+P[0]+'</div>'+
+      '<img class="mk-bg" src="assets/mk/scene-'+m.bg+'.webp" alt=""></div></div><div class="v-fb"></div>';
+    c._vids=[].slice.call(c.querySelectorAll('video'));box.appendChild(c);return c});
+  /* ORO's laptop: the chapter copy follows the video, as the site shows it while you scroll */
+  cards.forEach(function(c){var v=c.querySelector('.oro:not(.ph) video');if(!v)return;var sl=[].slice.call(c.querySelectorAll('.oro:not(.ph) .sl')),w=c.querySelector('.oro:not(.ph) .wash');
+    v.addEventListener('timeupdate',function(){var t=v.currentTime,a=-1;OROCH.forEach(function(ch,j){if(t>ch[0]+.35&&t<ch[1]-.35)a=j});var fin=t>31.6;
+      sl.forEach(function(s,j){s.classList.toggle('in',j<OROCH.length?j===a:fin)});w.style.opacity=fin?1:0})});
+  /* the screens' videos load when their card first comes up and play only while it is in view */
+  /* the move from the works to the about part: the card evaporates into particles that drift across and settle into my photo */
+  var tilesEl=document.getElementById('tiles'),held=false;
+  var aph=document.createElement('img');aph.className='v-aph';aph.src='assets/mk/about-photo.webp';aph.alt='';tilesEl.appendChild(aph);
+  var blk=document.createElement('img');blk.className='v-aph blk';blk.src='assets/mk/about-photo-wink.webp?v=2';blk.alt='';tilesEl.appendChild(blk);
+  /* a wink: one eye closes, holds for a moment, and opens again */
+  var winked=false;
+  function blink(ms){if(blk.classList.contains('on'))return;blk.classList.add('on');setTimeout(function(){blk.classList.remove('on')},ms||420)}
+  /* a wink when the cursor comes onto the photo, also when the photo appears under a cursor already resting there (the
+     first move over it counts as coming on); again on each new visit, and on a tap */
+  var onPh=false;aph.addEventListener('pointermove',function(){if(!onPh){onPh=true;blink()}});
+  aph.addEventListener('pointerleave',function(){onPh=false});aph.addEventListener('click',function(){blink()});
+  /* the particles for the about part: the last card sampled into small squares (its colours), and my photo sampled the
+     same way; each square gets a place in my photo, a drift and its own timing */
+  var PTS=null,PC=96,PR=60,TC=64;
+  (function(){var a=new Image(),b=new Image(),n=0;a.onload=b.onload=function(){if(++n<2)return;
+    var ca=document.createElement('canvas');ca.width=PC;ca.height=PR;var xa=ca.getContext('2d');xa.drawImage(a,0,0,PC,PR);var da=xa.getImageData(0,0,PC,PR).data;
+    var TR=Math.round(TC*1038/900),cb=document.createElement('canvas');cb.width=TC;cb.height=TR;var xb=cb.getContext('2d');xb.drawImage(b,0,0,TC,TR);var db=xb.getImageData(0,0,TC,TR).data;
+    var tg=[];for(var y=0;y<TR;y++)for(var x=0;x<TC;x++){var k=(y*TC+x)*4;if(db[k+3]>120)tg.push([(x+.5)/TC,(y+.5)/TR,db[k],db[k+1],db[k+2]])}
+    for(var i=tg.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=tg[i];tg[i]=tg[j];tg[j]=t}
+    var out=[];for(y=0;y<PR;y++)for(x=0;x<PC;x++){k=(y*PC+x)*4;var t2=tg[out.length%tg.length];
+      out.push({sx:(x+.5)/PC,sy:(y+.5)/PR,sr:da[k],sg:da[k+1],sb:da[k+2],tx:t2[0],ty:t2[1],tr:t2[2],tg:t2[3],tb:t2[4],
+        d:x/PC*.7+Math.random()*.3,d2:Math.random(),dx:30+Math.random()*150,dy:-(30+Math.random()*170),ph:Math.random()*6.28})}
+    PTS=out};a.src='assets/mk/oro-card.webp';b.src='assets/mk/about-photo.webp'})();
+  var lastV=null;
+  function vids(on){cards.forEach(function(c,i){var want=on.indexOf(i)>=0;c._vids.forEach(function(v){
+    if(want){if(!v.src)v.src=v.dataset.src;if(v.paused&&!RM)v.play().catch(function(){})}else if(!v.paused)v.pause()})})}
+  plist.innerHTML=PROJ.map(function(pr,i){return '<li class="v-pj2"><a class="row" href="#work"><span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t">'+pr.t+'</span><span class="k">'+pr.k+'</span></a></li>'}).join('');
+  var pjs=[].slice.call(plist.children);
+  /* a row of the index scrolls to its project, where its card is up front */
+  pjs.forEach(function(li,i){li.firstChild.addEventListener('click',function(e){e.preventDefault();
+    var p=.31+.66*(i+.08)/(N-1);scrollTo({top:innerHeight*(.3+.4*i),behavior:RM?'auto':'smooth'})})});
+  /* the menu's "projects" lands on the works (inside the pinned scene), not on the start of the steps */
+  document.querySelectorAll('.v-nav a[href="#work"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+    scrollTo({top:innerHeight*.3,behavior:RM?'auto':'smooth'})})});
+  /* and "about" lands where the photo has arrived and the story is in */
+  document.querySelectorAll('.v-nav a[href="#about"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+    scrollTo({top:vAt(B4+(B5-B4)*.86),behavior:RM?'auto':'smooth'})})});
+  /* and "how it works" lands on the first step */
+  document.querySelectorAll('.v-nav a[href="#process"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+    scrollTo({top:vAt(B1+.004),behavior:RM?'auto':'smooth'})})});
+  /* 3x3 rotation helpers (standard axes, as CSS applies them) */
+  function R3(ax,deg){var t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);
+    return ax==='X'?[1,0,0,0,c,-s,0,s,c]:ax==='Y'?[c,0,s,0,1,0,-s,0,c]:[c,-s,0,s,c,0,0,0,1]}
+  function rot(ax,deg){return R3(ax==='x'?'X':ax==='y'?'Y':'Z',deg)}
+  function mm(a,b){var o=[];for(var r=0;r<3;r++)for(var c=0;c<3;c++)o[r*3+c]=a[r*3]*b[c]+a[r*3+1]*b[3+c]+a[r*3+2]*b[6+c];return o}
+  function mv(a,v){return [a[0]*v[0]+a[1]*v[1]+a[2]*v[2],a[3]*v[0]+a[4]*v[1]+a[5]*v[2],a[6]*v[0]+a[7]*v[1]+a[8]*v[2]]}
+  function cl(v){return Math.min(1,Math.max(0,v))}
+  function sm(v){v=cl(v);return v*v*(3-2*v)}
+  function io(v){v=cl(v);return v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2}
+  function lerp(a,b,t){return a+(b-a)*t}
+  var ID=[1,0,0,0,1,0,0,0,1];
+  function css(M){return 'matrix3d('+[M[0],M[3],M[6],0,M[1],M[4],M[7],0,M[2],M[5],M[8],0,0,0,0,1].map(function(v){return v.toFixed(6)}).join(',')+')'}
+  /* the line cube of the steps (canvas) */
+  var cv=document.createElement('canvas');host.appendChild(cv);var g=cv.getContext('2d');
+  var FACES=[[[1,0,0],[0,1,0],[0,0,1]],[[-1,0,0],[0,1,0],[0,0,1]],[[0,1,0],[1,0,0],[0,0,1]],[[0,-1,0],[1,0,0],[0,0,1]],[[0,0,1],[1,0,0],[0,1,0]],[[0,0,-1],[1,0,0],[0,1,0]]];
+  var cbs=[];for(var x=-1;x<=1;x++)for(var y=-1;y<=1;y++)for(var z=-1;z<=1;z++)cbs.push([x,y,z]);
+  var W=1,H=1,R=1;
+  function resize(){W=innerWidth;H=innerHeight;R=Math.min(devicePixelRatio||1,2);cv.width=Math.round(W*R);cv.height=Math.round(H*R);
+    /* the works index ends exactly on the third line of the background grid from the right (desktop) */
+    var gl=scene.querySelectorAll('.v-cols i')[2];plist.style.maxWidth='';if(W>760&&gl){var lr=plist.getBoundingClientRect();plist.style.maxWidth=Math.max(240,lr.right-gl.getBoundingClientRect().left)+'px'}}
+  new ResizeObserver(resize).observe(scene);resize();
+  var MOVES=[['y',1],['x',1],['z',1]],SEG=[[0,.07],[.07,.14],[.14,.21]];
+  var mid={x:0,y:0,w:10,h:10},target=0,cur=0,mx=0,my=0,sx=0,sy=0,t0=performance.now(),step=-1,shownP=-1;
+  /* the scroll is not even: the steps and the cube's move take the first 36% of the scene (the timeline's 0 to .31),
+     the works the next part, about one screen per project (to .31-1), then the about part (its own 0 to 1) and its exit */
+  /* v3 scroll lengths (vh): the hero above it, where the works play and the last one the last one turns over and the cube is tossed in, 200;
+     the steps 60 (three stops), the about 30 (its start plays the cube into my photo), its exit 20; the marks are fractions of their sum. Under the hero the cube rests */
+  var LV=310,B1=200/LV,B4=260/LV,B5=290/LV,AB=B4,AE=B5,rev=false,targetA=0,curA=0,targetE=0,curE=0;
+  function vAt(x){return sec.offsetTop+x*(sec.offsetHeight-innerHeight)}
+  function measure(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));
+    target=v<B1?0:v<B4?STOPS[Math.round((v-B1)/(B4-B1)*(STOPS.length-1))]:.205;/* the about is not scrubbed: a short scroll past the last step starts it and it plays through on its own */
+    targetA=v>B4+(B5-B4)*.15?1:0;targetE=cl((v-B5)/(1-B5))}
+  /* the steps, one per scroll: each step is a stop, reached when its layer of the cube has made its quarter turn (the
+     scene eases there on its own); a wheel or trackpad gesture inside the steps moves exactly one step, and before
+     the first and after the last the page scrolls on as usual */
+  var STOPS=[.07,.14,.205],lockS=0;
+  function stopV(i){return vAt(B1+(B4-B1)*i/(STOPS.length-1))}
+  addEventListener('wheel',function(ev){if(Math.abs(ev.deltaY)<2)return;var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight)),lo=B1-(B4-B1)*.25,hi=B5;
+    if(v<lo||v>hi)return;var now=performance.now();
+    if(now<lockS){ev.preventDefault();lockS=Math.max(lockS,now+160);return}
+    /* the next stop in the gesture's direction from where the page is (coming up from the about, that is the last step) */
+    var rp=(v-B1)/(B4-B1)*(STOPS.length-1),nx=ev.deltaY>0?Math.floor(rp+.02)+1:Math.ceil(rp-.02)-1;
+    /* in the about: up goes back to the last step, down scrolls on as usual */
+    if(v>B4+.004){if(ev.deltaY>0)return;nx=STOPS.length-1}
+    if(nx<0||nx>STOPS.length-1)return;
+    ev.preventDefault();lockS=now+(v>B4+.004?900:650);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
+  addEventListener('scroll',measure,{passive:true});measure();cur=target;
+  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+  function setStep(n){if(n===step)return;step=n;steps.forEach(function(s,j){s.classList.toggle('on',j===n);s.classList.toggle('past',j<n)});snum.style.setProperty('--si',n)}
+  function setProj(n){if(n===shownP)return;shownP=n;pjs.forEach(function(s,j){s.classList.toggle('on',j===n);});}
+  function frame(now){
+    cur+=(target-cur)*(RM?1:.12);if(Math.abs(target-cur)<1e-4)cur=target;
+    /* the cube into my photo plays at an even pace, about 1.8 seconds, either way */
+    var dtA=Math.min(.05,(now-(frame.l||now))/1000);frame.l=now;curA=RM?targetA:curA+Math.sign(targetA-curA)*Math.min(Math.abs(targetA-curA),dtA/1.8);
+    curE+=(targetE-curE)*(RM?1:.12);if(Math.abs(targetE-curE)<1e-4)curE=targetE;
+    var p=cur,t=(now-t0)/1000,ab=curA;
+    setStep(rev?0:p<.075?0:p<.145?1:2);
+    var front=sm((p-.21)/.05),grow=io((p-.215)/.06),inner=sm((p-.252)/.016),morph=io((p-.27)/.04),settle=1-front;
+    var to=(1-sm((p-.2)/.035))*(1-sm(ab/.1));txt.style.opacity=to.toFixed(3);txt.style.transform='translateY('+(-30*(1-to)).toFixed(1)+'px)';txt.style.visibility=to<.01?'hidden':'visible';
+    var po=sm((p-.27)/.04)*(1-sm(ab/.12));ptxt.style.opacity=po.toFixed(3);ptxt.style.transform='translateY('+(30*(1-po)).toFixed(1)+'px)';ptxt.classList.toggle('on',po>.5);
+    var sr=slot.getBoundingClientRect(),scr=scene.getBoundingClientRect(),mob=W<=760;
+    /* once the hands are out of the frame, the cube is tossed in gently: it comes up from below the far side on a soft
+       arc, tumbling, and slows down to land in its place just as the scene pins */
+    var y0=heroEl.offsetHeight*.38,q=window.__toss!=null?window.__toss:cl((scrollY-y0)/Math.max(1,scrollY+scr.top-y0)),hk=1-Math.pow(1-q,3),appear=sm(q/.15),gone=sec.getBoundingClientRect().bottom<innerHeight*.02,
+        exitF=sm((sec.getBoundingClientRect().bottom-innerHeight*.1)/(innerHeight*.75));   /* the light fades out softly as the scene leaves, no hard edge */
+    var ex=sr.left-scr.left+sr.width/2,ey=sr.top-scr.top+sr.height/2,bx=mob?W*1.05:W*.8,by=H*1.15,ax=(bx+ex)/2,ay=Math.min(ey,H*.5)-H*(mob?.12:.22);
+    /* the project card fills the cube's place (left; on the phone above the text) */
+    var cw=Math.min(sr.width*(mob?1:1.04),sr.height*(mob?.92:.9)*1.6),ch=cw/1.6,ccx=sr.left-scr.left+sr.width/2,ccy=sr.top-scr.top+sr.height/2;
+    /* towards the works the cube faces you, grows and moves to the card's place; its middle square then opens into the card */
+    var cx=lerp((1-hk)*(1-hk)*bx+2*(1-hk)*hk*ax+hk*hk*ex,ccx,grow),cy=lerp((1-hk)*(1-hk)*by+2*(1-hk)*hk*ay+hk*hk*ey,ccy,grow);
+    var C=cw,K=11/(11-1.5),s0=Math.min(sr.width,sr.height)*.15,s1=ch*1.15/(3*1.06*K);
+    var size=lerp(s0*lerp(.7,1,hk),s1,grow),handed=p>=.27,showCard=p>=.27;
+    /* about (particle version): where my photo lands on the right (on the phone, in the card's place), drawn below;
+       the card fades as its particles take its place
+       */
+    var cub=ab>0,AP=null;
+    if(cub){var ar0=aslot.getBoundingClientRect(),tw0=mob?sr:ar0,PH=Math.min(tw0.height*(mob?.94:.86),tw0.width*(mob?.9:.92)*1038/900),PW=PH*900/1038;
+      AP={a1:io((ab-.03)/.13),a5:sm((ab-.74)/.12),PW:PW,PH:PH,PX:tw0.left-scr.left+tw0.width/2,PY:tw0.top-scr.top+tw0.height/2+(mob?0:H*.02)};handed=true}
+    if(!handed){
+      sx+=(my*8-sx)*.05;sy+=(mx*12-sy)*.05;var sway=RM?0:settle;
+      /* (its turn is shared, so the cube tossed in from the works lands in exactly this pose) */
+      var pX=lerp(26,0,front)-(1-hk)*120-sx*settle+Math.sin(t*.5)*2*sway,pY=lerp(-38,0,front)+(1-hk)*200+sy*settle+Math.sin(t*.35)*6*sway,V=mm(rot('x',pX),rot('y',pY));window.__cpose=[pX,pY];
+      /* each step turns its layer a quarter turn */
+      var turns=MOVES.map(function(m,i){return sm((p-SEG[i][0])/(SEG[i][1]-SEG[i][0]))*90});
+      var fx0=1e9,fy0=1e9,fx1=-1e9,fy1=-1e9,polys=[],D=size*11,inset=lerp(.41,.5,grow);
+      /* the layer that is turning right now (if any): the cube is drawn as solid little boxes, so the turning
+         layer moves as one slab and its squares never come apart */
+      var act=-1;turns.forEach(function(a,i){if(a>0&&a<90)act=i});
+      var ak=act<0?-1:{x:0,y:1,z:2}[MOVES[act][0]],an=act<0?0:mv(V,ak===0?[1,0,0]:ak===1?[0,1,0]:[0,0,1])[2];
+      cbs.forEach(function(pos){
+        var O=ID,P=pos;
+        MOVES.forEach(function(m,i){var a=turns[i];if(a<=0)return;var k={x:0,y:1,z:2}[m[0]];if(Math.round(P[k])!==m[1])return;var M=rot(m[0],a);O=mm(M,O);P=mv(M,P)});
+        FACES.forEach(function(f){
+          var Nn=mv(O,f[0]);if(mv(V,Nn)[2]<=0.001)return;
+          var u=mv(O,f[1]),w=mv(O,f[2]),cen=[P[0]+Nn[0]*.5,P[1]+Nn[1]*.5,P[2]+Nn[2]*.5];
+          function pt(a,b){var q=mv(V,[cen[0]+u[0]*a+w[0]*b,cen[1]+u[1]*a+w[1]*b,cen[2]+u[2]*a+w[2]*b]);var k=D/(D-q[2]*size);return [cx+q[0]*size*1.06*k,cy-q[1]*size*1.06*k]}
+          var idx=-1;if(Math.abs(Nn[2]-1)<.01&&Math.round(cen[2]*2)===3)idx=(1-Math.round(cen[1]))*3+(Math.round(cen[0])+1);
+          var inL=act>=0&&Math.round(P[ak])===MOVES[act][1];
+          polys.push({z:mv(V,P)[2],front:act<0?0:(inL===(an>0)?1:0),o:[pt(-.5,-.5),pt(.5,-.5),pt(.5,.5),pt(-.5,.5)],
+            i:[pt(-inset,inset),pt(inset,inset),pt(inset,-inset),pt(-inset,-inset)],idx:idx})})});
+      /* back to front, box by box; across the turning cut, the part nearer to you goes last */
+      polys.sort(function(a,b){return (a.front-b.front)||(a.z-b.z)});
+      g.setTransform(R,0,0,R,0,0);g.clearRect(0,0,W,H);g.lineJoin='round';
+      polys.forEach(function(q){
+        /* like the hand illustration: hidden lines erased, nothing filled, the light comes through */
+        g.save();g.globalCompositeOperation='destination-out';g.beginPath();q.o.forEach(function(v,j){j?g.lineTo(v[0],v[1]):g.moveTo(v[0],v[1])});g.closePath();g.fill();g.restore();
+        if(q.idx>=0)q.o.forEach(function(v){fx0=Math.min(fx0,v[0]);fy0=Math.min(fy0,v[1]);fx1=Math.max(fx1,v[0]);fy1=Math.max(fy1,v[1])});
+        g.beginPath();q.i.forEach(function(v,j){j?g.lineTo(v[0],v[1]):g.moveTo(v[0],v[1])});g.closePath();g.strokeStyle='rgba(244,243,241,'+(.55*(1-inner)).toFixed(3)+')';g.lineWidth=1;g.stroke()});
+      /* towards the works the squares fade and only the outline of the face is left; it then opens into the card */
+      if(fx1>fx0){mid={x:fx0,y:fy0,w:fx1-fx0,h:fy1-fy0};if(inner>0){g.strokeStyle='rgba(244,243,241,'+(.55*inner).toFixed(3)+')';g.strokeRect(fx0,fy0,fx1-fx0,fy1-fy0)}}
     }
-  }
-  function update(){
-    ticking=false;
-    var r=flip.getBoundingClientRect(), total=r.height-2*innerHeight;
-    var p=Math.min(1,Math.max(0,-r.top/total));
-    var k=ease(Math.min(1,p/.85)), a=90*k;
-    var TR=document.documentElement.dataset.tr;
-    if(TR){ alt(TR,p); return; }
-    var m=Math.sin(Math.PI*k);   /* 0 at rest, 1 mid-flip */
-    box.style.setProperty('--a',a.toFixed(2)+'deg');
-    box.style.setProperty('--s',(1-.3*m).toFixed(4));
-    box.style.setProperty('--ry',(-14*m).toFixed(2)+'deg');
-    box.style.setProperty('--ty',(-3*m).toFixed(2)+'vh');
-    box.style.setProperty('--rad',(28*m).toFixed(1)+'px');
-    box.style.setProperty('--so',m.toFixed(3));
-    document.getElementById('floor').style.setProperty('--fo',m.toFixed(3));
-    box.querySelector('.f-front').classList.toggle('live',a<45);
-    box.querySelector('.f-bottom').classList.toggle('live',a>=45);
-    box.classList.toggle('done',a>=89.5);
-    box.querySelector('.f-front').style.visibility=a>=89.5?'hidden':'visible';
-    box.querySelector('.f-bottom').style.visibility=a<=0.5?'hidden':'visible';
-    box.querySelector('.f-front').style.setProperty('--shade',(k*.55).toFixed(3));
-    box.querySelector('.f-bottom').style.setProperty('--shade2',((1-k)*.6).toFixed(3));
-    
-  }
-  addEventListener('scroll',function(){var c1=document.querySelector('#stack .r'),ti=document.querySelector('.st-intro');if(c1&&ti){var t=c1.getBoundingClientRect().top;ti.style.opacity=Math.max(0,Math.min(1,(t-innerHeight*.3)/(innerHeight*.35))).toFixed(3)}},{passive:true});
-  addEventListener('scroll',function(){var s=document.getElementById('stack');if(s&&hdr)hdr.classList.toggle('inked',s.getBoundingClientRect().top<innerHeight*.5)},{passive:true});
-  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
-  addEventListener('resize',update); update();
+    /* about: the cube turns to face you and glides to my photo's place, flattening into its face, nine squares. Then
+       the middle square grows until it is the photo's frame, the other eight fading; the photo comes up inside it
+       (below) and the frame's line fades into it. The mirror of the toss that brought the cube in */
+    if(cub){g.setTransform(R,0,0,R,0,0);g.clearRect(0,0,W,H);
+      var mt=io(cl(ab/.4)),gw=io(cl((ab-.3)/.3)),la=1-sm((ab-.56)/.14),lo=1-sm(gw/.45);
+      if(la>.003){var sz=Math.min(sr.width,sr.height)*.15,U=sz*1.06,
+          x0=sr.left-scr.left+sr.width/2,y0=sr.top-scr.top+sr.height/2,bxc=lerp(x0,AP.PX,mt),byc=lerp(y0,AP.PY,mt)-Math.sin(Math.PI*mt)*H*.04,
+          hz=1.5*(1-sm((mt-.2)/.6)),D=sz*11,Vb=mm(rot('x',26*(1-mt)),rot('y',-38*(1-mt))),ins=.41;
+        function bp(p){var q=mv(Vb,p),k=D/(D-q[2]*sz);return [bxc+q[0]*U*k,byc-q[1]*U*k]}
+        var BF=[[[0,0,1],[1,0,0],[0,1,0],hz,1.5,1.5],[[1,0,0],[0,0,1],[0,1,0],1.5,hz,1.5],[[-1,0,0],[0,0,1],[0,1,0],1.5,hz,1.5],[[0,1,0],[1,0,0],[0,0,1],1.5,1.5,hz],[[0,-1,0],[1,0,0],[0,0,1],1.5,1.5,hz]];
+        g.lineJoin='round';g.lineWidth=1;g.strokeStyle='rgba(244,243,241,.55)';
+        BF.forEach(function(fc){var n=fc[0],u=fc[1],v=fc[2],d=fc[3],a=fc[4],b=fc[5],front=n[2]===1;
+          if(mv(Vb,n)[2]<=.001||a<.02||b<.02)return;
+          /* the side faces go as the cube flattens; on the face, the eight around the middle go as it grows */
+          var fa=front?1:Math.min(1,d/.6,b/.6,a/.6);
+          function fp(i,j){return bp([n[0]*d+u[0]*i+v[0]*j,n[1]*d+u[1]*i+v[1]*j,n[2]*d+u[2]*i+v[2]*j])}
+          for(var i=-1;i<=1;i++)for(var j=-1;j<=1;j++){var mid0=front&&i===0&&j===0;if(mid0&&gw>0)continue;
+            g.globalAlpha=fa*(mid0?la:lo);if(g.globalAlpha<.003)continue;
+            var ii=ins,jj=ins,qd=[fp(i-ii,j+jj),fp(i+ii,j+jj),fp(i+ii,j-jj),fp(i-ii,j-jj)];
+            g.beginPath();qd.forEach(function(p,k){k?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])});g.closePath();g.stroke()}});
+        /* the middle square, growing into the photo's frame */
+        if(gw>0){var hw=lerp(ins*U,AP.PW/2,gw),hh=lerp(ins*U,AP.PH/2,gw);g.globalAlpha=la;
+          g.strokeRect(lerp(bxc,AP.PX,gw)-hw,lerp(byc,AP.PY,gw)-hh,hw*2,hh*2)}
+        g.globalAlpha=1}
+      }
+    cv.style.opacity=gone?0:cub?'1':handed?0:appear.toFixed(3);wrap.classList.toggle('on',showCard&&!gone);
+    glow.style.setProperty('--gx',cx+'px');glow.style.setProperty('--gy',cy+'px');glow.style.setProperty('--gw',(Math.max(size*10,C*2.2))+'px');glow.style.setProperty('--go',gone?'0':(appear*exitF).toFixed(3));
+    /* the card stack: it starts as the outline of the cube's face and opens into the landscape card; the project fades in */
+    var bxL=lerp(mid.x,ccx-cw/2,morph),bxT=lerp(mid.y,ccy-ch/2,morph),bxW=lerp(mid.w,cw,morph),bxH=lerp(mid.h,ch,morph);
+    box.style.setProperty('--CW',bxW+'px');box.style.setProperty('--CH',bxH+'px');box.style.left=bxL+'px';box.style.top=bxT+'px';
+    /* about: the last card breaks back into the nine squares of the cube's face. Each square turns over and flies across
+       on its own arc, in a diagonal wave, and they come together on the right as my photo, like a face of the cube
+       clicking into place; the lines between them fade and the photo is whole. Then the story comes in */
+    var tOn=ab>=.06&&!gone;tilesEl.classList.toggle('on',tOn);
+    if(ab>0&&!held){cards[N-1]._vids.forEach(function(v){v.pause();v.currentTime=v.closest('.ph')?1:33});held=true}else if(ab===0)held=false;
+    box.style.filter='';box.style.opacity='';
+    if(tOn){var ar=aslot.getBoundingClientRect(),tw=mob?sr:ar,ph=Math.min(tw.height*(mob?.94:.86),tw.width*(mob?.9:.92)*1038/900),pw=ph*900/1038,
+        pL=tw.left-scr.left+tw.width/2-pw/2,pT=tw.top-scr.top+tw.height/2-ph/2+(mob?0:H*.02),cL=ccx-cw/2,cT=ccy-ch/2,avg=0;
+      {
+        /* the card's picture fades and its frame line is handed to the canvas, which draws it flowing into my outline;
+           the photo then comes up inside that outline */
+        box.style.opacity=(1-sm((ab-.05)/.05)).toFixed(3);
+        var e5=sm((ab-.54)/.2);aph.style.left=(AP.PX-AP.PW/2)+'px';aph.style.top=(AP.PY-AP.PH/2)+'px';aph.style.width=AP.PW+'px';aph.style.height=AP.PH+'px';
+        aph.style.opacity=e5.toFixed(3);aph.style.filter='blur('+(lerp(3,0,e5)).toFixed(1)+'px)';avg=io(cl(ab/.58));
+        blk.style.left=aph.style.left;blk.style.top=aph.style.top;blk.style.width=aph.style.width;blk.style.height=aph.style.height;aph.classList.toggle('live',e5>.95)}
+      var gx=lerp(ccx,pL+pw/2,avg),gy=lerp(ccy,pT+ph*.58,avg),gw=lerp(cw*2.2,pw*2.4,avg);
+      glow.style.setProperty('--gx',gx+'px');glow.style.setProperty('--gy',gy+'px');glow.style.setProperty('--gw',gw+'px');glow.style.setProperty('--go',gone?'0':exitF.toFixed(3))}
+    var at=sm((ab-.55)/.18);atxt.style.opacity=at.toFixed(3);atxt.style.transform='translateY('+(30*(1-at)).toFixed(1)+'px)';atxt.classList.toggle('on',at>.5);
+    /* the about leaves: the words lift away in a blur, the photo fades after them, and in the middle the reviews'
+       quote mark draws itself in one line, from my words to the words of the people I worked with */
+    var ex=curE,xo=sm(ex/.5),xp=sm((ex-.1)/.5);
+    if(ex>0){atxt.style.opacity=(at*(1-xo)).toFixed(3);atxt.style.transform='translateY('+(30*(1-at)-60*xo).toFixed(1)+'px)';atxt.style.filter='blur('+(xo*6).toFixed(2)+'px)'}else atxt.style.filter='';
+    /* the photo fades and softens as it goes, after the words */
+    tilesEl.style.opacity=(1-sm((ex-.24)/.42)).toFixed(3);tilesEl.style.filter=ex>.24?'blur('+(sm((ex-.24)/.42)*5).toFixed(2)+'px)':'';
+    /* scrolling on past the about, I wink once at you before the photo goes (again on the next pass down) */
+    if(ex>.03&&!winked&&aph.classList.contains('live')){winked=true;blink(650)}else if(ex<.01)winked=false;
+    box.style.setProperty('--pi',sm((p-.282)/.028).toFixed(3));wrap.style.perspectiveOrigin=(bxL+bxW/2)+'px '+(bxT+bxH*.3)+'px';
+    var u=rev?N-1:cl((p-.31)/.66)*(N-1),k=Math.min(N-2,Math.floor(u)),fr=u-k;if(u>=N-1){k=N-2;fr=1}
+    var tp=io((fr-.2)/.6);
+    /* card k falls toward you over its bottom edge and fades as it lies down; card k+1 waits right behind it */
+    cards.forEach(function(c,i){
+      if(i===k){var a=-180*tp;c.style.visibility='visible';c.style.zIndex=2;c.style.opacity=(1-sm((tp-.6)/.4)).toFixed(3);c.style.transform='translateZ(1px) rotateX('+a.toFixed(2)+'deg)'}
+      else if(i===k+1){c.style.visibility='visible';c.style.zIndex=1;c.style.opacity=1;c.style.transform='none'}
+      else c.style.visibility='hidden'});
+    var von=showCard&&!gone&&ab===0?[k,k+1]:[],vk=von.join();if(vk!==lastV){lastV=vk;vids(von)}
+    /* a gentle sway keeps the stack alive, and it leans toward the cursor */
+    var lean=RM?ID:mm(rot('x',(-sx*.4+Math.sin(t*.5)*1.2)),rot('y',(sy*.5+Math.sin(t*.35)*2.5)));
+    if(handed){sx+=(my*8-sx)*.05;sy+=(mx*12-sy)*.05}
+    box.style.transform=css(ab>0?ID:lean);
+    setProj(p<.3?0:(tp<.5?k:k+1));
+    requestAnimationFrame(frame)}
+  requestAnimationFrame(frame);
 })();
 </script>
 <script>
+/* reviews: the background grid comes down into the section and builds their frames. Its lines on the review columns
+   carry on down as the scroll goes (a drawing front a little below the middle of the screen); the line across the top
+   and the line under each review run out from the right when the front reaches them, and each review rises into its
+   cell as the cell closes. The lines are drawn on a canvas, and where the cursor touches them they bend aside gently,
+   take a little lavender light and spring back */
+(function(){var s=document.getElementById('reviews'),list=s.querySelector('.v-rev-list'),cols=s.querySelectorAll('.v-cols i');
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e,o){if(e[0].isIntersecting){s.classList.add('in');o.disconnect()}},{rootMargin:'0px 0px -20% 0px'}).observe(s);else s.classList.add('in');
+  var cv=document.createElement('canvas');cv.className='v-lines';cv.setAttribute('aria-hidden','true');s.appendChild(cv);
+  var g=cv.getContext('2d'),R=1,W=0,H=0,LN=[],QS=[],mx=-9999,my=-9999,act=0,run=false,RM=matchMedia('(prefers-reduced-motion: reduce)').matches,STEP=8,F=0,FS=0;
+  /* a line: points from its start; v = drawn down to the front, h = runs out once the front passes its height */
+  function seg(x0,y0,x1,y1,k){var n=Math.max(2,Math.round(Math.hypot(x1-x0,y1-y0)/STEP)),p=[];for(var i=0;i<=n;i++)p.push({x:x0+(x1-x0)*i/n,y:y0+(y1-y0)*i/n,dx:0,dy:0});LN.push({p:p,k:k,y:y0,y1:y1})}
+  function size(){R=Math.min(devicePixelRatio||1,2);W=s.clientWidth;H=s.clientHeight;cv.style.left='0';cv.style.top='0';cv.style.width=W+'px';cv.style.height=H+'px';cv.width=Math.round(W*R);cv.height=Math.round(H*R);
+    var a=s.getBoundingClientRect(),l=list.getBoundingClientRect(),L=l.left-a.left,T=l.top-a.top,lw=l.width;LN=[];
+    /* the grid lines that are also the edges of the review columns: the 1st, 3rd, 5th and 7th */
+    var xs=[];[0,2,4,6].forEach(function(i){if(cols[i])xs.push(cols[i].getBoundingClientRect().left-a.left+.5)});
+    if(innerWidth<=760)xs=[];
+    xs.forEach(function(x){seg(x,0,x,T+l.height,'v')});   /* down to the bottom of the reviews, no further */
+    seg(L+lw,T,L,T,'h');
+    /* a line under each review, except the last one in its column: the column just ends there */
+    var qa=[].slice.call(list.querySelectorAll('.v-q')),last={};
+    qa.forEach(function(q){var r=q.getBoundingClientRect(),c=Math.round(r.left);if(!last[c]||r.bottom>last[c].b)last[c]={q:q,b:r.bottom}});
+    QS=qa.map(function(q){var r=q.getBoundingClientRect(),y=r.bottom-a.top;if(last[Math.round(r.left)].q!==q)seg(r.right-a.left,y,r.left-a.left,y,'h');return {el:q,top:r.top-a.top,h:r.height}});
+    front();FS=F;draw()}
+  function front(){var a=s.getBoundingClientRect();F=RM?H+1:innerHeight*.8-a.top}
+  function part(p,f){/* the first f (0..1) of a line, as a list of points */var n=p.length-1,e=f*n,k=Math.floor(e),o=p.slice(0,k+1);
+    if(k<n&&e>k){var A=p[k],B=p[k+1],t=e-k;o.push({x:A.x+(B.x-A.x)*t,y:A.y+(B.y-A.y)*t,dx:A.dx+(B.dx-A.dx)*t,dy:A.dy+(B.dy-A.dy)*t})}return o}
+  function draw(){g.setTransform(R,0,0,R,0,0);g.clearRect(0,0,W,H);var moving=false,sg=95,A=14;
+    FS+=(F-FS)*(RM?1:.12);if(Math.abs(F-FS)>.5)moving=true;else FS=F;
+    LN.forEach(function(ln){var f=ln.k==='v'?Math.min(1,Math.max(0,FS/ln.y1)):Math.min(1,Math.max(0,(FS-ln.y)/160));if(f<=0)return;
+      ln.p.forEach(function(p){var dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy,fo=act*A*Math.exp(-d2/(2*sg*sg)),d=Math.sqrt(d2)||1,tx=dx/d*fo,ty=dy/d*fo;
+        p.dx+=(tx-p.dx)*.14;p.dy+=(ty-p.dy)*.14;if(Math.abs(tx-p.dx)>.04||Math.abs(ty-p.dy)>.04)moving=true});
+      var q=part(ln.p,f);g.beginPath();q.forEach(function(p,i){i?g.lineTo(p.x+p.dx,p.y+p.dy):g.moveTo(p.x+p.dx,p.y+p.dy)});
+      g.strokeStyle='rgba(244,243,241,.18)';g.lineWidth=1;g.stroke();
+      /* the very tip of a line that is still growing has a small light */
+      if(f<1&&!RM){var e=q[q.length-1];g.fillStyle='rgba(192,168,251,.85)';g.beginPath();g.arc(e.x+e.dx,e.y+e.dy,1.6,0,6.283);g.fill()}});
+    if(act>0){g.save();g.globalCompositeOperation='source-atop';var gr=g.createRadialGradient(mx,my,0,mx,my,140);gr.addColorStop(0,'rgba(192,168,251,.9)');gr.addColorStop(1,'rgba(192,168,251,0)');g.fillStyle=gr;g.fillRect(mx-140,my-140,280,280);g.restore()}
+    /* a review rises into its cell as the front closes it */
+    QS.forEach(function(q){q.el.classList.toggle('on',FS>q.top+q.h*.55)});
+    if(moving){run=true;requestAnimationFrame(draw)}else run=false}
+  function kick(){if(!run){run=true;requestAnimationFrame(draw)}}
+  addEventListener('scroll',function(){front();kick()},{passive:true});
+  s.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;act=1;kick()});
+  s.addEventListener('pointerleave',function(){act=0;kick()});
+  new ResizeObserver(size).observe(s);size();setTimeout(size,1400)})();
+</script>
+<script>
+/* questions, contact and footer */
 (function(){
-  var items=[].slice.call(document.querySelectorAll('#plRow .pl'));
-  function open(el){items.forEach(function(i){i.classList.toggle('is-on',i===el)})}
-  items.forEach(function(el){
-    el.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)open(el)});
-    el.addEventListener('click',function(){open(el)});
-    el.addEventListener('focus',function(){open(el)});
+  var faq=document.getElementById('faq'),ct=document.getElementById('contact'),ft=document.getElementById('footer');
+  /* each comes in when it is reached: the lines draw themselves, the words rise out of a blur */
+  [faq].forEach(function(s){if(!('IntersectionObserver' in window)){s.classList.add('in');return}
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting){s.classList.add('in');o.disconnect()}},{rootMargin:'0px 0px -25% 0px'}).observe(s)});
+  /* one question open at a time */
+  var qs=[].slice.call(faq.querySelectorAll('.v-fq'));
+  qs.forEach(function(q){var b=q.querySelector('button');
+    b.addEventListener('click',function(){var o=!q.classList.contains('open');
+      qs.forEach(function(x){x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});
+      if(o){q.classList.add('open');b.setAttribute('aria-expanded','true')}});
+    /* a small lavender light runs along the question's line under the cursor */
+    q.addEventListener('pointermove',function(e){q.style.setProperty('--mx',(e.clientX-q.getBoundingClientRect().left)+'px')});
+    q.addEventListener('pointerleave',function(){q.style.setProperty('--mx','-400px')})});
+  /* the closing line: "years build a name" comes in slowly, letter by letter, and then "seconds build an impression"
+     arrives all at once, in a flash. Both lines are split into letters, for that and for the silk below */
+  var lines=[].slice.call(ft.querySelectorAll('.v-sign>span')),n=0;
+  lines.forEach(function(l,li){var txt=l.textContent;l.textContent='';l.removeAttribute('data-t');
+    txt.split('').forEach(function(c){var e=document.createElement('span');e.className='ch';e.textContent=c;e.setAttribute('data-c',c);
+      if(li===0&&c!==' '){e.style.transitionDelay=(n*.09)+'s';n++}l.appendChild(e)});
   });
+  var go=function(){ft.classList.add('in');setTimeout(function(){ft.classList.add('go')},n*90+700)};
+  var sg=ft.querySelector('.v-sign');
+  if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches)new IntersectionObserver(function(e,ob){if(e[0].isIntersecting){go();ob.disconnect()}},{threshold:.6}).observe(sg);else{ft.classList.add('in','go')}
 })();
 </script>
 <script>
-(function(){var c=[].slice.call(document.querySelectorAll('#stack .r'));
-if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-function u(){c.forEach(function(el,i){var n=c[i+1];if(!n)return;var r=n.getBoundingClientRect(),t=el.getBoundingClientRect().top;
-var q=Math.min(1,Math.max(0,1-(r.top-t)/innerHeight));el.style.setProperty('--s',(1-.06*q).toFixed(4));el.style.filter='brightness('+(1-.35*q).toFixed(3)+')';});}
-addEventListener('scroll',function(){requestAnimationFrame(u)},{passive:true});u();})();
-</script>
-<script>
+/* contact: comes in when reached; the hands come in with the scroll (--k 0 to 1) and stop pointing at the form.
+   The form still needs to be connected to where the details should go (email or a form service) */
 (function(){
-var W=[
- {k:'מיתוג · אתר תדמית',t:"איתן שפיר ושות'",p:'משרד רואי חשבון עם יותר מארבעים שנות ניסיון קיבל שפה אחת, מהמונוגרמה ועד האתר'},
- {k:'מיתוג',t:"קטרינה מקרי ושות'",p:'שלוש אותיות שנכנסות זו בזו, בנחושת על כחול עמוק'},
- {k:'מיתוג · אתר חנות',t:"Juli's",p:'עלי כותרת שהפכו לסמל, ואתר חנות שבו הזר הוא הגיבור'},
- {k:'מיתוג',t:'סיגלית גרינפלד מיטלמן',p:'שתי אותיות בקו דק אחד, על נייר בגוון אדמה'},
- {k:'מיתוג · אתר תדמית',t:'רביד נחום אדריכלים',p:'קו אחד שעובר מהלוגו ועד האתר, כמו בתוכנית של בית'},
- {k:'מיתוג',t:'משה אבות שחף',p:'מסגרת ישרה וקו אחד שזורם בתוכה'},
- {k:'מיתוג',t:'Victoria',p:'קונדיטורית שהלב שלה נמצא בתוך האות'},
- {k:'מיתוג',t:'גאיה רון',p:'מונוגרמה עדינה וחתימה בכתב יד, בגווני עור חמים'},
- {k:'מיתוג',t:'קיפוד פתרונות מחשוב',p:'הקוצים של הקיפוד הפכו לניצוצות של חשמל'},
- {k:'מיתוג',t:'YNALIZE',p:'מאנליזה לתובנה, בסימן אחד'},
- {k:'מיתוג · אתר תדמית',t:'ORO מגורים על מאדים',p:'מתחם מגורים יוקרתי על כוכב אחר, ואתר שנגלל כמו סרט, פרק אחרי פרק'}
-];
-/* one card per project, the websites first; [image, work, object-position] */
-var C=[ ['w-eitan-mockup','0','50% 66%'],['w-julis-mockup','2','50% 64%'],['w-ravid-1','4','50% 55%'],['w-oro-mockup','10','50% 60%'], ['w-katerina-2','1'],['w-sigal','3'],['w-victoria-box','6'],['w-kipod-mugs','8','50% 60%']];
-/* the project view shows every image of the work */
-var G={0:['w-eitan-mockup','w-eitan'],1:['w-katerina-2','lf/06'],2:['w-julis-mockup','lf/08'],3:['w-sigal','lf/11'],4:['w-ravid-1','w-ravid-2'],6:['w-victoria-box','lf/02'],8:['w-kipod-mugs','w-kipod-it'],10:['w-oro-mockup']};
-var S=6,N=C.length,STEP=360/N,ring=document.getElementById('ring'),stage=document.getElementById('stage'),info=document.getElementById('info'),cnt=document.getElementById('cnt');
-var cards=C.map(function(c,i){var el=document.createElement('div');el.className='card';
-  var img='<img src="assets/img/'+c[0]+'.webp" alt="" draggable="false"'+(c[2]?' style="object-position:'+c[2]+'"':'')+'>',h='';
-  for(var j=0;j<S;j++)h+='<div class="sl'+(j===0?' s0':'')+(j===S-1?' sE':'')+'" data-j="'+j+'"><div class="fc">'+img+'</div><div class="bk">'+img+'</div></div>';
-  el.innerHTML=h;el.setAttribute('aria-label',W[+c[1]].t);
-  el.addEventListener('click',function(){if(moved>=6)return;if(i===nearest()&&target===null)openPV(i);else goTo(i)});ring.appendChild(el);return el});
-var R=0;
-var BIG=1.3;
-function layout(){var mob=innerWidth<=760,w=mob?Math.round(innerWidth*.46):Math.round(Math.min(innerWidth*.2,innerHeight*.3)),h=Math.round(w/1.45),gap=w*(mob?.12:.42);
-  /* the wheel spans ~70% of the screen width; card size follows the height so it never runs off the bottom */
-  /* perspective grows with the wheel, so the side cards stay readable; the wheel spans ~72% of the width */
-  R=Math.max(N*(w+gap)/(2*Math.PI),mob?0:innerWidth*.46);var P=mob?1100:Math.max(1700,R*1.4);stage.style.perspective=P+"px";
-  /* arrows sit clear of the outermost cards */document.getElementById("stwrap").style.setProperty("--R",(R*P/(P+R)+w*.55)+"px");/* cards are built at the focused size and scaled down when not in front: shrinking stays sharp */var wB=Math.round(w*BIG),hB=Math.round(h*BIG),sw=wB/S,off=sw/R*180/Math.PI;
-  stage.style.height=Math.round(hB*1.6)+"px";ring.style.setProperty('--w',wB+'px');ring.style.setProperty('--h',hB+'px');last='';
-  cards.forEach(function(el,i){[].forEach.call(el.children,function(s){var j=+s.dataset.j;
-    s.style.width=(sw+.8)+'px';s.style.left=(-sw/2)+'px';
-    s.style.transform='rotateY('+(i*STEP+(j-(S-1)/2)*off)+'deg) translateZ('+R+'px)';
-    s.firstChild.firstChild.style.left=(-j*sw)+'px';s.lastChild.firstChild.style.left=(-(S-1-j)*sw)+'px'})})}
-/* phone: the arrows move under the wheel, either side of the counter */
-function placeArrows(){var nav=document.querySelector('.ring-sec .nav'),sw=document.getElementById('stwrap'),nx=document.getElementById('next'),pr=document.getElementById('prev');
-  if(innerWidth<=760){if(nx.parentNode!==nav){nav.insertBefore(nx,nav.firstChild);nav.appendChild(pr)}}else if(nx.parentNode!==sw){sw.appendChild(nx);sw.appendChild(pr)}}
-layout();placeArrows();addEventListener('resize',function(){layout();placeArrows()});
-var rot=0,vel=0,target=null,dragging=false,lastX=0,moved=0,active=-1;
-var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-/* the cube flip calls this once, when the wheel comes into view */
-window.ringSpin=function(){if(RM)return;rot=-140;target=0};
-function nearest(){return ((Math.round(-rot/STEP)%N)+N)%N}
-/* project view: every image of the focused work, large */
-var pv=document.getElementById('pv'),pvg=document.getElementById('pvg'),lastFocus=null;
-function openPV(i){var wi=C[i][1],w=W[+wi];lastFocus=document.activeElement;
-  document.getElementById('pvk').textContent=w.k;document.getElementById('pvt').textContent=w.t;document.getElementById('pvp').textContent=w.p;
-  pvg.innerHTML=G[wi].map(function(s){return '<img src="assets/img/'+s+'.webp" alt="'+w.t+'">'}).join('');
-  pv.hidden=false;requestAnimationFrame(function(){pv.classList.add('on')});document.getElementById('pvx').focus()}
-function closePV(){pv.classList.remove('on');setTimeout(function(){pv.hidden=true},450);if(lastFocus)lastFocus.focus()}
-document.getElementById('pvx').onclick=closePV;
-pv.addEventListener('click',function(e){if(e.target===pv||e.target===pvg)closePV()});
-
-function goTo(i){var cur=-rot/STEP,diff=((i-cur)%N+N)%N;if(diff>N/2)diff-=N;target=-(cur+diff)*STEP;vel=0}
-function setInfo(i){if(i===active)return;active=i;var w=W[+C[i][1]];info.classList.add('swap');
-  cnt.textContent=String(i+1).padStart(2,'0')+' / '+N;
-  setTimeout(function(){info.querySelector('.k').textContent=w.k;info.querySelector('h3').textContent=w.t;info.querySelector('p').textContent=w.p;info.classList.remove('swap')},180)}
-stage.addEventListener('pointerdown',function(e){dragging=true;moved=0;lastX=e.clientX;target=null;vel=0;stage.classList.add('drag');stage.setPointerCapture(e.pointerId)});
-stage.addEventListener('pointermove',function(e){if(!dragging)return;var dx=e.clientX-lastX;lastX=e.clientX;moved+=Math.abs(dx);var d=dx*.16;rot+=d;vel=vel*.5+d*.5});
-function end(){if(!dragging)return;dragging=false;stage.classList.remove('drag');target=Math.round((rot+vel*14)/STEP)*STEP}
-stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
-document.getElementById('next').onclick=function(){goTo((nearest()+1)%N)};
-document.getElementById('prev').onclick=function(){goTo((nearest()-1+N)%N)};
-addEventListener('keydown',function(e){if(!pv.hidden){if(e.key==='Escape')closePV();return}if(e.key==='Enter'&&document.activeElement===document.body)openPV(nearest());if(e.key==='ArrowLeft')goTo((nearest()+1)%N);if(e.key==='ArrowRight')goTo((nearest()-1+N)%N)});
-var tilt=-9,last='';
-(function f(){
-  var sp=0;
-  if(!dragging&&target!==null){var d=target-rot;sp=RM?d:d*.075;rot+=sp;if(Math.abs(d)<.02){rot=target;target=null;sp=0}}
-  else if(dragging)sp=vel;
-  /* the wheel leans back as it spins faster */
-  var want=-9-Math.min(7,Math.abs(sp)*1.1);tilt+=(want-tilt)*.08;
-  /* write to the DOM only when something changed, so the browser can re-draw the images sharp at rest */
-  var key=rot.toFixed(3)+'|'+tilt.toFixed(2)+'|'+dragging;if(key===last){requestAnimationFrame(f);return}last=key;
-  /* lift by the tilt so the front card stays centred however big the wheel is */
-  ring.style.transform='translateY('+(R*Math.sin(tilt*Math.PI/180)).toFixed(1)+'px) translateZ('+(-R)+'px) rotateX('+tilt.toFixed(2)+'deg) rotateY('+rot+'deg)';
-  var n=nearest();
-  cards.forEach(function(el,i){var a=(i*STEP+rot)*Math.PI/180,c=Math.cos(a);
-    el.style.setProperty('--dim',(i===n?0:Math.min(.75,(1-c)*.42+.12)).toFixed(3));
-    el.style.setProperty('--dimb',(.5+.25*(1+c)).toFixed(3));
-    var big=i===n&&!dragging;el.style.transform=big?'translateY(-34px) rotateY('+(i*STEP)+'deg) translateZ('+(R+60)+'px) scale(1) translateZ('+(-R)+'px) rotateY('+(-i*STEP)+'deg)':'translateY(0px) rotateY('+(i*STEP)+'deg) translateZ('+R+'px) scale('+(1/BIG).toFixed(4)+') translateZ('+(-R)+'px) rotateY('+(-i*STEP)+'deg)';el.style.zIndex=big?2:'';el.classList.toggle('front',i===n)});
-  setInfo(n);requestAnimationFrame(f)})();
+  var ct=document.getElementById('contact');if(!ct)return;var f=ct.querySelector('[data-form]'),st=ct.querySelector('[data-stage]');
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e,o){if(e[0].isIntersecting){ct.classList.add('in');o.disconnect()}},{rootMargin:'0px 0px -25% 0px'}).observe(ct);else ct.classList.add('in');
+  var sm=function(x){x=Math.min(1,Math.max(0,x));return x*x*(3-2*x)};
+  function reach(){var vh=innerHeight,r=st.getBoundingClientRect(),c=r.top+r.height/2;ct.style.setProperty('--k',sm((vh*1.05-c)/(vh*.6)).toFixed(4))}
+  addEventListener('scroll',reach,{passive:true});addEventListener('resize',reach);reach();
+  var dlg=null;
+  /* behind the heading and the form, the grid fades: the masks follow them (measured from the grid layer itself) */
+  var fm=ct.querySelector(".c2-form"),tp=ct.querySelector(".c2-top"),gc=ct.querySelector(".v-cols");
+  function hole(){var a=gc.getBoundingClientRect(),h=tp.getBoundingClientRect(),b=fm.getBoundingClientRect(),S=function(k,v){gc.style.setProperty(k,v+"px")};
+    S("--tx2",h.left-a.left+h.width/2);S("--ty2",h.top-a.top+h.height/2);S("--tw",Math.min(h.width/2,520));S("--th",h.height*.5+110);
+    S("--mx",b.left-a.left+b.width/2);S("--my",b.top-a.top+b.height/2);S("--mw",b.width*.5+140);S("--mh",b.height*.5+150)}
+  new ResizeObserver(hole).observe(fm);new ResizeObserver(hole).observe(tp);addEventListener("resize",hole);hole();
+  var err=ct.querySelector('.ct-err');
+  function say(m){if(err)err.textContent=m;}
+  function check(i){var ok=i.name==='name'?i.value.trim().length>1:i.value.replace(/\D/g,'').length>8;var w=i.closest('.fl');if(w)w.classList.toggle('bad',!ok);i.setAttribute('aria-invalid',ok?'false':'true');return ok}
+  f.addEventListener('submit',function(e){e.preventDefault();var n=f.elements.name,p=f.elements.phone,a=check(n),b=check(p);
+    if(!a||!b){say(!a&&!b?'נא להשאיר שם וטלפון':!a?'נא להשאיר שם':'נא להשאיר מספר טלפון');(!a?n:p).focus();return}
+    say('');(dlg||ct).classList.add('sent');var d=(dlg||ct).querySelector('.ct-done');d.focus({preventScroll:true})});
+  [f.elements.name,f.elements.phone].forEach(function(i){i.addEventListener('input',function(){if(i.getAttribute('aria-invalid')==='true'&&check(i))say('')})});
+})();
+</script>
+<style>
+/* the buttons' words: on hover each letter turns over in 3D, like a little cube rolling up, one after another,
+   and the same letter comes round from below */
+.lsw{display:inline-flex;perspective:500px;overflow:hidden;height:1.1em;line-height:1.1}
+.lsw i{position:relative;display:inline-block;font-style:normal;line-height:1.1;height:1.1em;transform-style:preserve-3d;transform-origin:50% 50% -.55em;
+  transition:transform .55s cubic-bezier(.65,0,.25,1);transition-delay:calc(var(--i) * 28ms)}
+.lsw i::after{content:attr(data-c);position:absolute;left:0;top:100%;width:100%;transform-origin:50% 0;transform:rotateX(-90deg)}
+a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.lsw i{transform:rotateX(90deg)}
+@media (prefers-reduced-motion:reduce){.lsw i{transition:none}a:hover>.lsw i,button:hover>.lsw i{transform:none}}
+</style>
+<script>
+/* the 3D letter swap on the buttons: the button's own words are split into letters (each a small cube); the button
+   keeps its words for screen readers in aria-label */
+(function(){
+  [].forEach.call(document.querySelectorAll('.v-nav a,.v-cta,.v3-all,.v-pall,.ct-send,.ct-direct a'),function(b){
+    [].slice.call(b.childNodes).forEach(function(n){if(n.nodeType!==3||!n.textContent.trim())return;
+      var t=n.textContent.trim(),w=document.createElement('span');w.className='lsw';w.setAttribute('aria-hidden','true');
+      t.split('').forEach(function(c,i){if(c===' '){w.appendChild(document.createTextNode('\u00a0'));return}var e=document.createElement('i');e.textContent=c;e.setAttribute('data-c',c);e.style.setProperty('--i',i);w.appendChild(e)});
+      if(!b.getAttribute('aria-label'))b.setAttribute('aria-label',t);
+      b.replaceChild(w,n);if(/\s$/.test(n.textContent))b.insertBefore(document.createTextNode(' '),w.nextSibling)})})
 })();
 </script>
 <script>
-/* second cube: the last step card turns away to the right, the works wheel comes in on the left face */
-(function(){
-  var f=document.getElementById('flip2'),box=document.getElementById('box2');
-  if(!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var front=box.querySelector('.f2-front'),side=box.querySelector('.f2-side'),spun=false,tick=false,c3=document.querySelector('#stack .r:last-child');
-  /* start the cube exactly when the last step card settles, so the still on the face lines up with it */
-  function align(){f.style.marginTop='0px';var ps=c3.style.position;c3.style.position='static';var d3=c3.getBoundingClientRect().top+scrollY;c3.style.position=ps;
-    var t=parseFloat(getComputedStyle(c3).top),f0=f.getBoundingClientRect().top+scrollY;f.style.marginTop=((d3-t)-f0)+'px';
-    var rep=front.querySelector('.r'),cr=c3.getBoundingClientRect(),fr=f.getBoundingClientRect();rep.style.top=t+'px';rep.style.left=(cr.left-fr.left)+'px';rep.style.width=cr.width+'px';rep.style.height=cr.height+'px';rep.style.transform='none'}
-  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-  function u(){tick=false;
-    var r=f.getBoundingClientRect(),total=r.height-innerHeight,p=Math.min(1,Math.max(0,-r.top/total));
-    f.classList.toggle('on',r.top<=.5);
-    var k=ease(Math.min(1,Math.max(0,(p-.08)/.5))),w=box.clientWidth,m=Math.sin(Math.PI*k);
-    if(k>=.999){box.style.transform='none';side.style.transform='none';front.style.visibility='hidden'}
-    else{box.style.transform='scale('+(1-.16*m)+') translateZ('+(-w/2)+'px) rotateY('+(90*k)+'deg)';
-      front.style.transform='translateZ('+(w/2)+'px)';side.style.transform='rotateY(-90deg) translateZ('+(w/2)+'px)';front.style.visibility='visible'}
-    front.style.filter='brightness('+(1-.6*k)+')';side.style.filter=k>=.999?'':'brightness('+(.4+.6*k)+')';
-    side.style.visibility=k<=.001?'hidden':'visible';
-    front.classList.toggle('live',k<.5);side.classList.toggle('live',k>=.5);
-    if(k>.45&&!spun&&window.ringSpin){spun=true;window.ringSpin()}}
-  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(u)}},{passive:true});
-  addEventListener('resize',function(){align();u()});align();u();
-})();
-</script>
-<script>
-/* a cube never rests half-turned: when the scroll stops mid-flip, finish the turn in the direction of travel */
-(function(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var f1=document.getElementById('flip'),f2=document.getElementById('flip2');
-  var zones=[{el:f1,a:0,b:.85,tot:function(){return f1.offsetHeight-2*innerHeight}},
-             {el:f2,a:.08,b:.58,tot:function(){return f2.offsetHeight-innerHeight}}];
-  var timer=null,lastY=scrollY,dir=1,busy=false;
-  function settle(){
-    zones.forEach(function(z){
-      if(!z.el||busy)return;
-      var top=z.el.getBoundingClientRect().top+scrollY,tot=z.tot(),p=(scrollY-top)/tot;
-      if(p<=z.a+.005||p>=z.b-.005)return;
-      var to=top+(dir>0?z.b:z.a)*tot;
-      busy=true;scrollTo({top:to,behavior:'smooth'});
-      setTimeout(function(){busy=false;lastY=scrollY},900);
-    });
-  }
-  addEventListener('scroll',function(){
-    if(busy)return;
-    var y=scrollY;if(y!==lastY)dir=y>lastY?1:-1;lastY=y;
-    clearTimeout(timer);timer=setTimeout(settle,180);
-  },{passive:true});
+/* the closing line: now and then one soft light passes over the lavender line (only while the line is on screen),
+   and on hover a soft light follows the cursor over both lines */
+(function(){var s=document.querySelector('.v-sign');if(!s||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var on=false,run=false,t0=performance.now(),fl=s.querySelector('.f');
+  /* the light under the cursor: each line gets a lit copy, shown around the cursor only */
+  var LT=[].slice.call(s.querySelectorAll(':scope>span')).map(function(l){var c=l.cloneNode(true);c.classList.add('lit');c.setAttribute('aria-hidden','true');l.appendChild(c);return l});
+  s.addEventListener('pointermove',function(e){s.classList.add('hov');
+    LT.forEach(function(l){var r=l.getBoundingClientRect();l.style.setProperty('--mx',(e.clientX-r.left)+'px');l.style.setProperty('--my',(e.clientY-r.top)+'px')})});
+  s.addEventListener('pointerleave',function(){s.classList.remove('hov')});
+  function measure(){if(fl){var fr=fl.getBoundingClientRect();fl.style.setProperty('--lw',(fr.width*2.2)+'px');
+      [].forEach.call(fl.querySelectorAll('.ch'),function(c){c.style.setProperty('--lx',(c.getBoundingClientRect().left-fr.left)+'px')})}}
+  function frame(now){var t=(now-t0)/1000;
+    if(fl){var w=(parseFloat(fl.style.getPropertyValue('--lw'))||2200)/2.2,tc=t%7,q=tc<2?tc/2:1;q=q*q*(3-2*q);fl.style.setProperty('--sh',(-1.2*w*q)+'px')}   /* every 7s one soft light passes over the line, right to left; at rest it waits off the line's edge */
+    if(on){requestAnimationFrame(frame)}else run=false}
+  function start(){if(!run){run=true;requestAnimationFrame(frame)}}
+  addEventListener('resize',measure);setTimeout(measure,300);measure();
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;if(on){measure();start()}}).observe(s);else{on=true;start()}
 })();
 </script>
 </body>
