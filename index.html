@@ -230,13 +230,22 @@ body{background:var(--ink);color:var(--paper);margin:0}
 }
 
 /* ---------- the three steps, then the works: one long pinned scene driven by the scroll ---------- */
-.v-steps{position:relative;height:410vh;background:var(--ink)}
+.v-steps{position:relative;height:395vh;background:var(--ink)}
 .v-steps .v-cols{z-index:0}
 .v-steps-in{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:center;gap:3.5vw;padding:96px 3.8% 40px 6vw;--gut:clamp(18px,1.6vw,26px);box-sizing:border-box;overflow:hidden}
 /* the text columns start on the first line of the background grid, set in by one gutter */
 .v-steps-txt{padding-right:var(--gut);position:relative;z-index:2;will-change:opacity,transform}
 /* the steps: a small label, a large outlined numeral (thin like the hand drawing) that rolls to the next number,
    then the step's title wiping up into place and its text */
+/* arriving at the steps, their title stands large while the cube rests (.intro); the next scroll sends it up and away
+   as step 01 comes in with the cube's first turn */
+.v-sbig{position:absolute;left:0;right:0;top:50%;margin:0;padding-right:var(--gut);translate:0 -50%;pointer-events:none;
+  font:600 clamp(48px,6.2vw,108px)/.98 var(--display);opacity:0;transform:translateY(-26px);filter:blur(6px);transition:opacity .6s,transform .9s cubic-bezier(.22,.61,.36,1),filter .6s}
+.v-sbig em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.v-steps-txt.intro .v-sbig{opacity:1;transform:none;filter:none;transition-delay:.15s}
+.v-steps-txt h2,.v-snum{transition:opacity .5s}
+.v-steps-txt.intro h2,.v-steps-txt.intro .v-snum{opacity:0}
+@media (max-width:760px){.v-sbig{text-align:center;padding:0;font-size:clamp(44px,13vw,60px)}}
 .v-steps-txt h2{font:500 clamp(15px,1.1vw,18px)/1 var(--body);color:var(--lav);letter-spacing:.06em;margin:0;display:flex;align-items:center;gap:14px}
 .v-steps-txt h2::after{content:"";width:48px;height:1px;background:currentColor;opacity:.6}
 .v-snum{direction:ltr;text-align:right;font:600 clamp(120px,12.5vw,214px)/.86 var(--display);height:.86em;overflow:hidden;margin:clamp(16px,3vh,30px) 0 clamp(14px,2.4vh,24px)}
@@ -335,7 +344,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
   .v-pall{height:42px;padding:0 18px;margin-top:16px}
 }
 @media (max-width:760px){
-  .v-steps{height:410vh}
+  .v-steps{height:395vh}
   .v-steps-in{grid-template-columns:1fr;grid-template-rows:42% 1fr;padding:84px 22px 26px;gap:6px;--gut:0px}
   .v-cube-slot{order:-1;grid-row:1}.v-steps-txt{grid-row:2}
   .v-snum{font-size:76px;margin:10px 0 8px}.v-slist{min-height:170px}
@@ -398,12 +407,14 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-q .who span{display:block;margin-top:8px;font:400 13px/1 var(--body);color:var(--lav);letter-spacing:.06em}
 @media (max-width:760px){
   .v-rev-in{padding:0 22px;--gut:0px}
-  .v-rev-head{flex-direction:column;align-items:flex-start}.v-rev-head h2{font-size:34px}
+  .v-rev-head{flex-direction:column;align-items:flex-start;margin-bottom:28px}.v-rev-head h2{font-size:40px}
+  /* the cards have their own frames on the phone: the drawn frame lines are not needed */
+  .v-rev .v-lines{display:none}
   /* on the phone the reviews are a carousel: one card each, the next one's edge showing, each swipe settling on a card */
   .v-rev-list{columns:auto;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
-    margin:0 -22px;padding:6px 22px 4px;scroll-padding:0 22px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    margin:0 -22px;padding:6px 11vw 4px;scroll-padding:0 11vw;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .v-rev-list::-webkit-scrollbar{display:none}
-  .v-q{flex:0 0 86%;scroll-snap-align:center;padding:26px 22px;border:1px solid rgba(244,243,241,.14);border-radius:20px;background:rgba(244,243,241,.03)}
+  .v-q{flex:0 0 78vw;scroll-snap-align:center;padding:26px 22px;border:1px solid rgba(244,243,241,.14);border-radius:20px;background:rgba(244,243,241,.03)}
   .v-q blockquote{font-size:15.5px;line-height:1.7}
   .v-rev-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
   .v-rev-dots button{all:unset;cursor:pointer;width:7px;height:7px;border-radius:999px;background:rgba(244,243,241,.28);transition:width .4s cubic-bezier(.22,.61,.36,1),background .4s}
@@ -423,7 +434,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-faq-head{position:sticky;top:130px;padding:0 var(--gut)}
 .v-faq-head h2{font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0 0 22px}
 .v-faq-head h2 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
-.v-faq-head p{margin:0;max-width:24ch;font:300 clamp(15px,1.1vw,17px)/1.6 var(--body);opacity:.7}
+.v-faq-head p{margin:0;max-width:40ch;font:300 clamp(15px,1.1vw,17px)/1.6 var(--body);opacity:.7}
 .v-faq-list{list-style:none;margin:0;padding:0;position:relative}
 .v-fq{position:relative;--mx:-400px}
 .v-fq::before,.v-faq-list::after{content:"";position:absolute;inset-inline:0;top:0;height:1px;pointer-events:none;transform-origin:right;
@@ -626,6 +637,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
     <div class="v-3d" id="cube" aria-hidden="true"></div>
     <div class="v-steps-txt" id="stepsTxt">
       <h2 id="steps-h">הדרך לאתר אחר</h2>
+      <p class="v-sbig" aria-hidden="true">הדרך<br><em>לאתר אחר</em></p>
       <div class="v-snum" aria-hidden="true"><div class="v-snum-in" id="snum"><span>01</span><span>02</span><span>03</span></div></div>
       <ol class="v-slist">
         <li class="v-step on"><h3><span>מכירים את העסק</span></h3><p>לפני שמתחילים לעצב, מגלים יחד מה גורם ללקוחות לבחור דווקא בכם, גם אם הם לא יודעים להסביר למה. את כל זה מזקקים למשפט אחד שממנו הכול מתחיל.</p></li>
@@ -812,8 +824,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
   var top3=document.getElementById('v3top'),proc=document.getElementById('process');
   var MK=[].slice.call(hero.querySelectorAll('.v3-mk')),cap=hero.querySelector('.v3-cap'),info=hero.querySelector('.v3-info'),wh=hero.querySelector('.v3-white'),cslot=document.querySelector('.v-cube-slot');
   var CAP=[['רביד נחום אדריכלים','מיתוג · אתר תדמית'],["Juli's",'מיתוג · אתר חנות'],["איתן שפיר ושות'",'מיתוג · אתר תדמית'],['ORO מגורים על מאדים','מיתוג · אתר תדמית']],capI=-1,N=MK.length;
-  /* scroll lengths (vh): the hands meeting 55, the light turning white and the first project coming out of it 75, each project its own stop of 40, the way out 50 (its first tenth starts the card turning over and the cube's toss, which then play on their own) */
-  var INTRO=55,P0=75,PER=40,OUT=50,WK=P0+(N-1)*PER,TOT=INTRO+WK+OUT;
+  /* scroll lengths (vh): the hands meeting 55, the light turning white and the first project coming out of it 75, each project its own stop of 40, the way out 20 (its first part starts the card turning over and the cube's toss, which then play on their own) */
+  var INTRO=55,P0=75,PER=40,OUT=20,WK=P0+(N-1)*PER,TOT=INTRO+WK+OUT;
   /* the scroll itself: RI for the opening (which then plays on its own), then the projects' stops and the way out */
   var RI=30,TOTR=RI+WK-P0+OUT;
   function cl3(x){return Math.min(1,Math.max(0,x))}function sm3(x){x=cl3(x);return x*x*(3-2*x)}function io3(x){x=cl3(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
@@ -896,7 +908,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
      its own (the card turning over, then the cube tossed in), about two seconds; scrolling back up plays it backwards */
   var A=0,AT=0,aRun=false,aLast=0,ADUR=RM3()?.01:1.9;
   function RM3(){return matchMedia('(prefers-reduced-motion: reduce)').matches}
-  function outA(s){var t=s>.1?1:0;if(t!==AT){AT=t;if(!aRun){aRun=true;aLast=performance.now();requestAnimationFrame(atick)}}return A}
+  function outA(s){var t=s>.12?1:0;if(t!==AT){AT=t;if(!aRun){aRun=true;aLast=performance.now();requestAnimationFrame(atick)}}return A}
   function atick(now){var dt=Math.min(.05,(now-aLast)/1000);aLast=now;A+=Math.sign(AT-A)*Math.min(Math.abs(AT-A),dt/ADUR);leave();
     if(A!==AT)requestAnimationFrame(atick);else aRun=false}
   addEventListener('scroll',leave,{passive:true});leave();
@@ -1029,12 +1041,12 @@ body{background:var(--ink);color:var(--paper);margin:0}
     var gl=scene.querySelectorAll('.v-cols i')[2];plist.style.maxWidth='';if(W>760&&gl){var lr=plist.getBoundingClientRect();plist.style.maxWidth=Math.max(240,lr.right-gl.getBoundingClientRect().left)+'px'}}
   new ResizeObserver(resize).observe(scene);resize();
   var MOVES=[['y',1],['x',1],['z',1]],SEG=[[0,.07],[.07,.14],[.14,.21]];
-  var mid={x:0,y:0,w:10,h:10},target=0,cur=0,mx=0,my=0,sx=0,sy=0,t0=performance.now(),step=-1,shownP=-1;
+  var mid={x:0,y:0,w:10,h:10},target=0,cur=0,mx=0,my=0,sx=0,sy=0,t0=performance.now(),step=-2,shownP=-1;
   /* the scroll is not even: the steps and the cube's move take the first 36% of the scene (the timeline's 0 to .31),
      the works the next part, about one screen per project (to .31-1), then the about part (its own 0 to 1) and its exit */
-  /* v3 scroll lengths (vh): the hero above it, where the works play and the last one the last one turns over and the cube is tossed in, 200;
-     the steps 60 (three stops), the about 30 (its start plays the cube into my photo), its exit 20; the marks are fractions of their sum. Under the hero the cube rests */
-  var LV=310,B1=200/LV,B4=260/LV,B5=290/LV,AB=B4,AE=B5,rev=false,targetA=0,curA=0,targetE=0,curE=0;
+  /* v3 scroll lengths (vh): the hero above it, where the works play and the last one the last one turns over and the cube is tossed in, 170;
+     the steps 60 (four stops: the title, then a step with each turn), the about 30 (its start plays the cube into my photo), its exit 20; the marks are fractions of their sum. Under the hero the cube rests */
+  var LV=295,B1=170/LV,B4=230/LV,B5=260/LV,AB=B4,AE=B5,rev=false,targetA=0,curA=0,targetE=0,curE=0;
   function vAt(x){return sec.offsetTop+x*(sec.offsetHeight-innerHeight)}
   function measure(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));
     target=v<B1?0:v<B4?STOPS[Math.round((v-B1)/(B4-B1)*(STOPS.length-1))]:.205;/* the about is not scrubbed: a short scroll past the last step starts it and it plays through on its own */
@@ -1042,13 +1054,15 @@ body{background:var(--ink);color:var(--paper);margin:0}
   /* the steps, one per scroll: each step is a stop, reached when its layer of the cube has made its quarter turn (the
      scene eases there on its own); a wheel or trackpad gesture inside the steps moves exactly one step, and before
      the first and after the last the page scrolls on as usual */
-  var STOPS=[.07,.14,.205],lockS=0;
+  var STOPS=[0,.07,.14,.205],lockS=0;
   /* from the about to the reviews: a scroll down in the about glides the page, on its own and eased, to the reviews'
      heading (the about's way out plays on the way); a scroll up at the reviews' top glides back to the about */
   var lockR=0,revEl=document.getElementById('reviews');
   function glide(y,ms){var y0=scrollY,t0=performance.now();(function g(n){var k=cl((n-t0)/ms);scrollTo({top:y0+(y-y0)*io(k),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}
   function revY(){var h=revEl.querySelector('h2');return h.getBoundingClientRect().top+scrollY-innerHeight*.16}
   addEventListener('wheel',function(ev){if(Math.abs(ev.deltaY)<2)return;var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight)),now=performance.now(),ry=revY();
+    /* while the about is still coming in from the last step, the gesture that brought it is held back */
+    if(now<lockS){ev.preventDefault();lockS=Math.max(lockS,now+160);return}
     var inAbout=v>B4+.004&&v<B5+(1-B5)*.5,atRev=scrollY>vAt(B5)&&scrollY<=ry+innerHeight*.08;
     if(!(inAbout&&ev.deltaY>0)&&!(atRev&&ev.deltaY<0))return;
     ev.preventDefault();if(now<lockR){lockR=Math.max(lockR,now+160);return}lockR=now+1700;
@@ -1061,7 +1075,10 @@ body{background:var(--ink);color:var(--paper);margin:0}
     var rp=(v-B1)/(B4-B1)*(STOPS.length-1),nx=ev.deltaY>0?Math.floor(rp+.02)+1:Math.ceil(rp-.02)-1;
     /* in the about: up goes back to the last step, down scrolls on as usual */
     if(v>B4+.004){if(ev.deltaY>0)return;nx=STOPS.length-1}
-    if(nx<0||nx>STOPS.length-1)return;
+    /* down from the last step: to the about, and held there while it comes in (the rest of the gesture must not
+       glide on to the reviews) */
+    if(nx>STOPS.length-1){if(v<=B4+.004){ev.preventDefault();lockS=now+1900;scrollTo({top:vAt(B4+(B5-B4)*.5),behavior:'auto'})}return}
+    if(nx<0)return;
     ev.preventDefault();lockS=now+(v>B4+.004?1000:1150);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
   addEventListener('scroll',measure,{passive:true});measure();cur=target;
   addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
@@ -1076,7 +1093,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
     /* the about's way out plays at an even pace too, about 1.1 seconds */
     curE=RM?targetE:curE+Math.sign(targetE-curE)*Math.min(Math.abs(targetE-curE),dtA/1.1);
     var p=cur,t=(now-t0)/1000,ab=curA;
-    setStep(rev?0:p<.075?0:p<.145?1:2);
+    var intro=!rev&&p<.012;txt.classList.toggle('intro',intro);
+    setStep(rev?0:intro?-1:p<.075?0:p<.145?1:2);
     var front=sm((p-.21)/.05),grow=io((p-.215)/.06),inner=sm((p-.252)/.016),morph=io((p-.27)/.04),settle=1-front;
     var to=(1-sm((p-.2)/.035))*(1-sm(ab/.1));txt.style.opacity=to.toFixed(3);txt.style.transform='translateY('+(-30*(1-to)).toFixed(1)+'px)';txt.style.visibility=to<.01?'hidden':'visible';
     var po=sm((p-.27)/.04)*(1-sm(ab/.12));ptxt.style.opacity=po.toFixed(3);ptxt.style.transform='translateY('+(30*(1-po)).toFixed(1)+'px)';ptxt.classList.toggle('on',po>.5);
