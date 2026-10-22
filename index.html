@@ -22,6 +22,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-hdr{position:fixed;inset-inline:0;top:0;z-index:50;transition:background .35s,box-shadow .35s}
 .v-hdr.solid{background:rgba(13,12,17,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--v-line)}
 .v-hdr .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:96px}
+/* the header spans the screen with the page: its logo and button sit on the outer lines of the background grid, on any width */
+.v-hdr .v-wrap{width:100%;padding-inline:calc(3.8% + clamp(18px,1.6vw,26px))}
 .v-logo{justify-self:start;color:var(--paper);display:inline-flex}
 .v-logo svg{height:52px;width:auto}
 .v-nav ul{display:flex;gap:clamp(24px,3vw,48px);list-style:none;margin:0;padding:0}
@@ -37,13 +39,14 @@ body{background:var(--ink);color:var(--paper);margin:0}
   background:radial-gradient(closest-side,rgba(192,168,251,.42),rgba(192,168,251,.14) 55%,transparent);filter:blur(7px);opacity:.85;transition:opacity .35s,transform .35s}
 .v-cta:hover::before{opacity:1;transform:scale(1.15)}
 .v-menu{display:none;width:48px;height:48px;border-radius:8px;background:rgba(244,243,241,.08);color:var(--paper);border:0;font-size:22px}
+@keyframes v-mnav{to{opacity:1;translate:0 0}}
 /* v3: while the works play on the white, the header turns light too */
 .v-hdr.lite.solid{background:rgba(247,245,242,.9);box-shadow:0 1px 0 rgba(23,20,31,.08)}
 .v-hdr .v-logo,.v-hdr .v-nav a,.v-hdr .v-cta,.v-hdr .v-menu{transition:color .35s,background .35s,border-color .35s}
 .v-hdr.lite .v-logo,.v-hdr.lite .v-nav a,.v-hdr.lite .v-cta,.v-hdr.lite .v-menu{color:#17141f}
 .v-hdr.lite .v-nav a:hover{color:#7a5ae6}
 .v-hdr.lite .v-cta{border-color:rgba(23,20,31,.5)}.v-hdr.lite .v-cta:hover{color:#17141f}
-.v-hdr.lite .v-menu{background:rgba(23,20,31,.06)}
+.v-hdr.lite .v-menu{background:none}
 
 /* hero: one design frame (desktop 1325x846 from the Figma, phone 367x460 from the phone sketch).
    Everything in it, text and hands, is placed in frame units and scaled by --sc, so the composition
@@ -96,6 +99,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-hero .lead{top:calc(var(--ptop) * var(--sc) * 1px);width:calc(var(--pw) * var(--sc) * 1px);font:300 calc(var(--pfs) * var(--sc) * 1px)/1.6 var(--body)}
 .v-hero .close{top:calc(var(--ctop) * var(--sc) * 1px);width:100%;font:600 calc(var(--cfs) * var(--sc) * 1px)/1.2 var(--display);color:var(--lav)}
 @media (min-width:761px){.v-hero .lead span{display:block}}
+/* on the phone, the first sentence has its own line, ending on its full stop; the second follows on the next lines */
+@media (max-width:760px){.v-hero .lead{width:calc(var(--pw) * var(--sc) * 1px + 16px)}.v-hero .lead span{display:block}.v-hero .lead span:first-child{white-space:nowrap}}
 /* v3: the hero stays pinned for a while above the scene, which starts under it at the top of the page */
 .v3-top{position:relative;z-index:4}
 .v3-top .v-hero{position:sticky;top:0;min-height:100vh;min-height:100svh}
@@ -120,17 +125,17 @@ body{background:var(--ink);color:var(--paper);margin:0}
    one behind the other; going on, the front card leaves to the right growing and turning, and the next comes forward */
 .v3-mk{position:absolute;left:var(--cx,50%);top:var(--cy,53%);width:var(--cw);height:auto;translate:-50% -50%;z-index:3;pointer-events:none;opacity:0;border-radius:6px;
   transform-origin:50% 50%;will-change:transform,opacity;box-shadow:0 40px 90px -40px rgba(0,0,0,.35),0 0 0 1px rgba(23,20,31,.06)}
-.v-hero{--cw:min(52vw,900px,calc((100svh - 270px) * 1.6));--cy:47%;--cx:50%}
+.v-hero{--cw:min(52vw,900px,calc((100svh - 270px) * 1.6));--cy:47%;--cx:50%;--ar:.625}
 /* under the card in front, along its width: the project's name at its right, the way to all the projects at its left */
 /* the back of the last project's card: the night of the page, which fills the screen as the card turns over */
-.v3-back{position:absolute;left:var(--cx,50%);top:var(--cy,53%);width:var(--cw);aspect-ratio:1.6;translate:-50% -50%;z-index:11;pointer-events:none;opacity:0;
+.v3-back{position:absolute;left:var(--cx,50%);top:var(--cy,53%);width:var(--cw);aspect-ratio:1 / var(--ar,.625);translate:-50% -50%;z-index:11;pointer-events:none;opacity:0;
   background:radial-gradient(70% 75% at 50% 55%,rgba(192,168,251,.3),rgba(192,168,251,.09) 55%,transparent 82%),#1a1722;border-radius:6px;transform-origin:50% 50%;will-change:transform;
   box-shadow:inset 0 0 0 1px rgba(236,230,252,.22),inset 0 0 60px rgba(192,168,251,.12),0 40px 90px -40px rgba(0,0,0,.35)}
 /* as it fills the screen it deepens into the page's own night, so the hand-over is seamless */
 .v3-back::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--ink);opacity:var(--bdk,0)}
 /* the hero's own light under the hands goes as the works leave, the cube's light travelling with it instead */
 .v3-top .v-hero::after{opacity:var(--hg,1)}
-.v3-info{position:absolute;z-index:12;left:calc(var(--cx) - var(--cw) / 2);width:var(--cw);top:calc(var(--cy) + var(--cw) * .3125 + 22px);
+.v3-info{position:absolute;z-index:12;left:calc(var(--cx) - var(--cw) / 2);width:var(--cw);top:calc(var(--cy) + var(--cw) * var(--ar) / 2 + 22px);
   opacity:0;visibility:hidden;color:#17141f;pointer-events:none}
 .v3-foot{display:flex;align-items:center;justify-content:space-between;gap:24px}
 /* the name of the section, written large across the white behind the cards, faint, drifting slowly with the scroll */
@@ -141,9 +146,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v3-all{flex:none;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;border:1.5px solid rgba(23,20,31,.5);border-radius:999px;
   color:#17141f;text-decoration:none;font:500 16px/1 var(--body);pointer-events:auto;transition:background .3s,border-color .3s,color .3s}
 .v3-all:hover{background:var(--lav);border-color:var(--lav)}
-@media (max-width:760px){.v-hero{--cw:86vw;--cx:50%;--cy:44%}
+@media (max-width:760px){.v-hero{--cw:min(70vw,calc((100svh - 300px) / 1.5));--cx:50%;--cy:44%;--ar:1.5}
+  /* on the phone the name sits centred under the card and the button to all the projects, centred, at the bottom */
+  .v3-info{left:16px;right:16px;width:auto;bottom:max(26px,4svh);height:auto}.v3-foot{height:100%;justify-content:space-between}.v3-cap{text-align:center}
   .v3-white .v3-big{font-size:17vw}
-  .v3-foot{flex-direction:column;align-items:flex-start;gap:16px}.v3-all{height:42px;font-size:15px;padding:0 18px}}
+  .v3-foot{flex-direction:column;align-items:center;gap:16px}.v3-all{height:42px;font-size:15px;padding:0 18px}}
 /* a glimpse of the work in the hero: the hands hold four of the projects fanned out like a hand of cards. In the opening,
    once the hands have opened, the fan spreads from a single stack; hovering a card lifts and straightens it and shows its
    name, and the fan fades as the hero leaves */
@@ -196,16 +203,29 @@ body{background:var(--ink);color:var(--paper);margin:0}
 
 /* ---------- tablet & phone ---------- */
 @media (max-width:900px){
+  /* the phone's header: the logo, and a menu of two thin lines; the call button waits inside the menu */
   .v-nav{display:none}
-  .v-hdr .bar{grid-template-columns:1fr auto auto;gap:10px;height:76px}
-  .v-menu{display:grid;place-items:center}
-  .v-hdr.open .v-nav{display:block;position:fixed;inset:76px 0 auto;background:var(--ink);padding:24px var(--v-pad) 34px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
-  .v-hdr.open .v-nav ul{flex-direction:column;gap:22px}
-  .v-hdr.open .v-nav a{font-size:26px}
+  .v-hdr .bar{grid-template-columns:1fr auto;gap:10px;height:72px}.v-hdr .v-wrap{padding-inline:var(--v-pad)}
+  .v-hdr .bar>.v-cta{display:none}
+  .v-menu{display:block;position:relative;width:44px;height:44px;margin-inline-end:-10px;background:none;border-radius:0;cursor:pointer}
+  .v-menu span{position:absolute;right:10px;height:1.5px;border-radius:2px;background:currentColor;transition:transform .5s cubic-bezier(.7,0,.2,1),width .5s cubic-bezier(.7,0,.2,1),top .5s cubic-bezier(.7,0,.2,1)}
+  .v-menu span:first-child{top:17px;width:24px}.v-menu span:last-child{top:25px;width:15px}
+  .v-hdr.open .v-menu span:first-child{top:21px;width:24px;transform:rotate(45deg)}.v-hdr.open .v-menu span:last-child{top:21px;width:24px;transform:rotate(-45deg)}
+  .v-menu:focus-visible{outline:1.5px solid var(--lav);outline-offset:2px;border-radius:8px}
+  /* open: over the whole screen, the pages in large type coming in one after another, the call button at the bottom */
+  .v-hdr.open{background:transparent;box-shadow:none;backdrop-filter:none}
+  .v-hdr.open .v-nav{display:flex;position:fixed;inset:0;z-index:-1;flex-direction:column;justify-content:center;padding:96px var(--v-pad) 140px;
+    background:radial-gradient(70% 45% at 85% 30%,rgba(192,168,251,.14),transparent 70%),var(--ink)}
+  .v-hdr.open .v-nav ul{flex-direction:column;gap:clamp(14px,3vh,26px)}
+  .v-hdr.open .v-nav a{display:inline-block;font:600 clamp(30px,9vw,40px)/1.15 var(--display);color:var(--paper);opacity:0;translate:0 18px;animation:v-mnav .6s cubic-bezier(.22,.61,.36,1) forwards}
+  .v-hdr.open .v-nav li:nth-child(2) a{animation-delay:.06s}.v-hdr.open .v-nav li:nth-child(3) a{animation-delay:.12s}
+  .v-hdr.open .v-nav li:nth-child(4) a{animation-delay:.18s}.v-hdr.open .v-nav li:nth-child(5) a{animation-delay:.24s}
+  .v-hdr.open .bar>.v-cta{display:flex;justify-content:center;position:fixed;justify-self:stretch;width:auto;left:var(--v-pad);right:var(--v-pad);bottom:max(30px,env(safe-area-inset-bottom));height:54px;
+    font-size:17px;opacity:0;animation:v-mnav .6s cubic-bezier(.22,.61,.36,1) .3s forwards}
+  .v-hdr.open.lite .v-logo,.v-hdr.open.lite .v-menu,.v-hdr.open.lite .v-cta{color:var(--paper)}.v-hdr.open.lite .v-cta{border-color:rgba(244,243,241,.55)}
 }
 @media (max-width:600px){
-  .v-cta{height:42px;font-size:15px;padding:0 16px;gap:9px}
-  .v-logo svg{height:42px}
+  .v-logo svg{height:40px}
 }
 
 /* ---------- the three steps, then the works: one long pinned scene driven by the scroll ---------- */
@@ -378,9 +398,19 @@ body{background:var(--ink);color:var(--paper);margin:0}
 @media (max-width:760px){
   .v-rev-in{padding:0 22px;--gut:0px}
   .v-rev-head{flex-direction:column;align-items:flex-start}.v-rev-head h2{font-size:34px}
-  .v-rev-list{columns:1}.v-q{padding:26px 0}
+  /* on the phone the reviews are a carousel: one card each, the next one's edge showing, each swipe settling on a card */
+  .v-rev-list{columns:auto;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+    margin:0 -22px;padding:6px 22px 4px;scroll-padding:0 22px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .v-rev-list::-webkit-scrollbar{display:none}
+  .v-q{flex:0 0 86%;scroll-snap-align:center;padding:26px 22px;border:1px solid rgba(244,243,241,.14);border-radius:20px;background:rgba(244,243,241,.03)}
+  .v-q blockquote{font-size:15.5px;line-height:1.7}
+  .v-rev-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+  .v-rev-dots button{all:unset;cursor:pointer;width:7px;height:7px;border-radius:999px;background:rgba(244,243,241,.28);transition:width .4s cubic-bezier(.22,.61,.36,1),background .4s}
+  .v-rev-dots button.on{width:22px;background:var(--lav)}
+  .v-rev-dots button:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
 }
 @media (prefers-reduced-motion:reduce){.v-q{transition:none;opacity:1;transform:none}}
+@media (min-width:761px){.v-rev-dots{display:none}}
 /* ---------- questions: the doubts that are left before picking up the phone ----------
    the heading sits on the right two columns of the grid, the questions on the four to its left; each question is a
    line that draws itself in from the right, and a little lavender light runs along it under the cursor */
@@ -556,7 +586,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
     <a class="v-logo" href="#hero" aria-label="קרן ארליכמן, לראש העמוד"><svg viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a>
     <nav class="v-nav" aria-label="ראשי"><ul><li><a href="#work">פרויקטים</a></li><li><a href="#process">איך זה עובד</a></li><li><a href="#about">אודות</a></li><li><a href="#process">תהליך</a></li><li><a href="#contact">צרו קשר</a></li></ul></nav>
     <a class="v-cta" href="#contact">לשיחת היכרות <span aria-hidden="true">←</span></a>
-    <button class="v-menu" id="menu" type="button" aria-label="פתיחת התפריט" aria-expanded="false">☰</button>
+    <button class="v-menu" id="menu" type="button" aria-label="פתיחת התפריט" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
 
@@ -565,10 +595,10 @@ body{background:var(--ink);color:var(--paper);margin:0}
   <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <span class="v3-light" aria-hidden="true"></span>
   <div class="v3-white" aria-hidden="true"><div class="v-cols"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="b1"></span><span class="b2"></span><span class="b3"></span><b class="v3-big">עבודות נבחרות</b></div>
-  <img class="v3-mk" data-i="0" src="assets/img/v3-mock-ravid.webp" alt="רביד נחום אדריכלים, האתר במחשב ובטלפון">
-  <img class="v3-mk" data-i="1" src="assets/img/v3-mock-julis.webp" alt="Juli's, האתר במחשב ובטלפון">
-  <img class="v3-mk" data-i="2" src="assets/img/v3-mock-eitan.webp" alt="איתן שפיר ושות', האתר במחשב ובטלפון">
-  <img class="v3-mk" data-i="3" src="assets/img/v3-mock-oro.webp" alt="ORO, האתר במחשב ובטלפון">
+  <picture><source media="(max-width:760px)" srcset="assets/img/w-ravid-1.webp"><img class="v3-mk" data-i="0" src="assets/img/v3-mock-ravid.webp" alt="רביד נחום אדריכלים, האתר במחשב ובטלפון"></picture>
+  <picture><source media="(max-width:760px)" srcset="assets/img/w-julis-mockup.webp"><img class="v3-mk" data-i="1" src="assets/img/v3-mock-julis.webp" alt="Juli's, האתר במחשב ובטלפון"></picture>
+  <picture><source media="(max-width:760px)" srcset="assets/img/w-eitan-mockup.webp"><img class="v3-mk" data-i="2" src="assets/img/v3-mock-eitan.webp" alt="איתן שפיר ושות', האתר במחשב ובטלפון"></picture>
+  <picture><source media="(max-width:760px)" srcset="assets/img/w-oro-mockup.webp"><img class="v3-mk" data-i="3" src="assets/img/v3-mock-oro.webp" alt="ORO, האתר במחשב ובטלפון"></picture>
   <div class="v3-back" aria-hidden="true"></div>
   <div class="v3-info">
     <div class="v3-foot">
@@ -735,8 +765,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
 (function(){
   var h=document.getElementById('hdr'),m=document.getElementById('menu');
   function s(){h.classList.toggle('solid',scrollY>40)}addEventListener('scroll',s,{passive:true});s();
-  m.addEventListener('click',function(){var o=h.classList.toggle('open');m.setAttribute('aria-expanded',o);m.setAttribute('aria-label',o?'סגירת התפריט':'פתיחת התפריט')});
-  h.querySelectorAll('.v-nav a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open');m.setAttribute('aria-expanded','false')})});
+  function setOpen(o){h.classList.toggle('open',o);m.setAttribute('aria-expanded',o);m.setAttribute('aria-label',o?'סגירת התפריט':'פתיחת התפריט');
+    document.documentElement.style.overflow=o?'hidden':''}   /* the page stays put under the open menu */
+  m.addEventListener('click',function(){setOpen(!h.classList.contains('open'))});
+  h.querySelectorAll('.v-nav a,.v-cta').forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('open')){setOpen(false);m.focus()}});
   /* the hero frame: positions are in design units of the active frame */
   var hero=document.getElementById('hero');
   var DESK={fw:1325,fh:846,ttop:168,tfs:112,ptop:466,pfs:22,pw:720,ctop:548,cfs:31,ax:187,ay:212,hs:.653},
@@ -1004,11 +1037,21 @@ body{background:var(--ink);color:var(--paper);margin:0}
   function vAt(x){return sec.offsetTop+x*(sec.offsetHeight-innerHeight)}
   function measure(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));
     target=v<B1?0:v<B4?STOPS[Math.round((v-B1)/(B4-B1)*(STOPS.length-1))]:.205;/* the about is not scrubbed: a short scroll past the last step starts it and it plays through on its own */
-    targetA=v>B4+(B5-B4)*.15?1:0;targetE=cl((v-B5)/(1-B5))}
+    targetA=v>B4+(B5-B4)*.15?1:0;targetE=v>B5+(1-B5)*.08?1:0}
   /* the steps, one per scroll: each step is a stop, reached when its layer of the cube has made its quarter turn (the
      scene eases there on its own); a wheel or trackpad gesture inside the steps moves exactly one step, and before
      the first and after the last the page scrolls on as usual */
   var STOPS=[.07,.14,.205],lockS=0;
+  /* from the about to the reviews: a scroll down in the about glides the page, on its own and eased, to the reviews'
+     heading (the about's way out plays on the way); a scroll up at the reviews' top glides back to the about */
+  var lockR=0,revEl=document.getElementById('reviews');
+  function glide(y,ms){var y0=scrollY,t0=performance.now();(function g(n){var k=cl((n-t0)/ms);scrollTo({top:y0+(y-y0)*io(k),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}
+  function revY(){var h=revEl.querySelector('h2');return h.getBoundingClientRect().top+scrollY-innerHeight*.16}
+  addEventListener('wheel',function(ev){if(Math.abs(ev.deltaY)<2)return;var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight)),now=performance.now(),ry=revY();
+    var inAbout=v>B4+.004&&v<B5+(1-B5)*.5,atRev=scrollY>vAt(B5)&&scrollY<=ry+innerHeight*.08;
+    if(!(inAbout&&ev.deltaY>0)&&!(atRev&&ev.deltaY<0))return;
+    ev.preventDefault();if(now<lockR){lockR=Math.max(lockR,now+160);return}lockR=now+1700;
+    if(ev.deltaY>0)glide(ry,1500);else glide(vAt(B4+(B5-B4)*.5),1400)},{passive:false});
   function stopV(i){return vAt(B1+(B4-B1)*i/(STOPS.length-1))}
   addEventListener('wheel',function(ev){if(Math.abs(ev.deltaY)<2)return;var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight)),lo=B1-(B4-B1)*.25,hi=B5;
     if(v<lo||v>hi)return;var now=performance.now();
@@ -1018,16 +1061,19 @@ body{background:var(--ink);color:var(--paper);margin:0}
     /* in the about: up goes back to the last step, down scrolls on as usual */
     if(v>B4+.004){if(ev.deltaY>0)return;nx=STOPS.length-1}
     if(nx<0||nx>STOPS.length-1)return;
-    ev.preventDefault();lockS=now+(v>B4+.004?900:650);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
+    ev.preventDefault();lockS=now+(v>B4+.004?1000:1150);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
   addEventListener('scroll',measure,{passive:true});measure();cur=target;
   addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
   function setStep(n){if(n===step)return;step=n;steps.forEach(function(s,j){s.classList.toggle('on',j===n);s.classList.toggle('past',j<n)});snum.style.setProperty('--si',n)}
   function setProj(n){if(n===shownP)return;shownP=n;pjs.forEach(function(s,j){s.classList.toggle('on',j===n);});}
   function frame(now){
-    cur+=(target-cur)*(RM?1:.12);if(Math.abs(target-cur)<1e-4)cur=target;
+    /* the cube moves to each new place at an even, readable pace: about 1.2 seconds, easing in and out */
+    if(target!==frame.tt){frame.tf=cur;frame.tt=target;frame.ts=now}
+    cur=RM?target:lerp(frame.tf,frame.tt,io(cl((now-frame.ts)/1200)));
     /* the cube into my photo plays at an even pace, about 1.8 seconds, either way */
     var dtA=Math.min(.05,(now-(frame.l||now))/1000);frame.l=now;curA=RM?targetA:curA+Math.sign(targetA-curA)*Math.min(Math.abs(targetA-curA),dtA/1.8);
-    curE+=(targetE-curE)*(RM?1:.12);if(Math.abs(targetE-curE)<1e-4)curE=targetE;
+    /* the about's way out plays at an even pace too, about 1.1 seconds */
+    curE=RM?targetE:curE+Math.sign(targetE-curE)*Math.min(Math.abs(targetE-curE),dtA/1.1);
     var p=cur,t=(now-t0)/1000,ab=curA;
     setStep(rev?0:p<.075?0:p<.145?1:2);
     var front=sm((p-.21)/.05),grow=io((p-.215)/.06),inner=sm((p-.252)/.016),morph=io((p-.27)/.04),settle=1-front;
@@ -1277,6 +1323,18 @@ a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.
       t.split('').forEach(function(c,i){if(c===' '){w.appendChild(document.createTextNode('\u00a0'));return}var e=document.createElement('i');e.textContent=c;e.setAttribute('data-c',c);e.style.setProperty('--i',i);w.appendChild(e)});
       if(!b.getAttribute('aria-label'))b.setAttribute('aria-label',t);
       b.replaceChild(w,n);if(/\s$/.test(n.textContent))b.insertBefore(document.createTextNode(' '),w.nextSibling)})})
+})();
+</script>
+<script>
+/* the reviews' carousel on the phone: a dot for each review; the dot of the card in view is lit, and a dot takes you
+   to its card */
+(function(){var list=document.querySelector('.v-rev-list');if(!list)return;
+  var qs=[].slice.call(list.querySelectorAll('.v-q')),dots=document.createElement('div');dots.className='v-rev-dots';dots.setAttribute('aria-label','המלצות');
+  qs.forEach(function(q,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','המלצה '+(i+1)+' מתוך '+qs.length);
+    b.addEventListener('click',function(){q.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',inline:'center',block:'nearest'})});dots.appendChild(b)});
+  list.after(dots);var B=[].slice.call(dots.children);
+  function on(i){B.forEach(function(b,j){b.classList.toggle('on',j===i);b.setAttribute('aria-current',j===i?'true':'false')})}on(0);
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)on(qs.indexOf(e.target))})},{root:list,threshold:.6});qs.forEach(function(q){io.observe(q)})}
 })();
 </script>
 <script>
