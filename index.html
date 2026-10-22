@@ -352,6 +352,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
   background:radial-gradient(closest-side,rgba(192,168,251,.12),transparent);filter:blur(20px);
   /* its lower part fades out well before the section ends, so the reviews flow into the questions without an edge */
   -webkit-mask:linear-gradient(#000 35%,transparent 80%);mask:linear-gradient(#000 35%,transparent 80%)}
+/* the bottom of the reviews fades into the night, whatever the screen, so the light above never meets the questions at an edge */
+.v-rev::after{content:"";position:absolute;inset:auto 0 0 0;height:min(45vh,420px);background:linear-gradient(rgba(13,12,17,0),var(--ink) 85%);pointer-events:none;z-index:0}
 /* the grid comes down into the reviews: its 1st, 3rd, 5th and 7th lines are drawn by the script as the frames of the
    reviews (down to the bottom of the list); the lines between them step back behind the reviews */
 @media (min-width:761px){.v-rev .v-cols i:nth-child(odd){visibility:hidden}}
@@ -493,8 +495,10 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .c2-form{position:relative;z-index:2;width:var(--fw)}
 .c2-form .ct-send{margin-top:8px}
 @media (max-width:760px){
-  .c2-stage{height:auto;padding:200px 0}.c2 .hl{--lw:200vw;--rot:-62deg;--dx:0px}
-  .c2 .hl.t{--py:0;--dy:calc(190px - (1 - var(--k)) * 30vh)}.c2 .hl.b{--py:100%;--dy:calc(-190px + (1 - var(--k)) * 30vh)}
+  /* on the phone the hands come from above and below on the same diagonal: the upper one from the top right pointing
+     down to the form, the lower one from the bottom left pointing up to it; they slide in as the form is reached */
+  .c2-stage{height:auto;padding:200px 0}.c2 .hl{--lw:210vw;--px:50%;--dx:0px}
+  .c2 .hl.t{--rot:-44deg;--dx:0px;--py:0;--dy:calc(185px - (1 - var(--k)) * 30vh)}.c2 .hl.b{--rot:-46deg;--dx:0px;--py:100%;--dy:calc(-180px + (1 - var(--k)) * 30vh)}
 }
 
 @media (prefers-reduced-motion:reduce){.v-faq .v-up,.v-ct .v-up{transition:none}.v-ct{--k:1!important}}
@@ -536,18 +540,13 @@ body{background:var(--ink);color:var(--paper);margin:0}
   .v-ft-in{padding:0 22px}.v-sign{font-size:13vw}
   .v-ft-row{grid-template-columns:1fr;justify-items:start}.v-legal{justify-self:start}
 }
-/* on hover, a soft lavender light follows the cursor over the closing line: each line has a lit copy laid over it,
-   shown only in a circle around the cursor (--mx, --my, set per line); the outlined line's contour turns lavender
-   there, as if the light drew it, and the filled line brightens. The glow is on the letters themselves, no box */
-.v-sign .lit{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;
-  -webkit-mask:radial-gradient(circle min(18vw,230px) at var(--mx,-999px) var(--my,-999px),#000 15%,transparent 72%);
-  mask:radial-gradient(circle min(18vw,230px) at var(--mx,-999px) var(--my,-999px),#000 15%,transparent 72%)}
-.v-sign.hov .lit{opacity:1}
-.v-sign .o.lit .ch{-webkit-text-stroke-color:#cbb6ff}
-.v-sign .o.lit .ch{text-shadow:0 0 .07em rgba(192,168,251,.9),0 0 .22em rgba(192,168,251,.4)}
-.v-sign .f.lit .ch{background:#f6f2ff;-webkit-background-clip:text;background-clip:text}
-.v-sign .f.lit{filter:none}
-.v-ft.go .v-sign .f.lit{animation:none}
+/* on hover, the 3D letter swap of the buttons and the menu, at the size of the closing line: each letter rolls up like
+   a face of a small cube (it turns about the cube's middle, half a letter behind it), and the same letter comes round
+   from below, one after another along the line (--ri), the top line first. It plays once for each visit */
+.v-sign>span{perspective:900px}
+.v-sign .ch{transform-origin:50% 50% -.45em}
+.v-sign.roll .ch{animation:v-roll .8s cubic-bezier(.65,0,.25,1) calc(var(--ri,0) * 34ms) both}
+@keyframes v-roll{0%{transform:rotateX(0)}49.99%{transform:rotateX(90deg)}50%{transform:rotateX(-90deg)}100%{transform:rotateX(0)}}
 @media (prefers-reduced-motion:reduce){.v-sign .o .ch{opacity:1;filter:none;transition:none}.v-sign .f .ch{opacity:1;animation:none}}
 </style>
 </head>
@@ -1282,14 +1281,14 @@ a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.
 </script>
 <script>
 /* the closing line: now and then one soft light passes over the lavender line (only while the line is on screen),
-   and on hover a soft light follows the cursor over both lines */
+   and on hover its letters roll over like little cubes */
 (function(){var s=document.querySelector('.v-sign');if(!s||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var on=false,run=false,t0=performance.now(),fl=s.querySelector('.f');
-  /* the light under the cursor: each line gets a lit copy, shown around the cursor only */
-  var LT=[].slice.call(s.querySelectorAll(':scope>span')).map(function(l){var c=l.cloneNode(true);c.classList.add('lit');c.setAttribute('aria-hidden','true');l.appendChild(c);return l});
-  s.addEventListener('pointermove',function(e){s.classList.add('hov');
-    LT.forEach(function(l){var r=l.getBoundingClientRect();l.style.setProperty('--mx',(e.clientX-r.left)+'px');l.style.setProperty('--my',(e.clientY-r.top)+'px')})});
-  s.addEventListener('pointerleave',function(){s.classList.remove('hov')});
+  /* the letters' order for the roll on hover, and the roll itself (once for each visit, not cut short) */
+  var rch=[].slice.call(s.querySelectorAll('.ch')),ri=0;rch.forEach(function(c){if(c.textContent.trim())c.style.setProperty('--ri',ri++)});
+  var rolling=false,rollMs=(ri-1)*34+800;
+  s.addEventListener('pointerenter',function(){if(rolling)return;rolling=true;s.classList.remove('roll');void s.offsetWidth;s.classList.add('roll');
+    setTimeout(function(){s.classList.remove('roll');rolling=false},rollMs+60)});
   function measure(){if(fl){var fr=fl.getBoundingClientRect();fl.style.setProperty('--lw',(fr.width*2.2)+'px');
       [].forEach.call(fl.querySelectorAll('.ch'),function(c){c.style.setProperty('--lx',(c.getBoundingClientRect().left-fr.left)+'px')})}}
   function frame(now){var t=(now-t0)/1000;
