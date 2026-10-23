@@ -411,10 +411,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
   /* the cards have their own frames on the phone: the drawn frame lines are not needed */
   .v-rev .v-lines{display:none}
   /* on the phone the reviews are a carousel: one card each, the next one's edge showing, each swipe settling on a card */
-  .v-rev-list{columns:auto;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  /* it scrolls sideways only: a swipe up or down anywhere on the cards scrolls the page */
+  .v-rev-list{columns:auto;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
     margin:0 -22px;padding:6px 11vw 4px;scroll-padding:0 11vw;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .v-rev-list::-webkit-scrollbar{display:none}
-  .v-q{flex:0 0 78vw;scroll-snap-align:center;padding:26px 22px;border:1px solid rgba(244,243,241,.14);border-radius:20px;background:rgba(244,243,241,.03)}
+  .v-q{flex:0 0 78vw;scroll-snap-align:center;transform:none;padding:26px 22px;border:1px solid rgba(244,243,241,.14);border-radius:20px;background:rgba(244,243,241,.03)}
   .v-q blockquote{font-size:15.5px;line-height:1.7}
   .v-rev-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
   .v-rev-dots button{all:unset;cursor:pointer;width:7px;height:7px;border-radius:999px;background:rgba(244,243,241,.28);transition:width .4s cubic-bezier(.22,.61,.36,1),background .4s}
