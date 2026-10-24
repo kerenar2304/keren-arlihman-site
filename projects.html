@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>עבודות | קרן ארליכמן</title>
+<meta name="description" content="מיתוגים ואתרים שעיצבה קרן ארליכמן לעסקים: לוגו, שפה חזותית ואתרי תדמית וחנות">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/sub.css">
+<link rel="stylesheet" href="assets/header.css">
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+<div class="sb-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="sb-glow" aria-hidden="true"></div>
+<header class="v-hdr" id="hdr">
+  <div class="v-wrap bar">
+    <a class="v-logo" href="./" aria-label="קרן ארליכמן, לדף הבית"><svg viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a>
+    <nav class="v-nav" aria-label="ראשי"><ul><li><a href="projects.html" aria-current="page">פרויקטים</a></li><li><a href="./#process">איך זה עובד</a></li><li><a href="./#about">אודות</a></li><li><a href="./#process">תהליך</a></li><li><a href="./#contact">צרו קשר</a></li></ul></nav>
+    <a class="v-cta" href="./#contact">לשיחת היכרות <span aria-hidden="true">←</span></a>
+    <button class="v-menu" id="menu" type="button" aria-label="פתיחת התפריט" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+
+<style>
+/* the works, one grid of four columns: a website (two columns wide, its living mockup) beside two brands, then two
+   brands beside a website, a row of brands between; the last place an invitation. The filter keeps only the
+   websites (two by two) or only the brands (four by four) */
+.pj-filter{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;padding:0 var(--gut)}
+.pj-filter button{height:44px;padding:0 22px;border:1px solid rgba(244,243,241,.3);border-radius:999px;background:none;color:var(--paper);
+  font:400 16px/1 var(--body);cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.pj-filter button span{opacity:.55;margin-inline-start:6px;font-size:14px}
+.pj-filter button:hover{border-color:var(--lav)}
+.pj-filter button[aria-pressed="true"]{background:var(--lav);border-color:var(--lav);color:var(--ink)}
+.pj-grid{position:relative;z-index:1;list-style:none;margin:0;padding:clamp(36px,6vh,60px) var(--gut) 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(30px,3.4vw,48px) clamp(16px,1.8vw,26px)}
+.pj-grid>li{display:flex;flex-direction:column;gap:14px;min-width:0}
+/* a brand's caption: the name on one line, the kind of work under it, then the way to the full project */
+.b-card>.cap{flex-direction:column;align-items:flex-start;gap:10px}
+.b-card .cap b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.cap>span{max-width:100%}
+@media (max-width:760px){.b-card .cap b{font-size:16px}.cap .go{font-size:14px}}
+.s-card{grid-column:span 2}
+.f-web .b-card,.f-web .c-card,.f-brand .s-card:not(.both){display:none!important}
+/* the pictures: a brand's is a 4:5 product shot; a website's fills the same height beside them */
+.b-pic,.w-pic{position:relative;display:block;color:inherit;text-decoration:none;overflow:hidden;border-radius:14px;background:#1b1922;box-shadow:0 30px 60px -34px rgba(0,0,0,.7)}
+.b-pic{aspect-ratio:4/5}
+.w-pic{flex:1;min-height:0}
+.f-web .w-pic{flex:none;aspect-ratio:1.6}
+.b-pic img,.w-pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.22,.61,.36,1)}
+.b-pic:hover img,.s-card:hover .w-pic video{transform:scale(1.04)}
+.w-pic .pv{display:none}
+/* the small labels in the picture's corner: website, branding, or both */
+.tags{position:absolute;top:14px;right:14px;z-index:1;display:flex;gap:6px}
+.tag{padding:7px 12px;border-radius:999px;background:rgba(13,12,17,.55);backdrop-filter:blur(6px);
+  font:400 12px/1 var(--body);letter-spacing:.04em;color:var(--paper)}
+.tag.t-web{background:var(--lav);color:var(--ink)}
+/* the name and the kind of work under each picture; a website adds the way to the live site */
+.cap{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;min-height:46px}
+.cap>span{display:flex;flex-direction:column;gap:5px;min-width:0}
+.cap b{font:600 clamp(20px,1.5vw,25px)/1.05 var(--display)}
+.cap small{font:300 14px/1.3 var(--body);opacity:.6}
+.go{flex:none;display:inline-flex;gap:6px;color:var(--lav);font:400 15px/1 var(--body);text-decoration:none;padding-bottom:3px;border-bottom:1px solid rgba(192,168,251,.4);transition:border-color .3s}
+.go:hover{border-color:var(--lav)}
+.cap>.gos{display:flex;flex-direction:row;align-items:flex-end;gap:20px;flex:none}
+button.go{background:none;border-width:0 0 1px;border-style:solid;cursor:pointer;padding-inline:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* the invitation, the whole last row: the night with its lavender light */
+.c-card{grid-column:1/-1}
+.c-card .c-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;padding:clamp(28px,4vw,56px);
+  border:1px solid rgba(192,168,251,.28);border-radius:14px;background:radial-gradient(120% 90% at 50% 110%,rgba(192,168,251,.22),transparent 60%),rgba(244,243,241,.02)}
+.c-card p{margin:0;font:600 clamp(30px,3.4vw,58px)/1.05 var(--display)}
+.c-card em{font-style:normal;color:var(--lav)}
+@media (max-width:900px){
+  .pj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 14px}
+  .w-pic{flex:none;aspect-ratio:1.6}
+}
+@media (max-width:760px){
+  .w-pic,.f-web .w-pic{aspect-ratio:2/3}.w-pic video{display:none}.w-pic .pv{display:block}
+  .cap{flex-direction:column;align-items:flex-start;min-height:0}.gos{gap:16px}
+  .cap b{font-size:18px}.cap small{font-size:13px}
+  .tags{top:10px;right:10px}.tag{padding:6px 10px;font-size:11px}
+  .c-card .c-in{gap:16px}.c-card .sb-btn{height:40px;padding:0 16px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){.w-pic video,.b-pic img{transition:none}}
+</style>
+<main id="main" tabindex="-1">
+  <div class="sb-top">
+    <span class="sb-kick up">עבודות</span>
+    <h1 class="up d1">מיתוג ואתרים<br>ש<em>עושים רושם</em></h1>
+    <p class="sb-lead up d2">מהלוגו הראשון ועד האתר החי. כאן אפשר לראות מה עיצבתי לעסקים שרצו להיראות כמו שהם באמת.</p>
+  </div>
+  <div class="pj-filter up d3" role="group" aria-label="סינון העבודות">
+    <button type="button" data-f="all" aria-pressed="true">הכל<span>16</span></button>
+    <button type="button" data-f="web" aria-pressed="false">אתרים<span>4</span></button>
+    <button type="button" data-f="brand" aria-pressed="false">מיתוג<span>15</span></button>
+  </div>
+  <ul class="pj-grid">
+      <li class="s-card both"><a class="w-pic" href="project-ravid.html" aria-label="רביד נחום אדריכלים, לפרויקט המלא"><video muted loop playsinline preload="none" poster="assets/img/v3-mock-ravid.webp" aria-label="האתר של רביד נחום אדריכלים, במחשב ובטלפון"><source src="assets/img/v3-mock-ravid.mp4" type="video/mp4"></video><video class="pv" muted loop playsinline preload="none" poster="assets/img/v3-mock-ravid-p.webp" aria-label="האתר של רביד נחום אדריכלים, במחשב ובטלפון"><source src="assets/img/v3-mock-ravid-p.mp4" type="video/mp4"></video><span class="tags"><span class="tag t-web">אתר</span><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>רביד נחום אדריכלים</b><small>מיתוג · אתר תדמית</small></span><span class="gos"><a class="go" href="project-ravid.html">לפרויקט המלא <span aria-hidden="true">←</span></a><a class="go" href="https://kerenar2304.github.io/ravid-nahum/" target="_blank" rel="noopener">לאתר החי <span aria-hidden="true">↖</span><span class="sr">(נפתח בחלון חדש)</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-victoria.html" aria-label="Victoria, לפרויקט המלא"><img src="assets/img/p/victoria/v-box.webp" alt="המיתוג של Victoria" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>Victoria</b><small>קונדיטוריה</small></span><span class="gos"><a class="go" href="project-victoria.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-katerina.html" aria-label="Katerina Makri, לפרויקט המלא"><img src="assets/img/w-katerina-2.webp" alt="המיתוג של Katerina Makri" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>Katerina Makri</b><small>משרד עורכי דין</small></span><span class="gos"><a class="go" href="project-katerina.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-kipod.html" aria-label="קיפוד, לפרויקט המלא"><img src="assets/img/p/kipod/m1.webp" alt="המיתוג של קיפוד" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>קיפוד</b><small>פתרונות מחשוב</small></span><span class="gos"><a class="go" href="project-kipod.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-gaya.html" aria-label="Gaya Ron, לפרויקט המלא"><img src="assets/img/p/gaya/cards.webp" alt="המיתוג של Gaya Ron" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>Gaya Ron</b><small>מאפרת</small></span><span class="gos"><a class="go" href="project-gaya.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="s-card both"><a class="w-pic" href="project-julis.html" aria-label="Juli&#39;s, לפרויקט המלא"><video muted loop playsinline preload="none" poster="assets/img/v3-mock-julis.webp" aria-label="האתר של Juli&#39;s, במחשב ובטלפון"><source src="assets/img/v3-mock-julis.mp4" type="video/mp4"></video><video class="pv" muted loop playsinline preload="none" poster="assets/img/v3-mock-julis-p.webp" aria-label="האתר של Juli&#39;s, במחשב ובטלפון"><source src="assets/img/v3-mock-julis-p.mp4" type="video/mp4"></video><span class="tags"><span class="tag t-web">אתר</span><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>Juli's</b><small>מיתוג · אתר חנות · סושיאל</small></span><span class="gos"><a class="go" href="project-julis.html">לפרויקט המלא <span aria-hidden="true">←</span></a><a class="go" href="https://kerenar2304.github.io/julis-flowers-preview/" target="_blank" rel="noopener">לאתר החי <span aria-hidden="true">↖</span><span class="sr">(נפתח בחלון חדש)</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-sigal.html" aria-label="סיגלית גרינפלד מיטלמן, לפרויקט המלא"><img src="assets/img/p/sigal/m1.webp" alt="המיתוג של סיגלית גרינפלד מיטלמן" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>סיגלית גרינפלד מיטלמן</b><small>עורכת דין</small></span><span class="gos"><a class="go" href="project-sigal.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-kipodc.html" aria-label="KIPOD, לפרויקט המלא"><img src="assets/img/w-kipod.webp" alt="המיתוג של KIPOD" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>KIPOD</b><small>יוצר תוכן</small></span><span class="gos"><a class="go" href="project-kipodc.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-navy.html" aria-label="חטיבת ים, לפרויקט המלא"><img src="assets/img/b/navy-wall.webp" alt="המיתוג של חטיבת ים" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>חטיבת ים</b><small>משרד הביטחון</small></span><span class="gos"><a class="go" href="project-navy.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-pocktick.html" aria-label="PockTick, לפרויקט המלא"><img src="assets/img/p/pocktick/app.webp" alt="המיתוג של PockTick" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>PockTick</b><small>אפליקציית כרטיסים</small></span><span class="gos"><a class="go" href="project-pocktick.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="s-card both"><a class="w-pic" href="project-eitan.html" aria-label="איתן שפיר ושות&#39;, לפרויקט המלא"><video muted loop playsinline preload="none" poster="assets/img/v3-mock-eitan.webp" aria-label="האתר של איתן שפיר ושות&#39;, במחשב ובטלפון"><source src="assets/img/v3-mock-eitan.mp4" type="video/mp4"></video><video class="pv" muted loop playsinline preload="none" poster="assets/img/v3-mock-eitan-p.webp" aria-label="האתר של איתן שפיר ושות&#39;, במחשב ובטלפון"><source src="assets/img/v3-mock-eitan-p.mp4" type="video/mp4"></video><span class="tags"><span class="tag t-web">אתר</span><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>איתן שפיר ושות'</b><small>מיתוג · אתר תדמית</small></span><span class="gos"><a class="go" href="project-eitan.html">לפרויקט המלא <span aria-hidden="true">←</span></a><a class="go" href="https://kerenar2304.github.io/eitan-shafir/" target="_blank" rel="noopener">לאתר החי <span aria-hidden="true">↖</span><span class="sr">(נפתח בחלון חדש)</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-moshe.html" aria-label="משה אבות שחף, לפרויקט המלא"><img src="assets/img/p/moshe/stationery.webp" alt="המיתוג של משה אבות שחף" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>משה אבות שחף</b><small>משרד עורכי דין</small></span><span class="gos"><a class="go" href="project-moshe.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-ynalize.html" aria-label="YNALIZE, לפרויקט המלא"><img src="assets/img/b/ynalize-cards.webp" alt="המיתוג של YNALIZE" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>YNALIZE</b><small>אנליטיקה ונתונים</small></span><span class="gos"><a class="go" href="project-ynalize.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-crema.html" aria-label="קרמרינה, לפרויקט המלא"><img src="assets/img/p/crema/hero.webp" alt="המיתוג של קרמרינה" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>קרמרינה</b><small>עוגות מעוצבות</small></span><span class="gos"><a class="go" href="project-crema.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="b-card"><a class="b-pic" href="project-yaela.html" aria-label="יעלה, לפרויקט המלא"><img src="assets/img/p/yaela/cards.webp" alt="המיתוג של יעלה" loading="lazy"><span class="tags"><span class="tag">מיתוג</span></span></a><div class="cap"><span><b>יעלה</b><small>סטודיו לעיצוב גרפי</small></span><span class="gos"><a class="go" href="project-yaela.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="s-card"><a class="w-pic" href="project-oro.html" aria-label="ORO מגורים על מאדים, לפרויקט המלא"><video data-wait="0" muted loop playsinline preload="none" poster="assets/img/v3-mock-oro.webp" aria-label="האתר של ORO מגורים על מאדים, במחשב ובטלפון"><source src="assets/img/v3-mock-oro.mp4" type="video/mp4"></video><video class="pv" data-wait="0" muted loop playsinline preload="none" poster="assets/img/v3-mock-oro-p.webp" aria-label="האתר של ORO מגורים על מאדים, במחשב ובטלפון"><source src="assets/img/v3-mock-oro-p.mp4" type="video/mp4"></video><span class="tags"><span class="tag t-web">אתר</span></span></a><div class="cap"><span><b>ORO מגורים על מאדים</b><small>אתר תדמית</small></span><span class="gos"><a class="go" href="project-oro.html">לפרויקט המלא <span aria-hidden="true">←</span></a></span></div></li>
+      <li class="c-card"><div class="c-in"><p>הפרויקט הבא <em>יכול להיות שלכם</em></p><a class="sb-btn" href="./#contact">לשיחת היכרות <span aria-hidden="true">←</span></a></div></li>
+  </ul>
+</main>
+
+
+<script>
+(function(){
+  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches,mob=function(){return innerWidth<761};
+  /* the filter: everything mixed, only the websites, or only the brands */
+  var grid=document.querySelector('.pj-grid'),fb=[].slice.call(document.querySelectorAll('.pj-filter button'));
+  fb.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;
+    fb.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});
+    grid.classList.toggle('f-web',f==='web');grid.classList.toggle('f-brand',f==='brand')})});
+  /* the websites' videos: on the computer the card under the pointer plays at once, from its beginning; on the
+     phone the card in view plays from its beginning after resting two seconds (data-wait: ms). With reduced motion asked for,
+     they stay on their first frame */
+  var cards=[].slice.call(document.querySelectorAll('.s-card'));
+  function vid(c){return c.querySelector(mob()?'video.pv':'video:not(.pv)')}
+  function start(c,now){if(RM)return;var v=vid(c);if(!v||!v.paused||v._w)return;v.preload='auto';try{v.currentTime=0}catch(_){}
+    v._w=setTimeout(function(){v._w=0;if(!c._on)return;var p=v.play();if(p&&p.catch)p.catch(function(){})},now?0:v.dataset.wait?+v.dataset.wait:2000)}
+  function stop(c){[].forEach.call(c.querySelectorAll('video'),function(v){if(v._w){clearTimeout(v._w);v._w=0}if(!v.paused)v.pause()})}
+  cards.forEach(function(c){
+    c.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'&&!mob()){c._on=true;start(c,true)}});
+    c.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'&&!mob()){c._on=false;stop(c)}})});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!mob())return;var c=e.target;
+    c._on=e.isIntersecting;if(c._on)start(c);else stop(c)})},{threshold:.35});cards.forEach(function(c){io.observe(c)})}
+})();
+</script>
+
+<footer class="sb-ft">
+  <h2>שנים בונים שם, <em>שניות בונות רושם</em></h2>
+  <a class="sb-btn" href="./#contact">לשיחת היכרות <span aria-hidden="true">←</span></a>
+  <nav class="sb-legal" aria-label="מסמכים"><a href="privacy.html">מדיניות פרטיות</a><a href="accessibility.html">הצהרת נגישות</a><a href="terms.html">תנאי שימוש</a></nav>
+  <a class="sb-me" href="./" aria-label="קרן ארליכמן, גרפיקה ועיצוב אתרים, לדף הבית" dir="ltr"><svg viewBox="560 240 880 1230" aria-hidden="true"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg><span class="nm" aria-hidden="true"><b>KEREN ARLIHMAN</b><span class="ln"><i></i><small>GRAPHIC &amp; WEB DESIGNER</small></span></span></a>
+  <p class="sb-cr">© 2026 קרן ארליכמן. כל הזכויות שמורות.</p>
+</footer>
+<script src="assets/header.js"></script>
+</body>
+</html>

@@ -8,23 +8,51 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-.doc{padding-block:calc(var(--hdr-h) + 60*var(--u)) var(--sec)}
-.doc h1{font-size:var(--t2);line-height:.95}
-.doc h2{font-family:var(--display);font-weight:400;font-size:var(--t3);margin-top:calc(40*var(--u))}
-.doc p,.doc li{max-width:68ch;margin-top:12px}
-.doc ul{padding-inline-start:1.2em}
-.doc .upd{font-size:var(--t5);color:var(--lav-ink);margin-top:18px}
-.doc a{text-decoration:underline;text-underline-offset:3px}
-.end{min-height:100svh;display:grid;align-content:center;padding-block:var(--sec)}
-.end h1{font-size:var(--t1);line-height:.86}
-.end p{margin-top:calc(30*var(--u));font-size:var(--t3);max-width:34ch}
-.end .cta{margin-top:calc(40*var(--u))}
+/* the page that was not found, in the language of the site: the night, the vertical grid, the lavender light, the
+   outlined button with its glow. The words stay: "this page has not been branded yet" */
+body{margin:0;min-height:100svh;background:var(--ink);color:var(--paper);overflow-x:hidden}
+.nf-cols{position:fixed;inset:0 3.8%;display:flex;justify-content:space-between;pointer-events:none;z-index:0}
+.nf-cols i{width:1px;background:rgba(244,243,241,.09)}
+/* the light, low in the middle, as under the hands */
+.nf-glow{position:fixed;left:50%;bottom:-30vh;width:min(110vw,1300px);aspect-ratio:1.6;translate:-50% 0;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(192,168,251,.26),rgba(192,168,251,.08) 55%,transparent);filter:blur(10px)}
+.nf-hdr{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:96px;padding-inline:calc(3.8% + clamp(18px,1.6vw,26px))}
+.nf-logo{color:var(--paper);display:inline-flex}.nf-logo svg{height:52px;width:auto}
+/* the outlined pill of the site's buttons, with its small lavender light */
+.nf-btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;border:1.5px solid rgba(244,243,241,.55);border-radius:999px;
+  color:var(--paper);text-decoration:none;font:400 16px/1 var(--body);transition:background .3s,color .3s,border-color .3s}
+.nf-btn::before{content:"";position:absolute;inset:-70% -35%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(192,168,251,.42),rgba(192,168,251,.14) 55%,transparent);filter:blur(7px);opacity:.85;transition:opacity .35s,transform .35s}
+.nf-btn:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}.nf-btn:hover::before{opacity:1;transform:scale(1.15)}
+.nf-btn:focus-visible,.nf-logo:focus-visible{outline:2px solid var(--lav);outline-offset:4px}
+.nf-btn.big{height:56px;padding:0 30px;font-size:17px}
+.nf{position:relative;z-index:1;min-height:calc(100svh - 96px);display:grid;align-content:center;justify-items:start;gap:0;
+  padding:0 calc(3.8% + clamp(18px,1.6vw,26px)) 12vh}
+.nf h1{margin:0;font:600 clamp(54px,8.6vw,150px)/.95 var(--display)}
+.nf h1 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.nf p{margin:clamp(22px,3.4vh,34px) 0 0;max-width:34ch;font:300 clamp(17px,1.4vw,22px)/1.6 var(--body);opacity:.75}
+.nf .nf-btn{margin-top:clamp(30px,5vh,48px)}
+/* the words rise out of a blur, one after another, as on the site */
+.up{opacity:0;translate:0 24px;filter:blur(6px);animation:nf-up 1s cubic-bezier(.22,.61,.36,1) forwards}
+.up:nth-child(2){animation-delay:.15s}.up:nth-child(3){animation-delay:.3s}
+@keyframes nf-up{to{opacity:1;translate:0 0;filter:none}}
+@media (max-width:760px){.nf-hdr{height:72px;padding-inline:max(20px,5.7vw)}.nf-logo svg{height:40px}.nf-hdr .nf-btn{height:38px;padding:0 15px;font-size:14px;gap:8px;border-width:1px}
+  .nf{min-height:calc(100svh - 72px);padding:0 max(20px,5.7vw) 14vh}.nf h1{font-size:clamp(38px,11.4vw,58px)}
+  .nf-cols i:nth-child(even){visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.up{animation:none;opacity:1;translate:none;filter:none}}
 </style>
 </head>
-<body class="is-ready">
-<header class="hdr solid"><div class="wrap bar"><a class="logo" href="./" aria-label="קרן ארליכמן, לדף הבית"><svg class="mark" viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a><a class="btn solid" href="./#contact">לשיחת היכרות <span class="ar" aria-hidden="true">←</span></a></div></header>
-<main id="main" class="wrap">
-<section class="end"><h1>העמוד הזה<br>עוד לא עבר <span class="sel">מיתוג<i></i><i></i><i></i><i></i></span></h1><p>חפשו אותו בדף הבית. שם כבר הכל מדויק.</p><div class="cta"><a class="btn solid" href="./">לדף הבית <span class="ar" aria-hidden="true">←</span></a></div></section>
+<body>
+<div class="nf-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="nf-glow" aria-hidden="true"></div>
+<header class="nf-hdr">
+  <a class="nf-logo" href="./" aria-label="קרן ארליכמן, לדף הבית"><svg viewBox="560 240 880 1230" role="img" aria-label="קרן ארליכמן"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg></a>
+  <a class="nf-btn" href="./#contact">לשיחת היכרות <span aria-hidden="true">←</span></a>
+</header>
+<main class="nf">
+  <h1 class="up">העמוד הזה<br><em>עוד לא עבר מיתוג</em></h1>
+  <p class="up">חפשו אותו בדף הבית. שם כבר הכל מדויק.</p>
+  <a class="nf-btn big up" href="./">לדף הבית <span aria-hidden="true">←</span></a>
 </main>
 </body>
 </html>

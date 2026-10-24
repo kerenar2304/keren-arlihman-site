@@ -1,0 +1,82 @@
+/* the inner pages (the works, the legal pages, thanks), in the language of the home page: the night, the vertical
+   grid, the lavender light low in the middle, the outlined pill buttons, the words rising out of a blur */
+@font-face{font-family:"Sansation";src:url(mk/fonts/Sansation-Light.ttf) format("truetype");font-weight:300;font-display:swap}
+@font-face{font-family:"Sansation";src:url(mk/fonts/Sansation-Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+:root{--gut:calc(3.8% + clamp(18px,1.6vw,26px))}
+body{margin:0;min-height:100svh;background:var(--ink);color:var(--paper);overflow-x:hidden}
+.sb-cols{position:fixed;inset:0 3.8%;display:flex;justify-content:space-between;pointer-events:none;z-index:0}
+.sb-cols i{width:1px;background:rgba(244,243,241,.08)}
+.sb-glow{position:fixed;left:50%;bottom:-38vh;width:min(110vw,1300px);aspect-ratio:1.6;translate:-50% 0;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(192,168,251,.2),rgba(192,168,251,.06) 55%,transparent);filter:blur(10px)}
+.skip{position:fixed;top:12px;right:12px;left:auto;z-index:1000;padding:12px 20px;border-radius:999px;background:var(--lav);color:var(--ink);font:500 16px/1 var(--body);text-decoration:none;translate:0 -200%;transition:translate .2s}
+.skip:focus{top:12px;translate:0 0;outline:2px solid var(--paper);outline-offset:3px}
+main:focus{outline:none}
+/* words for screen readers only */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* the header: the mark home, the way back to the works or home, the call to talk */
+.sb-hdr{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;height:88px;padding-inline:var(--gut);
+  background:linear-gradient(rgba(13,12,17,.92),rgba(13,12,17,.72) 70%,transparent);backdrop-filter:blur(6px)}
+.sb-logo{color:var(--paper);display:inline-flex}.sb-logo svg{height:46px;width:auto}
+.sb-nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);margin-inline-start:auto}
+.sb-nav a{color:var(--paper);text-decoration:none;font:400 16px/1 var(--body);opacity:.72;transition:opacity .25s}
+.sb-nav a:hover,.sb-nav a[aria-current]{opacity:1}
+.sb-nav a[aria-current]{color:var(--lav)}
+/* the outlined pill of the site's buttons, with its small lavender light */
+.sb-btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;border:1.5px solid rgba(244,243,241,.55);border-radius:999px;
+  color:var(--paper);text-decoration:none;font:400 16px/1 var(--body);white-space:nowrap;transition:background .3s,color .3s,border-color .3s;background:none;cursor:pointer}
+.sb-btn::before{content:"";position:absolute;inset:-70% -35%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(192,168,251,.42),rgba(192,168,251,.14) 55%,transparent);filter:blur(7px);opacity:.85;transition:opacity .35s,transform .35s}
+.sb-btn:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}.sb-btn:hover::before{opacity:1;transform:scale(1.15)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--lav);outline-offset:4px}
+
+/* the page's opening: a small line over the big title, and the lead under it */
+.sb-top{position:relative;z-index:1;padding:clamp(40px,9vh,110px) var(--gut) clamp(30px,6vh,70px)}
+.sb-kick{display:block;margin:0 0 18px;font:400 15px/1 var(--body);letter-spacing:.04em;color:var(--lav)}
+.sb-top h1{margin:0;font:600 clamp(52px,8.4vw,140px)/.92 var(--display)}
+.sb-top h1 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
+.sb-lead{margin:clamp(20px,3vh,30px) 0 0;max-width:46ch;font:300 clamp(17px,1.35vw,21px)/1.65 var(--body);opacity:.75}
+
+/* a legal text: one calm column, the headings in the display face, lavender links */
+.doc{position:relative;z-index:1;padding:0 var(--gut) clamp(70px,12vh,140px)}
+.doc-in{max-width:760px}
+.doc h2{margin:clamp(44px,6vh,64px) 0 0;font:600 clamp(26px,2.4vw,36px)/1.1 var(--display);color:var(--paper)}
+.doc h2 b{font-weight:600;color:var(--lav);margin-inline-end:.4em}
+.doc p,.doc li{margin:14px 0 0;font:300 17px/1.8 var(--body);color:rgba(244,243,241,.82)}
+.doc ul{margin:6px 0 0;padding-inline-start:1.2em}.doc li{margin-top:8px}.doc li::marker{color:var(--lav)}
+.doc strong{font-weight:500;color:var(--paper)}
+.doc a{color:var(--lav);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.doc .card{margin-top:22px;padding:22px 26px;border:1px solid rgba(244,243,241,.14);border-radius:14px;background:rgba(244,243,241,.03)}
+.doc .card p{margin:4px 0}
+.doc .upd{margin-top:clamp(50px,7vh,70px);padding-top:22px;border-top:1px solid rgba(244,243,241,.14);font:300 15px/1.6 var(--body);opacity:.6}
+
+/* the foot of an inner page: the call to talk, the legal links, her logo */
+.sb-ft{position:relative;z-index:1;margin-top:clamp(40px,8vh,90px);padding:clamp(50px,9vh,100px) var(--gut) 40px;border-top:1px solid rgba(244,243,241,.12);
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px}
+.sb-ft h2{margin:0;font:600 clamp(36px,4.6vw,72px)/1 var(--display)}
+.sb-ft h2 em{font-style:normal;color:var(--lav)}
+.sb-ft .sb-btn{height:56px;padding:0 30px;font-size:17px}
+.sb-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin-top:20px;font:400 14px/1.4 var(--body)}
+.sb-legal a{color:var(--paper);opacity:.6;text-decoration:none}.sb-legal a:hover,.sb-legal a[aria-current]{opacity:1}
+.sb-me{display:flex;align-items:center;gap:14px;color:var(--paper);text-decoration:none;margin-top:6px}
+.sb-me svg{height:46px;width:auto}
+.sb-me .nm{display:flex;flex-direction:column;gap:6px;text-align:left}
+.sb-me b{font:400 19px/1 "Sansation",var(--body);letter-spacing:.04em;white-space:nowrap}
+.sb-me .ln{display:flex;align-items:center;gap:10px}.sb-me .ln i{flex:1;height:1px;min-width:30px;background:currentColor;opacity:.75}
+.sb-me small{font:300 9.5px/1 "Sansation",var(--body);letter-spacing:.08em;white-space:nowrap;opacity:.85}
+.sb-cr{font:300 13px/1.4 var(--body);opacity:.45}
+
+/* the words rise out of a blur, one after another, as on the home page */
+.up{opacity:0;translate:0 24px;filter:blur(6px);animation:sb-up 1s cubic-bezier(.22,.61,.36,1) forwards}
+.up.d1{animation-delay:.12s}.up.d2{animation-delay:.24s}.up.d3{animation-delay:.36s}
+@keyframes sb-up{to{opacity:1;translate:0 0;filter:none}}
+
+@media (max-width:760px){
+  :root{--gut:max(20px,5.7vw)}
+  .sb-hdr{height:70px}.sb-logo svg{height:38px}.sb-nav a.hide-m{display:none}
+  .sb-hdr .sb-btn{height:38px;padding:0 15px;font-size:14px;gap:8px;border-width:1px}
+  .sb-top h1{font-size:clamp(44px,13vw,64px)}
+  .sb-cols i:nth-child(even){visibility:hidden}
+  .doc p,.doc li{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.up{animation:none;opacity:1;translate:none;filter:none}}
