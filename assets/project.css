@@ -155,3 +155,4 @@
 .ph h1[dir="rtl"]{direction:rtl}
 .ph h1[dir="rtl"]>span{margin-inline-end:.22em}
 .ph h1[dir="rtl"]>span:last-child{margin-inline-end:0}
+.pal{outline:1px solid rgba(255,255,255,.16);outline-offset:-1px}
