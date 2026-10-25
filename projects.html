@@ -76,6 +76,8 @@ button.go{background:none;border-width:0 0 1px;border-style:solid;cursor:pointer
   border:1px solid rgba(192,168,251,.28);border-radius:14px;background:radial-gradient(120% 90% at 50% 110%,rgba(192,168,251,.22),transparent 60%),rgba(244,243,241,.02)}
 .c-card p{margin:0;font:600 clamp(30px,3.4vw,58px)/1.05 var(--display)}
 .c-card em{font-style:normal;color:var(--lav)}
+/* every picture in a row the same height on the computer: the height of a brand card (4:5 on one column) */
+@media (min-width:901px){.pj-grid{align-items:start;container-type:inline-size}.pj-grid .b-pic,.pj-grid .w-pic{flex:none;aspect-ratio:auto;height:calc((100cqw - 3 * clamp(16px,1.8vw,26px)) / 4 * 1.25)}}
 @media (max-width:900px){
   .pj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 14px}
   .w-pic{flex:none;aspect-ratio:1.6}
