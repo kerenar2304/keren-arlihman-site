@@ -5,3 +5,7 @@
   m.addEventListener('click',function(){setOpen(!h.classList.contains('open'))});
   h.querySelectorAll('.v-nav a,.v-cta').forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
   addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('open')){setOpen(false);m.focus()}})})();
+/* a project page starts loading as soon as its link is pointed at or touched, so opening it feels immediate */
+(function(){var done={};function pf(h,as){if(done[h])return;done[h]=1;var l=document.createElement('link');l.rel='prefetch';l.href=h;if(as)l.as=as;document.head.appendChild(l)}
+  function go(e){var a=e.target.closest&&e.target.closest('a[href^="project-"]');if(!a)return;pf(a.getAttribute('href'));pf('assets/project.css','style');pf('assets/project.js','script')}
+  ['pointerover','touchstart','focusin'].forEach(function(t){addEventListener(t,go,{passive:true})})})();
