@@ -11,15 +11,15 @@
   +'#ka-ld .lk{display:flex;align-items:center;gap:clamp(14px,2vw,26px);direction:ltr}'
   +'#ka-ld svg{width:clamp(54px,7vw,92px);height:auto;overflow:visible}'
   +'#ka-ld .m{fill:none;stroke:#fff;stroke-linecap:butt}'
-  +'#ka-ld .m1{stroke-width:150;stroke-dasharray:800;stroke-dashoffset:800;animation:ka-d .5s cubic-bezier(.6,0,.3,1) .15s forwards}'
-  +'#ka-ld .m2{stroke-width:70;stroke-dasharray:960;stroke-dashoffset:960;animation:ka-d .45s cubic-bezier(.6,0,.3,1) .62s forwards}'
-  +'#ka-ld .m3{stroke-width:190;stroke-dasharray:850;stroke-dashoffset:850;animation:ka-d .5s cubic-bezier(.6,0,.3,1) 1.02s forwards}'
-  +'#ka-ld .m4{stroke-width:50;stroke-dasharray:420;stroke-dashoffset:420;animation:ka-d .3s cubic-bezier(.6,0,.3,1) 1.48s forwards}'
+  +'#ka-ld .m1{stroke-width:150;stroke-dasharray:800;stroke-dashoffset:800;animation:ka-d .38s cubic-bezier(.6,0,.3,1) .1s forwards}'
+  +'#ka-ld .m2{stroke-width:70;stroke-dasharray:960;stroke-dashoffset:960;animation:ka-d .34s cubic-bezier(.6,0,.3,1) .45s forwards}'
+  +'#ka-ld .m3{stroke-width:190;stroke-dasharray:850;stroke-dashoffset:850;animation:ka-d .38s cubic-bezier(.6,0,.3,1) .76s forwards}'
+  +'#ka-ld .m4{stroke-width:50;stroke-dasharray:420;stroke-dashoffset:420;animation:ka-d .24s cubic-bezier(.6,0,.3,1) 1.1s forwards}'
   +'#ka-ld .nm{display:flex;flex-direction:column;gap:8px}'
-  +'#ka-ld b{font:400 clamp(22px,3.2vw,40px)/1 "Sansation",Arial,sans-serif;letter-spacing:.04em;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:ka-w .7s cubic-bezier(.6,0,.3,1) 1.75s forwards}'
+  +'#ka-ld b{font:400 clamp(22px,3.2vw,40px)/1 "Sansation",Arial,sans-serif;letter-spacing:.04em;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:ka-w .55s cubic-bezier(.6,0,.3,1) 1.3s forwards}'
   +'#ka-ld .ln{display:flex;align-items:center;gap:12px}'
-  +'#ka-ld .ln i{flex:1;height:1px;background:currentColor;opacity:.75;transform:scaleX(0);transform-origin:left;animation:ka-l .5s cubic-bezier(.6,0,.3,1) 2.35s forwards}'
-  +'#ka-ld small{font:300 clamp(10px,1.2vw,15px)/1 "Sansation",Arial,sans-serif;letter-spacing:.08em;white-space:nowrap;opacity:0;animation:ka-f .5s ease 2.6s forwards}'
+  +'#ka-ld .ln i{flex:1;height:1px;background:currentColor;opacity:.75;transform:scaleX(0);transform-origin:left;animation:ka-l .4s cubic-bezier(.6,0,.3,1) 1.75s forwards}'
+  +'#ka-ld small{font:300 clamp(10px,1.2vw,15px)/1 "Sansation",Arial,sans-serif;letter-spacing:.08em;white-space:nowrap;opacity:0;animation:ka-f .4s ease 1.95s forwards}'
   +'@keyframes ka-d{to{stroke-dashoffset:0}}@keyframes ka-w{to{clip-path:inset(0 0 0 0)}}@keyframes ka-l{to{transform:scaleX(1)}}@keyframes ka-f{to{opacity:.85}}';
   var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
   var d=document.createElement('div');d.id='ka-ld';d.setAttribute('aria-hidden','true');
@@ -38,9 +38,9 @@
   +'</g></svg><span class="nm"><b>KEREN ARLIHMAN</b><span class="ln"><i></i><small>GRAPHIC &amp; WEB DESIGNER</small></span></span></div>';
   (document.body||document.documentElement).appendChild(d);
   var t0=Date.now(),loaded=document.readyState==='complete';
-  function end(){d.classList.add('out');setTimeout(function(){d.remove()},800)}
-  function maybe(){if(loaded&&Date.now()-t0>=3900)end()}
-  addEventListener('load',function(){loaded=true;setTimeout(maybe,Math.max(0,3900-(Date.now()-t0)))});
-  setTimeout(function(){loaded=true;maybe()},3900);
+  function end(){if(d.classList.contains("out"))return;d.classList.add("out");dispatchEvent(new Event("ka-loader-done"));setTimeout(function(){d.remove()},800)}
+  function maybe(){if(loaded&&Date.now()-t0>=2800)end()}
+  addEventListener('load',function(){loaded=true;setTimeout(maybe,Math.max(0,2800-(Date.now()-t0)))});
+  setTimeout(function(){loaded=true;maybe()},2800);
   setTimeout(end,6000);
 })();

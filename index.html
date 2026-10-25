@@ -849,7 +849,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
   addEventListener('resize',fit);fit();
   /* the opening plays once the hands' reach is known (the hands and words wait hidden until then) */
   var OPEN=!matchMedia('(prefers-reduced-motion: reduce)').matches&&scrollY<40;if(OPEN)hero.classList.add('pre');
-  function open(){if(!OPEN)return;OPEN=false;hero.classList.remove('pre');hero.classList.add('intro');setTimeout(function(){hero.classList.remove('intro')},3400)}
+  /* while the logo loader is still on screen, the opening waits for it to leave */
+  function open(){if(!OPEN)return;if(document.getElementById('ka-ld')&&!document.getElementById('ka-ld').classList.contains('out')){addEventListener('ka-loader-done',open,{once:true});return}OPEN=false;hero.classList.remove('pre');hero.classList.add('intro');setTimeout(function(){hero.classList.remove('intro')},3400)}
   setTimeout(open,1500);
   /* leaving the hero: --h runs 0 to 1; the hands slide out to the sides (--o, % of a hand's width) */
   /* v3, leaving the hero (it stays pinned while the works play): the words go, the hands come together and turn in, a
