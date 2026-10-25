@@ -1,6 +1,9 @@
 (function(){var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* the name's letters rise one after another */
-  [].forEach.call(document.querySelectorAll('.ph h1 span'),function(s,i){s.style.animationDelay=(.05+i*.05)+"s"});
+  [].forEach.call(document.querySelectorAll('.ph h1 span'),function(s,i){s.style.animationDelay=(.15+i*.07)+"s"});
+  /* a page prepared in advance (opened from a hovered link) starts its title only once it is actually shown */
+  function go(){document.documentElement.classList.add("go")}
+  if(document.prerendering)addEventListener("prerenderingchange",go,{once:true});else go();
   /* pictures rise in as they come into view */
   var rv=[].slice.call(document.querySelectorAll('.rv'));
   if(RM||!('IntersectionObserver' in window))rv.forEach(function(e){e.classList.add('on')});
