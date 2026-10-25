@@ -34,7 +34,7 @@
 .wide img{display:block;width:100%;height:auto}
 .gap{margin-top:clamp(12px,1.4vw,22px)}
 /* the colours, in code */
-.pal{display:grid;grid-template-columns:repeat(3,1fr);border-radius:18px;overflow:hidden;min-height:clamp(180px,22vw,320px)}
+.pal{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);border-radius:18px;overflow:hidden;min-height:clamp(180px,22vw,320px)}
 .pal div{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:clamp(16px,2vw,28px);font:400 14px/1.3 var(--body)}
 .pal b{font:600 clamp(18px,1.8vw,26px)/1 var(--display);letter-spacing:.02em}
 /* devices, drawn in code around the real screens: a browser, a phone */
