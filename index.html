@@ -358,8 +358,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
 @media (max-width:760px){
   .v-steps{height:395vh}
   .v-steps-in{grid-template-columns:1fr;grid-template-rows:42% 1fr;padding:84px 22px 26px;gap:6px;--gut:0px}
-  /* on the phone the cube sits a little lower, closer to the words */
-  .v-cube-slot{order:-1;grid-row:1;translate:0 7svh}.v-steps-txt{grid-row:2}
+  /* on the phone the cube keeps a clear space above the words */
+  .v-cube-slot{order:-1;grid-row:1;translate:0 0}.v-steps-txt{grid-row:2;padding-top:3svh}
   .v-snum{font-size:76px;margin:10px 0 8px}.v-slist{min-height:170px}
   .v-step h3{font-size:32px}.v-step p{font-size:14.5px;margin-top:10px}
 }
