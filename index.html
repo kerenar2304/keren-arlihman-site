@@ -953,6 +953,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
     if(nx<0){ev.preventDefault();lockW=now+1400;scrollTo({top:0,behavior:'auto'});return}
     if(nx>N-1)return;
     ev.preventDefault();lockW=now+(sv<RI-1?1400:650);scrollTo({top:stopAt(nx),behavior:'auto'})},{passive:false});
+  /* for the touch screen (below): the works as a zone that is moved one project per swipe */
+  window.__zW={in:function(){var sv=scrollY/Math.max(1,innerHeight)*100;return sv>=0&&sv<=RI+(N-1)*PER+PER*.5},fromBelow:function(){scrollTo({top:stopAt(N-1),behavior:'auto'})}};
   /* the way out is not scrubbed by the scroll: a short scroll past the last project starts it and it plays through on
      its own (the card turning over, then the cube tossed in), about two seconds; scrolling back up plays it backwards */
   var A=0,AT=0,aRun=false,aLast=0,ADUR=RM3()?.01:1.9;
@@ -1130,6 +1132,9 @@ body{background:var(--ink);color:var(--paper);margin:0}
     if(nx>STOPS.length-1){if(v<=B4+.004){ev.preventDefault();lockS=now+1100;scrollTo({top:vAt(B4+(B5-B4)*.5),behavior:'auto'})}return}
     if(nx<0)return;
     ev.preventDefault();lockS=now+(v>B4+.004?1000:1150);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
+  /* for the touch screen: the steps (and the about up to the reviews) as a zone moved one stop per swipe; arriving
+     from above it always lands on the title first */
+  window.__zS={in:function(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));return v>=B1-(B4-B1)*.25&&v<=B5},fromAbove:function(){lockS=performance.now()+1200;scrollTo({top:stopV(0),behavior:'auto'})}};
   addEventListener('scroll',measure,{passive:true});measure();cur=target;
   addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
   function setStep(n){if(n===step)return;step=n;steps.forEach(function(s,j){s.classList.toggle('on',j===n);s.classList.toggle('past',j<n)});snum.style.setProperty('--si',n)}
@@ -1440,6 +1445,24 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
   function front(x,y){var best=null,z=-1;MK.forEach(function(m){var o=+getComputedStyle(m).opacity;if(o<.6)return;var r=m.getBoundingClientRect();if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;var zi=+m.style.zIndex||0;if(zi>z){z=zi;best=m}});return best}
   addEventListener('click',function(e){if(e.target.closest('a,button,input,textarea,select'))return;var m=front(e.clientX,e.clientY);if(m)location.href=U[+m.dataset.i]||'projects.html'});
   addEventListener('mousemove',function(e){if(e.target.closest('a,button'))return;document.documentElement.style.cursor=front(e.clientX,e.clientY)?'pointer':''},{passive:true})})();
+</script>
+<script>
+/* the scroll scenes, finished: (1) arriving at the steps from above, by any means (a wheel, a trackpad's glide, a
+   phone's fling), the page always stops on the title first; (2) on a touch screen, inside the works and the steps a
+   swipe moves exactly one stop, as one wheel gesture does on the computer, and outside them the page scrolls as usual */
+(function(){var Z=function(){return [window.__zW,window.__zS].filter(Boolean)};
+  var lastY=scrollY,wasS=false,touching=false,hold=0,snapT=0;
+  addEventListener('scroll',function(){var zs=window.__zS,y=scrollY,inS=zs&&zs.in();
+    if(zs&&inS&&!wasS&&y>lastY&&!touching&&performance.now()>hold){hold=performance.now()+900;snapT=performance.now();zs.fromAbove()}
+    wasS=inS;lastY=y},{passive:true});
+  if(!('ontouchstart' in window))return;
+  var ty=0,act=false;
+  addEventListener('touchstart',function(e){touching=true;ty=e.touches[0].clientY;act=Z().some(function(z){return z.in()})},{passive:true});
+  addEventListener('touchmove',function(e){if(act)e.preventDefault()},{passive:false});
+  addEventListener('touchend',function(e){touching=false;if(!act)return;act=false;var dy=ty-e.changedTouches[0].clientY;if(Math.abs(dy)<28)return;
+    var w=new WheelEvent('wheel',{deltaY:dy>0?120:-120,cancelable:true,bubbles:true});dispatchEvent(w);
+    if(!w.defaultPrevented){var y0=scrollY,to=y0+dy*3,t0=performance.now();(function g(n){if(snapT>t0)return;var k=Math.min(1,(n-t0)/650);scrollTo({top:y0+(to-y0)*(1-Math.pow(1-k,3)),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}},{passive:true});
+  addEventListener('touchcancel',function(){touching=false;act=false},{passive:true})})();
 </script>
 </body>
 </html>
