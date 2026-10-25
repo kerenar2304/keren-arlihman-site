@@ -1431,7 +1431,7 @@ a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.
 </script>
 <script>
 /* the logo, at the top and in the footer, takes you straight to the hero: no long scroll through the whole page */
-document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var h=document.documentElement;h.style.scrollBehavior='auto';scrollTo(0,0);h.style.scrollBehavior='';history.replaceState(null,'',location.pathname+location.search)})});
+document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();if(scrollY<5)return;try{history.scrollRestoration='manual'}catch(_){}var h=document.documentElement;h.style.scrollBehavior='auto';scrollTo(0,0);document.body.style.visibility='hidden';location.replace(location.pathname+location.search)})});
 </script>
 </body>
 </html>
