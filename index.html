@@ -929,7 +929,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
   function visSv(s){var t=s>3?1:0;
     /* landing on the page further down (a reload, a link): the opening is simply done */
     if(!hInit){hInit=true;HI=t;HT=t}
-    if(t!==HT){HT=t;if(RM3())HI=t;else if(!hRun){hRun=true;hLast=performance.now();requestAnimationFrame(htick)}}
+    if(t!==HT){HT=t;if(RM3()||window.__snap)HI=t;else if(!hRun){hRun=true;hLast=performance.now();requestAnimationFrame(htick)}}
+    if(window.__snap)HI=HT;
     return HI<1?HI*(INTRO+P0):INTRO+P0+Math.max(0,s-RI)}
   function htick(now){var dt=Math.max(0,Math.min(.05,(now-hLast)/1000));hLast=now;HI+=Math.sign(HT-HI)*Math.min(Math.abs(HT-HI),dt/(innerWidth<761?4.6:4));leave();
     if(HI!==HT)requestAnimationFrame(htick);else {hRun=false;if(HT===1)lockW=Math.max(lockW,performance.now()+1100)}}
@@ -937,7 +938,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
      their own (about seven tenths of a second), so a project never stops halfway. A wheel or trackpad gesture inside
      the works moves exactly one project; before the first and after the last the page scrolls on as usual */
   var QA=0,QT=0,qRun=false,qLast=0,lockW=0;
-  function stepQ(t){if(t!==QT){QT=t;if(RM3()){QA=t}else if(!qRun){qRun=true;qLast=performance.now();requestAnimationFrame(qtick)}}return QA}
+  function stepQ(t){if(window.__snap){QT=t;QA=t;return QA}if(t!==QT){QT=t;if(RM3()){QA=t}else if(!qRun){qRun=true;qLast=performance.now();requestAnimationFrame(qtick)}}return QA}
   function qtick(now){var dt=Math.min(.05,(now-qLast)/1000);qLast=now;QA+=(QT-QA)*(1-Math.exp(-dt*7));if(Math.abs(QT-QA)<.002)QA=QT;leave();
     if(QA!==QT)requestAnimationFrame(qtick);else qRun=false}
   function stopAt(i){return (RI+i*PER)/100*innerHeight}
@@ -959,7 +960,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
      its own (the card turning over, then the cube tossed in), about two seconds; scrolling back up plays it backwards */
   var A=0,AT=0,aRun=false,aLast=0,ADUR=RM3()?.01:1.9;
   function RM3(){return matchMedia('(prefers-reduced-motion: reduce)').matches}
-  function outA(s){var t=s>.12?1:0;if(t!==AT){AT=t;if(!aRun){aRun=true;aLast=performance.now();requestAnimationFrame(atick)}}return A}
+  function outA(s){var t=s>.12?1:0;if(window.__snap){AT=t;A=t;return A}if(t!==AT){AT=t;if(!aRun){aRun=true;aLast=performance.now();requestAnimationFrame(atick)}}return A}
   function atick(now){var dt=Math.min(.05,(now-aLast)/1000);aLast=now;A+=Math.sign(AT-A)*Math.min(Math.abs(AT-A),dt/ADUR);leave();
     if(A!==AT)requestAnimationFrame(atick);else aRun=false}
   addEventListener('scroll',leave,{passive:true});leave();
@@ -1063,13 +1064,13 @@ body{background:var(--ink);color:var(--paper);margin:0}
     var p=.31+.66*(i+.08)/(N-1);scrollTo({top:innerHeight*(.3+.4*i),behavior:RM?'auto':'smooth'})})});
   /* the menu's "projects" lands on the works (inside the pinned scene), not on the start of the steps */
   document.querySelectorAll('.v-nav a[href="#work"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
-    scrollTo({top:innerHeight*.3,behavior:RM?'auto':'smooth'})})});
+    window.__jump(innerHeight*.3)})});
   /* and "about" lands where the photo has arrived and the story is in */
   document.querySelectorAll('.v-nav a[href="#about"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
-    scrollTo({top:vAt(B4+(B5-B4)*.86),behavior:RM?'auto':'smooth'})})});
+    window.__jump(vAt(B4+(B5-B4)*.86))})});
   /* and "how it works" lands on the first step */
   document.querySelectorAll('.v-nav a[href="#process"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
-    scrollTo({top:vAt(B1+.004),behavior:RM?'auto':'smooth'})})});
+    window.__jump(vAt(B1))})});
   /* 3x3 rotation helpers (standard axes, as CSS applies them) */
   function R3(ax,deg){var t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);
     return ax==='X'?[1,0,0,0,c,-s,0,s,c]:ax==='Y'?[c,0,s,0,1,0,-s,0,c]:[c,-s,0,s,c,0,0,0,1]}
@@ -1142,11 +1143,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
   function frame(now){
     /* the cube moves to each new place at an even, readable pace: about 1.2 seconds, easing in and out */
     if(target!==frame.tt){frame.tf=cur;frame.tt=target;frame.ts=now}
-    cur=RM?target:lerp(frame.tf,frame.tt,io(cl((now-frame.ts)/1200)));
+    cur=RM?target:lerp(frame.tf,frame.tt,io(cl((now-frame.ts)/1200)));if(window.__snap){measure();cur=target;frame.tf=frame.tt=target;}
     /* the cube into my photo plays at an even pace, about 1.8 seconds, either way */
     var dtA=Math.min(.05,(now-(frame.l||now))/1000);frame.l=now;curA=RM?targetA:curA+Math.sign(targetA-curA)*Math.min(Math.abs(targetA-curA),dtA/1.8);
     /* the about's way out plays at an even pace too, about 1.1 seconds */
-    curE=RM?targetE:curE+Math.sign(targetE-curE)*Math.min(Math.abs(targetE-curE),dtA/1.1);
+    curE=RM?targetE:curE+Math.sign(targetE-curE)*Math.min(Math.abs(targetE-curE),dtA/1.1);if(window.__snap){curA=targetA;curE=targetE}
     /* while the cube is still hidden under the hero and the works (not tossed in yet), nothing here is drawn: the
        frames go to the scroll there */
     if(window.__toss===0&&curA===0&&curE===0){cv.style.opacity='0';glow.style.setProperty('--go','0');requestAnimationFrame(frame);return}
@@ -1453,7 +1454,7 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
 (function(){var Z=function(){return [window.__zW,window.__zS].filter(Boolean)};
   var lastY=scrollY,wasS=false,touching=false,hold=0,snapT=0;
   addEventListener('scroll',function(){var zs=window.__zS,y=scrollY,inS=zs&&zs.in();
-    if(zs&&inS&&!wasS&&y>lastY&&!touching&&performance.now()>hold){hold=performance.now()+900;snapT=performance.now();zs.fromAbove()}
+    if(zs&&inS&&!wasS&&y>lastY&&!window.__snap&&!touching&&performance.now()>hold){hold=performance.now()+900;snapT=performance.now();zs.fromAbove()}
     wasS=inS;lastY=y},{passive:true});
   if(!('ontouchstart' in window))return;
   var ty=0,act=false;
@@ -1463,6 +1464,17 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
     var w=new WheelEvent('wheel',{deltaY:dy>0?120:-120,cancelable:true,bubbles:true});dispatchEvent(w);
     if(!w.defaultPrevented){var y0=scrollY,to=y0+dy*3,t0=performance.now();(function g(n){if(snapT>t0)return;var k=Math.min(1,(n-t0)/650);scrollTo({top:y0+(to-y0)*(1-Math.pow(1-k,3)),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}},{passive:true});
   addEventListener('touchcancel',function(){touching=false;act=false},{passive:true})})();
+</script>
+<style>html.snap body *{transition:none!important}</style>
+<script>
+/* the menu sends you straight to its part of the page: the page is hidden for a moment, moved there at once, every
+   scroll scene set to where it belongs there (window.__snap: no scene plays its way there), and shown again */
+window.__jump=function(y){var h=document.documentElement,b=document.body;h.classList.add('snap');h.style.scrollBehavior='auto';b.style.transition='none';b.style.opacity='0';window.__snap=true;
+  scrollTo(0,y);dispatchEvent(new Event('scroll'));var n=0;(function f(){scrollTo(0,y);dispatchEvent(new Event('scroll'));if(++n<6){requestAnimationFrame(f);return}
+    window.__snap=false;h.classList.remove('snap');h.style.scrollBehavior='';b.style.transition='opacity .35s ease';b.style.opacity='1';setTimeout(function(){b.style.transition=''},400)})()};
+document.querySelectorAll('a[href="#contact"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.getElementById('contact');window.__jump(t.getBoundingClientRect().top+scrollY)})});
+/* arriving from another page with a part in the address (./#about and so on): straight there, the same way */
+addEventListener('load',function(){var hs=location.hash;if(!/^#(about|process|work|contact)$/.test(hs))return;var a=document.querySelector('a[href="'+hs+'"]');if(a)setTimeout(function(){a.click()},60)});
 </script>
 </body>
 </html>
