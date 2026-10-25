@@ -54,3 +54,10 @@
 .sb-top{padding-top:calc(96px + clamp(30px,7vh,90px))}
 .ph{margin-top:0!important}
 @media (max-width:900px){.sb-top{padding-top:calc(72px + clamp(24px,5vh,60px))}}
+/* the 3D letter swap of the menu and the buttons, as on the home page: each letter rolls up like a face of a small cube */
+.lsw{display:inline-flex;perspective:500px;overflow:hidden;height:1.1em;line-height:1.1}
+.lsw i{position:relative;display:inline-block;font-style:normal;line-height:1.1;height:1.1em;transform-style:preserve-3d;transform-origin:50% 50% -.55em;
+  transition:transform .55s cubic-bezier(.65,0,.25,1);transition-delay:calc(var(--i) * 28ms)}
+.lsw i::after{content:attr(data-c);position:absolute;left:0;top:100%;width:100%;transform-origin:50% 0;transform:rotateX(-90deg)}
+a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.lsw i{transform:rotateX(90deg)}
+@media (prefers-reduced-motion:reduce){.lsw i{transition:none}a:hover>.lsw i,button:hover>.lsw i{transform:none}}
