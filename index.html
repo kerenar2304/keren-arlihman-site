@@ -1428,5 +1428,9 @@ a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;if(on){measure();start()}}).observe(s);else{on=true;start()}
 })();
 </script>
+<script>
+/* the logo, at the top and in the footer, takes you straight to the hero: no long scroll through the whole page */
+document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var h=document.documentElement;h.style.scrollBehavior='auto';scrollTo(0,0);h.style.scrollBehavior='';history.replaceState(null,'',location.pathname+location.search)})});
+</script>
 </body>
 </html>
