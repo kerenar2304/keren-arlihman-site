@@ -1433,5 +1433,13 @@ a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.
 /* the logo, at the top and in the footer, takes you straight to the hero: no long scroll through the whole page */
 document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();if(scrollY<5)return;try{history.scrollRestoration='manual'}catch(_){}var h=document.documentElement;h.style.scrollBehavior='auto';scrollTo(0,0);document.body.style.visibility='hidden';location.replace(location.pathname+location.search)})});
 </script>
+<script>
+/* the works: a click on the card in front opens that project's full page (the cards themselves let the scroll through,
+   so the click is caught on the page and matched to the front card under the pointer) */
+(function(){var U=['project-ravid.html','project-julis.html','project-eitan.html','project-oro.html'],MK=[].slice.call(document.querySelectorAll('.v3-mk'));
+  function front(x,y){var best=null,z=-1;MK.forEach(function(m){var o=+getComputedStyle(m).opacity;if(o<.6)return;var r=m.getBoundingClientRect();if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;var zi=+m.style.zIndex||0;if(zi>z){z=zi;best=m}});return best}
+  addEventListener('click',function(e){if(e.target.closest('a,button,input,textarea,select'))return;var m=front(e.clientX,e.clientY);if(m)location.href=U[+m.dataset.i]||'projects.html'});
+  addEventListener('mousemove',function(e){if(e.target.closest('a,button'))return;document.documentElement.style.cursor=front(e.clientX,e.clientY)?'pointer':''},{passive:true})})();
+</script>
 </body>
 </html>
