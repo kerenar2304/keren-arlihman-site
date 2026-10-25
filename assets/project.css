@@ -179,3 +179,9 @@ nav.pn a:hover .pn-ar{transform:translateX(-10px)}
   nav.pn em{font-size:13px}
   nav.pn img{border-radius:10px}
 }
+.po p{max-width:58ch}
+/* five rows, so the tilted table always fills its frame: no empty corner */
+.tbl .row.d{margin-left:-44vw;animation-duration:88s;animation-direction:reverse}
+.tbl .row.e{margin-left:-6vw;animation-duration:100s}
+.tbl .pl{width:max-content}
+.tbl .pl{gap:clamp(14px,1.6vw,26px)}.tbl .row{gap:clamp(14px,1.6vw,26px)}

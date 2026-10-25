@@ -14,3 +14,8 @@
   function f(){raf=0;var y=scrollY;if(y<innerHeight*1.2)hi.style.transform='translateY('+(y*.07).toFixed(1)+'px)';
     if(pl){var r=tb.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);if(p>-.1&&p<1.1)pl.style.setProperty('--dx',((p-.5)*-20)+'vw')}}
   addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(f)},{passive:true});f()})();
+/* the table of screens never shows an empty patch: each row repeats its screens until it is several times the
+   table's width (whole copies, so the drift of half its length still loops seamlessly) */
+(function(){var tb=document.querySelector('.tbl');if(!tb)return;
+  function fill(){var need=tb.offsetWidth*8;[].forEach.call(tb.querySelectorAll('img'),function(i){i.loading='eager'});[].forEach.call(tb.querySelectorAll('.row'),function(r){var k=0,w0=r.scrollWidth,du=parseFloat(getComputedStyle(r).animationDuration)||80;while(r.scrollWidth<need&&k++<4){r.innerHTML+=r.innerHTML}r.style.animationDuration=(du*r.scrollWidth/w0).toFixed(1)+'s';[].forEach.call(r.querySelectorAll('img'),function(i){i.loading='eager'})})}
+  if(document.readyState==='complete')fill();else addEventListener('load',fill)})();

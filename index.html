@@ -694,14 +694,9 @@ body{background:var(--ink);color:var(--paper);margin:0}
     <div class="v-tiles" id="tiles" aria-hidden="true"></div>
     <div class="v-atxt" id="about" aria-labelledby="about-h">
       <h2 id="about-h">מיתוג טוב<br><em>לא מתחיל בניחוש</em></h2>
-      <p class="a-lead">העסק התפתח, צבר ניסיון והתקדם. <em>אבל המיתוג?</em> הוא נשאר קצת מאחור: הלוגו נראה אחרת בכל מקום, ואת הלינק לאתר כבר מביך לשלוח.</p>
-      <p>אני קרן ארליכמן, מעצבת מותגים ואתרים, עם יותר מעשור של ניסיון בעולם האנליזה. לכן אצלי העיצוב מתחיל בהבנה:</p>
-      <ol class="a-steps">
-        <li><b>01</b>לומדת את העסק, את השוק ואת מה שמייחד אתכם</li>
-        <li><b>02</b>מציירת את הלוגו ביד, בדף ועיפרון</li>
-        <li><b>03</b>בונה שפה אחת שמלווה אתכם, מכרטיס הביקור ועד האתר</li>
-      </ol>
-      <p class="a-close">כי הנראות צריכה לשקף את המקום שאליו הגעתם. ובפעם הבאה שיבקשו מכם לינק לאתר, <em>תשלחו אותו בגאווה</em></p>
+      <p>העסק התפתח, צבר ניסיון והתקדם. אבל המיתוג? הוא קצת נשאר מאחור. הלוגו נראה אחרת בכל מקום, ואת הלינק לאתר כבר מביך לשלוח.</p>
+      <p>אני קרן ארליכמן, מעצבת מותגים ואתרים, ומביאה איתי יותר מעשור של ניסיון בעולם האנליזה. לכן, לפני שאני מציירת את הקו הראשון, אני לומדת את העסק שלכם, את השוק, את המתחרים ואת מה שמייחד אתכם. משם אני מתחילה לצייר את הלוגו עם דף ועיפרון, ובונה ממנו שפה עיצובית אחת, ברורה ואחידה, שמלווה את העסק בכל מקום, מכרטיס הביקור ועד לאתר.</p>
+      <p>כי הנראות של העסק צריכה לשקף את המקום שאליו הגעתם. ובפעם הבאה שיבקשו מכם לינק לאתר, תשלחו אותו בגאווה.</p>
     </div>
   </div>
 </section>
@@ -1150,8 +1145,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
        frames go to the scroll there */
     if(window.__toss===0&&curA===0&&curE===0){cv.style.opacity='0';glow.style.setProperty('--go','0');requestAnimationFrame(frame);return}
     var p=cur,t=(now-t0)/1000,ab=curA;
-    var intro=!rev&&p<.012;txt.classList.toggle('intro',intro);
-    setStep(rev?0:intro?-1:p<.075?0:p<.145?1:2);
+    var intro=!rev&&p<.04;txt.classList.toggle('intro',intro);
+    setStep(rev?0:intro?-1:p<.095?0:p<.15?1:2);
     var front=sm((p-.21)/.05),grow=io((p-.215)/.06),inner=sm((p-.252)/.016),morph=io((p-.27)/.04),settle=1-front;
     var to=(1-sm((p-.2)/.035))*(1-sm(ab/.1));txt.style.opacity=to.toFixed(3);txt.style.transform='translateY('+(-30*(1-to)).toFixed(1)+'px)';txt.style.visibility=to<.01?'hidden':'visible';
     var po=sm((p-.27)/.04)*(1-sm(ab/.12));ptxt.style.opacity=po.toFixed(3);ptxt.style.transform='translateY('+(30*(1-po)).toFixed(1)+'px)';ptxt.classList.toggle('on',po>.5);
