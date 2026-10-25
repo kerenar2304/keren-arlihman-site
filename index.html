@@ -371,6 +371,13 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-atxt h2{font:600 clamp(40px,4.2vw,66px)/1 var(--display);margin:0 0 clamp(22px,4vh,38px)}
 .v-atxt h2 em{font-style:normal;color:var(--lav);text-shadow:0 0 .14em rgba(192,168,251,.32),0 0 .5em rgba(192,168,251,.14)}
 .v-atxt p{font:300 clamp(15px,1.12vw,17.5px)/1.7 var(--body);margin:0 0 .9em;max-width:62ch;opacity:.85}
+/* the story in three beats: a large opening line, the three steps of the work side by side, and a closing line */
+.v-atxt .a-lead{font:400 clamp(19px,1.55vw,25px)/1.45 var(--body);opacity:1;max-width:42ch;margin-bottom:1em}
+.v-atxt .a-lead em,.v-atxt .a-close em{font-style:normal;color:var(--lav)}
+.a-steps{list-style:none;margin:clamp(14px,2.6vh,26px) 0 clamp(16px,3vh,30px);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,28px);max-width:64ch}
+.a-steps li{border-top:1px solid rgba(192,168,251,.4);padding-top:clamp(10px,1.6vh,16px);font:300 clamp(13.5px,1vw,15.5px)/1.5 var(--body);opacity:.9}
+.a-steps b{display:block;font:600 clamp(26px,2.4vw,40px)/1 var(--display);color:var(--lav);margin-bottom:clamp(6px,1vh,10px)}
+.v-atxt .a-close{font:400 clamp(16px,1.25vw,20px)/1.55 var(--body);opacity:1;max-width:44ch}
 .v-atxt .sig{font:400 clamp(15px,1.1vw,17px)/1 var(--body);color:var(--lav);opacity:1;margin-top:clamp(18px,3vh,28px)}
 /* the layer that holds my photo in the about part */
 .v-tiles{position:absolute;inset:0;z-index:3;pointer-events:none;display:none}
@@ -384,6 +391,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
   .v-aslot{grid-area:auto;grid-row:1;grid-column:1}
   .v-atxt{grid-area:auto;grid-row:2;grid-column:1;align-self:start;padding-left:0}
   .v-atxt h2{font-size:30px;margin-bottom:12px}.v-atxt p{font-size:13.5px;line-height:1.55;margin-bottom:.6em}
+  .v-atxt .a-lead{font-size:16px}.v-atxt .a-close{font-size:14px}
+  .a-steps{gap:10px;margin:10px 0 12px}.a-steps li{font-size:12px;line-height:1.4;padding-top:8px}.a-steps b{font-size:22px;margin-bottom:4px}
 }
 @media (prefers-reduced-motion:reduce){.v-step *,.v-snum-in{transition:none}}
 /* reviews: a large heading and my Google rating, then the three reviews in one row; the row spans the background grid
@@ -685,9 +694,14 @@ body{background:var(--ink);color:var(--paper);margin:0}
     <div class="v-tiles" id="tiles" aria-hidden="true"></div>
     <div class="v-atxt" id="about" aria-labelledby="about-h">
       <h2 id="about-h">מיתוג טוב<br><em>לא מתחיל בניחוש</em></h2>
-      <p>העסק התפתח, צבר ניסיון והתקדם. אבל המיתוג? הוא קצת נשאר מאחור. הלוגו נראה אחרת בכל מקום, ואת הלינק לאתר כבר מביך לשלוח.</p>
-      <p>אני קרן ארליכמן, מעצבת מותגים ואתרים, ומביאה איתי יותר מעשור של ניסיון בעולם האנליזה. לכן, לפני שאני מציירת את הקו הראשון, אני לומדת את העסק שלכם, את השוק, את המתחרים ואת מה שמייחד אתכם. משם אני מתחילה לצייר את הלוגו עם דף ועיפרון, ובונה ממנו שפה עיצובית אחת, ברורה ואחידה, שמלווה את העסק בכל מקום, מכרטיס הביקור ועד לאתר.</p>
-      <p>כי הנראות של העסק צריכה לשקף את המקום שאליו הגעתם. ובפעם הבאה שיבקשו מכם לינק לאתר, תשלחו אותו בגאווה.</p>
+      <p class="a-lead">העסק התפתח, צבר ניסיון והתקדם. <em>אבל המיתוג?</em> הוא נשאר קצת מאחור: הלוגו נראה אחרת בכל מקום, ואת הלינק לאתר כבר מביך לשלוח.</p>
+      <p>אני קרן ארליכמן, מעצבת מותגים ואתרים, עם יותר מעשור של ניסיון בעולם האנליזה. לכן אצלי העיצוב מתחיל בהבנה:</p>
+      <ol class="a-steps">
+        <li><b>01</b>לומדת את העסק, את השוק ואת מה שמייחד אתכם</li>
+        <li><b>02</b>מציירת את הלוגו ביד, בדף ועיפרון</li>
+        <li><b>03</b>בונה שפה אחת שמלווה אתכם, מכרטיס הביקור ועד האתר</li>
+      </ol>
+      <p class="a-close">כי הנראות צריכה לשקף את המקום שאליו הגעתם. ובפעם הבאה שיבקשו מכם לינק לאתר, <em>תשלחו אותו בגאווה</em></p>
     </div>
   </div>
 </section>
@@ -884,11 +898,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
       mk.style.transform='translate('+x.toFixed(2)+'vw,'+(y-gone*6).toFixed(2)+'vh) perspective(1600px) rotateY('+ry.toFixed(2)+'deg) rotateZ('+rz.toFixed(2)+'deg) scale('+sc.toFixed(4)+')';
       mk.style.filter=i===0&&m<.999?'blur('+((1-m)*10).toFixed(1)+'px)':'none'});
     /* the videos: only the card in front plays; the rest wait, paused. When a card comes to the front its video goes
-       back to its beginning, rests there two seconds (data-wait, ms, for a video that should start at once) and then plays. With reduced motion asked for, they stay still on their first frame */
+       back to its beginning, rests there a little over half a second (data-wait, ms, for a video that should start at once) and then plays. With reduced motion asked for, they stay still on their first frame */
     MK.forEach(function(mk,i){var v=mob?mk.querySelector('.pv'):mk.firstElementChild;if(!v||v.tagName!=='VIDEO')return;
       var near=Math.abs(i-q)<.9&&so<.4&&u0>.2&&!RM3();v._near=near;
       if(near&&v.paused&&!v._w){v.preload='auto';try{v.currentTime=0}catch(_){}
-        v._w=setTimeout(function(){v._w=0;if(!v._near)return;var pr=v.play();if(pr&&pr.catch)pr.catch(function(){})},v.dataset.wait?+v.dataset.wait:2000)}
+        v._w=setTimeout(function(){v._w=0;if(!v._near)return;var pr=v.play();if(pr&&pr.catch)pr.catch(function(){})},v.dataset.wait?+v.dataset.wait:600)}
       else if(!near){if(v._w){clearTimeout(v._w);v._w=0}if(!v.paused)v.pause()}});
     /* the name of the card in front: it fades while the cards move and comes back with the new name */
     var on=Math.round(q),near=1-cl3(Math.abs(q-on)/.18),show=e*near*(1-gone);
