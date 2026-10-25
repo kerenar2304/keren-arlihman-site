@@ -1,6 +1,6 @@
 (function(){var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* the name's letters rise one after another */
-  [].forEach.call(document.querySelectorAll('.ph h1 span'),function(s,i){s.style.animationDelay=(.25+i*.09)+'s'});
+  [].forEach.call(document.querySelectorAll('.ph h1 span'),function(s,i){s.style.animationDelay=(.05+i*.05)+"s"});
   /* pictures rise in as they come into view */
   var rv=[].slice.call(document.querySelectorAll('.rv'));
   if(RM||!('IntersectionObserver' in window))rv.forEach(function(e){e.classList.add('on')});
