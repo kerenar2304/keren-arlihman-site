@@ -1466,8 +1466,8 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
   addEventListener('touchcancel',function(){touching=false;act=false},{passive:true})})();
 </script>
 <style>
-/* on the phone the hands lean outwards, the open palms forming a bowl under the words */
-@media (max-width:760px){.v-hw.l{rotate:calc(var(--c,0) * 7deg + 14deg);transform-origin:50% 62%}.v-hw.r{rotate:calc(var(--c,0) * -7deg - 14deg);transform-origin:50% 62%}}
+/* on the phone the hands turn inwards, cradling the paragraph from below */
+@media (max-width:760px){.v-hw.l{rotate:calc(var(--c,0) * 7deg - 12deg);transform-origin:50% 62%}.v-hw.r{rotate:calc(var(--c,0) * -7deg + 12deg);transform-origin:50% 62%}}
 /* running text on the phone: one size along the whole page, 16px */
 /* on a short phone the photo and the cube take less height, so the whole story fits on the screen */
 @media (max-width:760px) and (max-height:760px){.v-steps-in{grid-template-rows:30% 1fr;padding-top:76px}.v-atxt h2{font-size:26px!important;margin-bottom:8px!important}.v-atxt p{margin-bottom:.45em!important;line-height:1.55!important}}
