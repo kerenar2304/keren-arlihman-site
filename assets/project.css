@@ -185,3 +185,6 @@ nav.pn a:hover .pn-ar{transform:translateX(-10px)}
 .tbl .row.e{margin-left:-6vw;animation-duration:100s}
 .tbl .pl{width:max-content}
 .tbl .pl{gap:clamp(14px,1.6vw,26px)}.tbl .row{gap:clamp(14px,1.6vw,26px)}
+
+/* running text on the phone: one size along the whole site, 16px */
+@media (max-width:760px){.po p{font-size:16px!important;line-height:1.65!important}}

@@ -1465,6 +1465,12 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
     if(!w.defaultPrevented){var y0=scrollY,to=y0+dy*3,t0=performance.now();(function g(n){if(snapT>t0)return;var k=Math.min(1,(n-t0)/650);scrollTo({top:y0+(to-y0)*(1-Math.pow(1-k,3)),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}},{passive:true});
   addEventListener('touchcancel',function(){touching=false;act=false},{passive:true})})();
 </script>
+<style>
+/* running text on the phone: one size along the whole page, 16px */
+/* on a short phone the photo and the cube take less height, so the whole story fits on the screen */
+@media (max-width:760px) and (max-height:760px){.v-steps-in{grid-template-rows:30% 1fr;padding-top:76px}.v-atxt h2{font-size:26px!important;margin-bottom:8px!important}.v-atxt p{margin-bottom:.45em!important;line-height:1.55!important}}
+@media (max-width:760px){.v-hero .lead,.v-step p,.v-atxt p,.v-q blockquote,.v-q blockquote p,.v-faq-head .v-up,.v-fq p,.c2-top .ct-sub{font-size:16px!important;line-height:1.65!important}.v-hero .lead span:first-child{white-space:normal}}
+</style>
 <style>html.snap body *{transition:none!important}</style>
 <script>
 /* the menu sends you straight to its part of the page: the page is hidden for a moment, moved there at once, every

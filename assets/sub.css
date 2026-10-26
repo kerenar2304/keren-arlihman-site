@@ -80,3 +80,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--lav);outline-offset
   .doc p,.doc li{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){.up{animation:none;opacity:1;translate:none;filter:none}}
+
+/* running text on the phone: one size along the whole site, 16px */
+@media (max-width:760px){.sb-lead,.doc-in p,.doc-in li{font-size:16px!important;line-height:1.65!important}}
