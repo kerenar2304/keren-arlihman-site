@@ -4,6 +4,8 @@
   var ss;try{ss=sessionStorage}catch(e){}
   if(ss&&ss.getItem('ka-loader'))return;
   if(document.prerendering)return;
+  /* only on the home page: a visitor who lands straight on a project or a policy page sees it at once */
+  if(!/(\/|\/index\.html|\/v3\.html|\/index)$/.test(location.pathname))return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   try{ss&&ss.setItem('ka-loader','1')}catch(e){}
   var css='@font-face{font-family:"Sansation";src:url(assets/mk/fonts/Sansation-Light.ttf);font-weight:300}@font-face{font-family:"Sansation";src:url(assets/mk/fonts/Sansation-Regular.ttf);font-weight:400}'+'#ka-ld{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#0d0c11;color:#f2efe9;transition:opacity .7s ease,visibility .7s}'

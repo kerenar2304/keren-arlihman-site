@@ -83,3 +83,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--lav);outline-offset
 
 /* running text on the phone: one size along the whole site, 16px */
 @media (max-width:760px){.sb-lead,.doc-in p,.doc-in li{font-size:16px!important;line-height:1.65!important}}
+
+/* the legal links get a full tap height */
+.sb-legal a{display:inline-block;padding-block:6px}

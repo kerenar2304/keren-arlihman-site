@@ -18,8 +18,10 @@
   (document.body||document.documentElement).appendChild(a);
   /* it waits for the loader, and hides where the page already offers WhatsApp */
   var ct=document.getElementById('contact'),inCt=false;
-  function upd(){var ld=document.getElementById('ka-ld');var ok=!(ld&&!ld.classList.contains('out'))&&!inCt;a.classList.toggle('on',ok)}
+  function upd(){var ld=document.getElementById('ka-ld'),h=document.getElementById('hdr');var ok=!(ld&&!ld.classList.contains('out'))&&!inCt&&!(h&&h.classList.contains('open'));a.classList.toggle('on',ok)}
   if(ct&&'IntersectionObserver' in window)new IntersectionObserver(function(es){inCt=es[0].isIntersecting;upd()},{threshold:.25}).observe(ct);
+  /* and while the phone menu is open, so it never covers the menu's own button */
+  var hd=document.getElementById('hdr');if(hd&&'MutationObserver' in window)new MutationObserver(upd).observe(hd,{attributes:true,attributeFilter:['class']});
   addEventListener('ka-loader-done',function(){setTimeout(upd,400)});
   setTimeout(upd,1200);
 })();
