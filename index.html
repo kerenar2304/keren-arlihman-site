@@ -564,6 +564,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .ct-done{display:none;margin:0;font:600 clamp(28px,2.6vw,42px)/1.2 var(--display)}
 .ct-done em{font-style:normal;color:var(--lav)}
 .ct-done span{display:block;margin-top:12px;font:300 clamp(15px,1.15vw,18px)/1.6 var(--body);opacity:.72}
+.ct-form .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}.ct-send:disabled{opacity:.6;cursor:wait}
 .sent .ct-form{display:none}.sent .ct-done{display:block;animation:v-words 1s cubic-bezier(.22,.61,.36,1) backwards}
 
 /* the hands come in from the upper left and the lower right, their tips at the two sides of the form */
@@ -796,6 +797,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
       <form class="ct-form" novalidate data-form>
         <label class="fl"><input name="name" autocomplete="name" placeholder=" " required><span>שם</span><i></i></label>
         <label class="fl"><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " style="text-align:right" required><span>טלפון</span><i></i></label>
+        <label class="hp" aria-hidden="true">חברה<input name="company" tabindex="-1" autocomplete="off"></label>
         <small class="ct-err" aria-live="polite"></small>
         <button class="ct-send" type="submit">לשליחת הפרטים <span aria-hidden="true">←</span></button>
         <p class="ct-note">המסירה מרצון, ובלי שם וטלפון לא אוכל לחזור אליכם. הפרטים ישמשו רק לכך. <a href="privacy.html">למדיניות הפרטיות</a></p>
@@ -1382,7 +1384,8 @@ body{background:var(--ink);color:var(--paper);margin:0}
 </script>
 <script>
 /* contact: comes in when reached; the hands come in with the scroll (--k 0 to 1) and stop pointing at the form.
-   The form still needs to be connected to where the details should go (email or a form service) */
+   The details go to /api/contact (functions/api/contact.js, which mails them through Resend); the thank-you shows
+   only once they really arrived, and otherwise the visitor is told so and offered WhatsApp */
 (function(){
   var ct=document.getElementById('contact');if(!ct)return;var f=ct.querySelector('[data-form]'),st=ct.querySelector('[data-stage]');
   if('IntersectionObserver' in window)new IntersectionObserver(function(e,o){if(e[0].isIntersecting){ct.classList.add('in');o.disconnect()}},{rootMargin:'0px 0px -25% 0px'}).observe(ct);else ct.classList.add('in');
@@ -1401,7 +1404,11 @@ body{background:var(--ink);color:var(--paper);margin:0}
   function check(i){var ok=i.name==='name'?i.value.trim().length>1:i.value.replace(/\D/g,'').length>8;var w=i.closest('.fl');if(w)w.classList.toggle('bad',!ok);i.setAttribute('aria-invalid',ok?'false':'true');return ok}
   f.addEventListener('submit',function(e){e.preventDefault();var n=f.elements.name,p=f.elements.phone,a=check(n),b=check(p);
     if(!a||!b){say(!a&&!b?'נא להשאיר שם וטלפון':!a?'נא להשאיר שם':'נא להשאיר מספר טלפון');(!a?n:p).focus();return}
-    say('');(dlg||ct).classList.add('sent');var d=(dlg||ct).querySelector('.ct-done');d.focus({preventScroll:true})});
+    var btn=f.querySelector('.ct-send');if(btn.disabled)return;btn.disabled=true;f.setAttribute('aria-busy','true');say('שולח...');
+    fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:n.value,phone:p.value,company:f.elements.company.value})})
+      .then(function(r){if(!r.ok)throw r;say('');(dlg||ct).classList.add('sent');var d=(dlg||ct).querySelector('.ct-done');d.focus({preventScroll:true})})
+      .catch(function(){say('השליחה לא עברה. אפשר לנסות שוב, או לכתוב לי ישירות בוואטסאפ')})
+      .then(function(){btn.disabled=false;f.removeAttribute('aria-busy')})});
   [f.elements.name,f.elements.phone].forEach(function(i){i.addEventListener('input',function(){if(i.getAttribute('aria-invalid')==='true'&&check(i))say('')})});
 })();
 </script>

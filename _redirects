@@ -1,0 +1,44 @@
+# the old WordPress addresses, each to its page here (301, so Google moves the ranking along)
+/creamarina          /project-crema       301
+/creamarina/         /project-crema       301
+/gaya-ron            /project-gaya        301
+/gaya-ron/           /project-gaya        301
+/katerina-makri      /project-katerina    301
+/katerina-makri/     /project-katerina    301
+/kipod               /project-kipod       301
+/kipod/              /project-kipod       301
+/victoria            /project-victoria    301
+/victoria/           /project-victoria    301
+/pocktick            /project-pocktick    301
+/pocktick/           /project-pocktick    301
+/moshe-avot-shahaf   /project-moshe       301
+/moshe-avot-shahaf/  /project-moshe       301
+/portfolio           /projects            301
+/portfolio/          /projects            301
+/about               /#about              301
+/about/              /#about              301
+/contact             /#contact            301
+/contact/            /#contact            301
+/%D7%9E%D7%93%D7%99%D7%A0%D7%99%D7%95%D7%AA-%D7%A4%D7%A8%D7%98%D7%99%D7%95%D7%AA/  /privacy        301
+/%d7%9e%d7%93%d7%99%d7%a0%d7%99%d7%95%d7%aa-%d7%a4%d7%a8%d7%98%d7%99%d7%95%d7%aa/  /privacy        301
+/%D7%94%D7%A6%D7%94%D7%A8%D7%AA-%D7%A0%D7%92%D7%99%D7%A9%D7%95%D7%AA/              /accessibility  301
+/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa/              /accessibility  301
+/%D7%91%D7%93%D7%99%D7%A7%D7%AA-%D7%98%D7%9E%D7%A4%D7%9C%D7%99%D7%99%D7%98%D7%99%D7%9D/  /  301
+/%d7%91%d7%93%d7%99%d7%a7%d7%aa-%d7%98%d7%9e%d7%a4%d7%9c%d7%99%d7%99%d7%98%d7%99%d7%9d/  /  301
+# old posts with no page of their own here, categories and tags: to all the work
+/moments-of-light/*  /projects  301
+/adi-tzur/*          /projects  301
+/flora-invitation/*  /projects  301
+/style/*             /projects  301
+/bw-invitation/*     /projects  301
+/maafim-ksumim/*     /projects  301
+/ale-shel-zait/*     /projects  301
+/florique/*          /projects  301
+/category/*          /projects  301
+/tag/*               /projects  301
+/wp-admin/*          /          301
+/wp-login.php        /          301
+/feed/*              /          301
+# the files the site was first built as
+/v3                  /          301
+/index               /          301
