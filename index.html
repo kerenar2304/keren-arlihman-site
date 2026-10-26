@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>קרן ארליכמן | מיתוג ואתרי תדמית</title>
-<meta name="description" content="מיתוג ואתרי תדמית לעסקים שעברו דרך. כי שנים בונים שם, שניות בונות רושם.">
+<meta name="description" content="מיתוג ואתרי תדמית לעסקים שעברו דרך. כי שנים בונות שם, שניות בונות רושם.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/site.css">
@@ -100,7 +100,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
 .v-hero .close{top:calc(var(--ctop) * var(--sc) * 1px);width:100%;font:600 calc(var(--cfs) * var(--sc) * 1px)/1.2 var(--display);color:var(--lav)}
 @media (min-width:761px){.v-hero .lead span{display:block}}
 /* on the phone, the first sentence has its own line, ending on its full stop; the second follows on the next lines */
-@media (max-width:760px){.v-hero .lead{width:calc(var(--pw) * var(--sc) * 1px + 16px)}.v-hero .lead span{display:block}.v-hero .lead span:first-child{white-space:nowrap}}
+@media (max-width:760px){.v-hero .lead{width:calc(var(--pw) * var(--sc) * 1px + 16px)}.v-hero .lead span{display:block}.v-hero .lead span:first-child{white-space:nowrap}.v-hero .lead span+span{text-wrap:balance}}
 /* v3: the hero stays pinned for a while above the scene, which starts under it at the top of the page */
 .v3-top{position:relative;z-index:4}
 .v3-top .v-hero{position:sticky;top:0;min-height:100vh;min-height:100svh}
@@ -660,7 +660,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
     <div class="v-copy">
       <h1 id="h1">היום אתם שווים<br><em>אתר אחר</em></h1>
       <p class="lead"><span>העסק שלכם עבר דרך אבל האתר נשאר מאחור.</span> <span>אני יוצרת לכם אתר תדמית שמרגיש ונראה כמו העסק שאתם היום.</span></p>
-      <p class="close">שנים בונים שם שניות בונות רושם</p>
+      <p class="close">שנים בונות שם שניות בונות רושם</p>
     </div>
   </div>
 </section>
@@ -793,7 +793,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
 <footer class="v-ft" id="footer">
   <div class="v-cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="v-ft-in">
-    <p class="v-sign" aria-label="שנים בונים שם, שניות בונות רושם"><span class="o" data-t="שנים בונים שם" aria-hidden="true">שנים בונים שם</span><span class="f" data-t="שניות בונות רושם" aria-hidden="true">שניות בונות רושם</span></p>
+    <p class="v-sign" aria-label="שנים בונות שם, שניות בונות רושם"><span class="o" data-t="שנים בונות שם" aria-hidden="true">שנים בונות שם</span><span class="f" data-t="שניות בונות רושם" aria-hidden="true">שניות בונות רושם</span></p>
     <div class="v-ft-row">
       <a class="v-ft-me" href="#hero" aria-label="קרן ארליכמן, גרפיקה ועיצוב אתרים, לראש העמוד" dir="ltr"><svg class="ftm" viewBox="560 240 880 1230" aria-hidden="true"><path fill="currentColor" d="M575 253H702V996L1133 253H1157L702 1039H575ZM917 837L989 710L1425 1458H1278L1117 1183ZM753 1163H1105L1117 1183H753Z"/></svg><span class="nm" aria-hidden="true"><b>KEREN ARLIHMAN</b><span class="ln"><i></i><small>GRAPHIC &amp; WEB DESIGNER</small></span></span></a>
 
@@ -823,7 +823,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
   /* the hero frame: positions are in design units of the active frame */
   var hero=document.getElementById('hero');
   var DESK={fw:1325,fh:846,ttop:168,tfs:112,ptop:466,pfs:22,pw:720,ctop:548,cfs:31,ax:187,ay:212,hs:.653},
-      MOB ={fw:367,fh:540,ttop:52,tfs:46,ptop:172,pfs:11.2,pw:200,ctop:410,cfs:16.5,ax:32,ay:148,hs:.225}   /* on the phone the hands hold the paragraph between them, and the purple line sits under the palms */;
+      MOB ={fw:367,fh:540,ttop:52,tfs:46,ptop:172,pfs:11.2,pw:200,ctop:410,cfs:16.5,ax:32,ay:228,hs:.225}   /* on the phone the hands hold the paragraph between them, and the purple line sits under the palms */;
   function fit(){
     var w=hero.clientWidth,mob=w<=760,F=mob?MOB:DESK,sc,hh,hx;
     if(mob){sc=w/F.fw;hh=F.fh*sc+76;hero.style.height=hh+'px';hx=0}
@@ -1469,7 +1469,7 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
 /* running text on the phone: one size along the whole page, 16px */
 /* on a short phone the photo and the cube take less height, so the whole story fits on the screen */
 @media (max-width:760px) and (max-height:760px){.v-steps-in{grid-template-rows:30% 1fr;padding-top:76px}.v-atxt h2{font-size:26px!important;margin-bottom:8px!important}.v-atxt p{margin-bottom:.45em!important;line-height:1.55!important}}
-@media (max-width:760px){.v-hero .lead,.v-step p,.v-atxt p,.v-q blockquote,.v-q blockquote p,.v-faq-head .v-up,.v-fq p,.c2-top .ct-sub{font-size:16px!important;line-height:1.65!important}.v-hero .lead span:first-child{white-space:normal}}
+@media (max-width:760px){.v-hero .lead,.v-step p,.v-atxt p,.v-q blockquote,.v-q blockquote p,.v-faq-head .v-up,.v-fq p,.c2-top .ct-sub{font-size:16px!important;line-height:1.65!important}.v-hero .lead{width:min(calc(100vw - 28px),370px)!important}.v-hero .lead span:first-child{white-space:nowrap}.v-hero .lead span+span{text-wrap:balance}}
 </style>
 <style>html.snap body *{transition:none!important}</style>
 <script>
