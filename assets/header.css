@@ -61,3 +61,8 @@
 .lsw i::after{content:attr(data-c);position:absolute;left:0;top:100%;width:100%;transform-origin:50% 0;transform:rotateX(-90deg)}
 a:hover>.lsw i,a:focus-visible>.lsw i,button:hover>.lsw i,button:focus-visible>.lsw i{transform:rotateX(90deg)}
 @media (prefers-reduced-motion:reduce){.lsw i{transition:none}a:hover>.lsw i,button:hover>.lsw i{transform:none}}
+
+/* the letter swap needs a hover: on a touch screen its hidden second row is left out, so no sliver of it shows under the words */
+@media (hover:none){.lsw i::after{display:none}.lsw{overflow:visible;height:auto}}
+/* at rest the second row of letters, standing edge-on under the words, is hidden so no sliver of it shows */
+.lsw i::after{opacity:0;transition:opacity .25s}a:hover>.lsw i::after,a:focus-visible>.lsw i::after,button:hover>.lsw i::after,button:focus-visible>.lsw i::after{opacity:1}

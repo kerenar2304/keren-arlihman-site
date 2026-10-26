@@ -625,6 +625,12 @@ body{background:var(--ink);color:var(--paper);margin:0}
 @media (prefers-reduced-motion:reduce){.v-sign .o .ch{opacity:1;filter:none;transition:none}.v-sign .f .ch{opacity:1;animation:none}}
 </style>
 <script type="speculationrules">{"prerender":[{"where":{"href_matches":"*project-*.html"},"eagerness":"moderate"}],"prefetch":[{"where":{"href_matches":"*project-*.html"},"eagerness":"conservative"}]}</script>
+<style>
+/* the letter swap needs a hover: on a touch screen its hidden second row is left out, so no sliver of it shows under the words */
+@media (hover:none){.lsw i::after{display:none}.lsw{overflow:visible;height:auto}}
+/* at rest the second row of letters, standing edge-on under the words, is hidden so no sliver of it shows */
+.lsw i::after{opacity:0;transition:opacity .25s}a:hover>.lsw i::after,a:focus-visible>.lsw i::after,button:hover>.lsw i::after,button:focus-visible>.lsw i::after{opacity:1}
+</style>
 </head>
 <body id="top">
 <script src="assets/loader.js"></script>
