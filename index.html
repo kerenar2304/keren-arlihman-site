@@ -1492,5 +1492,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(function(a){a.addEventLi
 /* arriving from another page with a part in the address (./#about and so on): straight there, the same way */
 addEventListener('load',function(){var hs=location.hash;if(!/^#(about|process|work|contact)$/.test(hs))return;var a=document.querySelector('a[href="'+hs+'"]');if(a)setTimeout(function(){a.click()},60)});
 </script>
+<script src="assets/wa.js" defer></script>
 </body>
 </html>
