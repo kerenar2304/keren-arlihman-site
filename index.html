@@ -1141,7 +1141,7 @@ body{background:var(--ink);color:var(--paper);margin:0}
     ev.preventDefault();lockS=now+(v>B4+.004?1000:1150);scrollTo({top:stopV(nx),behavior:'auto'})},{passive:false});
   /* for the touch screen: the steps (and the about up to the reviews) as a zone moved one stop per swipe; arriving
      from above it always lands on the title first */
-  window.__zS={in:function(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));return v>=B1-(B4-B1)*.25&&v<=B5},fromAbove:function(){lockS=performance.now()+1200;scrollTo({top:stopV(0),behavior:'auto'})}};
+  window.__zS={in:function(){var r=sec.getBoundingClientRect(),v=cl(-r.top/(r.height-innerHeight));return v>=B1-(B4-B1)*.25&&v<=B5},fromAbove:function(){lockS=performance.now()+1200;window.__titleHold=performance.now()+900;target=0;cur=0;scrollTo({top:stopV(0),behavior:'auto'})}};
   addEventListener('scroll',measure,{passive:true});measure();cur=target;
   addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
   function setStep(n){if(n===step)return;step=n;steps.forEach(function(s,j){s.classList.toggle('on',j===n);s.classList.toggle('past',j<n)});snum.style.setProperty('--si',n)}
@@ -1156,9 +1156,9 @@ body{background:var(--ink);color:var(--paper);margin:0}
     curE=RM?targetE:curE+Math.sign(targetE-curE)*Math.min(Math.abs(targetE-curE),dtA/1.1);if(window.__snap){curA=targetA;curE=targetE}
     /* while the cube is still hidden under the hero and the works (not tossed in yet), nothing here is drawn: the
        frames go to the scroll there */
-    if(window.__toss===0&&curA===0&&curE===0){cv.style.opacity='0';glow.style.setProperty('--go','0');requestAnimationFrame(frame);return}
+    if(window.__toss===0&&curA===0&&curE===0){if(!rev){txt.classList.add('intro');setStep(-1)}cv.style.opacity='0';glow.style.setProperty('--go','0');requestAnimationFrame(frame);return}
     var p=cur,t=(now-t0)/1000,ab=curA;
-    var intro=!rev&&p<.04;txt.classList.toggle('intro',intro);
+    var intro=!rev&&(p<.04||performance.now()<(window.__titleHold||0)||(window.__toss!=null&&window.__toss<1));txt.classList.toggle('intro',intro);
     setStep(rev?0:intro?-1:p<.095?0:p<.15?1:2);
     var front=sm((p-.21)/.05),grow=io((p-.215)/.06),inner=sm((p-.252)/.016),morph=io((p-.27)/.04),settle=1-front;
     var to=(1-sm((p-.2)/.035))*(1-sm(ab/.1));txt.style.opacity=to.toFixed(3);txt.style.transform='translateY('+(-30*(1-to)).toFixed(1)+'px)';txt.style.visibility=to<.01?'hidden':'visible';
@@ -1468,7 +1468,7 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
   addEventListener('touchmove',function(e){if(act)e.preventDefault()},{passive:false});
   addEventListener('touchend',function(e){touching=false;if(!act)return;act=false;var dy=ty-e.changedTouches[0].clientY;if(Math.abs(dy)<28)return;
     var w=new WheelEvent('wheel',{deltaY:dy>0?120:-120,cancelable:true,bubbles:true});dispatchEvent(w);
-    if(!w.defaultPrevented){var y0=scrollY,to=y0+dy*3,t0=performance.now();(function g(n){if(snapT>t0)return;var k=Math.min(1,(n-t0)/650);scrollTo({top:y0+(to-y0)*(1-Math.pow(1-k,3)),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}},{passive:true});
+    if(!w.defaultPrevented){var y0=scrollY,to=y0+dy*2.2,t0=performance.now();(function g(n){if(snapT>t0)return;var k=Math.min(1,(n-t0)/650);scrollTo({top:y0+(to-y0)*(1-Math.pow(1-k,3)),behavior:'auto'});if(k<1)requestAnimationFrame(g)})(t0)}},{passive:true});
   addEventListener('touchcancel',function(){touching=false;act=false},{passive:true})})();
 </script>
 <style>
@@ -1477,7 +1477,7 @@ document.querySelectorAll('a.v-logo,a.v-ft-me').forEach(function(a){a.addEventLi
 /* running text on the phone: one size along the whole page, 16px */
 /* on a short phone the photo and the cube take less height, so the whole story fits on the screen */
 @media (max-width:760px) and (max-height:760px){.v-steps-in{grid-template-rows:30% 1fr;padding-top:76px}.v-atxt h2{font-size:26px!important;margin-bottom:8px!important}.v-atxt p{margin-bottom:.45em!important;line-height:1.55!important}}
-@media (max-width:760px){.v-hero .lead,.v-step p,.v-atxt p,.v-q blockquote,.v-q blockquote p,.v-faq-head .v-up,.v-fq p,.c2-top .ct-sub{font-size:16px!important;line-height:1.65!important}.v-hero .lead{width:min(calc(100vw - 28px),370px)!important}.v-hero .lead span:first-child{white-space:nowrap}.v-hero .lead span+span{text-wrap:balance}}
+@media (max-width:760px){.v-hero .lead,.v-step p,.v-atxt p,.v-q blockquote,.v-q blockquote p,.v-faq-head p.v-up,.v-fq p,.c2-top .ct-sub{font-size:16px!important;line-height:1.65!important}.v-hero .lead{width:min(calc(100vw - 28px),370px)!important}.v-hero .lead span:first-child{white-space:nowrap}.v-hero .lead span+span{text-wrap:balance}}
 </style>
 <style>html.snap body *{transition:none!important}</style>
 <script>
